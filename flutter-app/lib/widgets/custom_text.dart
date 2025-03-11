@@ -18,7 +18,7 @@ class CustomText extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: txtFontSize == 0
-            ? (MediaQuery.sizeOf(context).width * 0.034).clamp(12.0, 18.0)
+            ? (MediaQuery.sizeOf(context).width * 0.045).clamp(12.0, 18.0)
             : txtFontSize,
         color: txtColor,
         fontWeight: txtFontWeight,

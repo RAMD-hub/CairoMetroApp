@@ -4,8 +4,8 @@ import 'package:cairo_metro_flutter/widgets/dialog_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widgets/address_card.dart';
-import '../widgets/custom_icon.dart';
 import '../widgets/custom_text.dart';
+import '../widgets/home_appbar.dart';
 import '../widgets/stations_card.dart';
 
 class MetroHome extends StatelessWidget {
@@ -18,22 +18,7 @@ class MetroHome extends StatelessWidget {
       backgroundColor: const Color(0xFFF7F6F2),
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            pinned: true,
-            floating: false,
-            leading: const Padding(
-              padding: EdgeInsets.only(left: 16.0),
-              child: CustomIcon(icon: Icons.location_on_outlined),
-            ),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.only(right: 16.0),
-                child: CustomIcon(icon: Icons.language, color: Colors.black),
-              ),
-            ],
-          ),
+          HomeAppBar(),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16),

@@ -28,8 +28,8 @@ class CustomRadioButton extends StatelessWidget {
           spacing: 8,
           children: [
             Container(
-              width: (MediaQuery.sizeOf(context).width * 0.04),
-              height: (MediaQuery.sizeOf(context).height * 0.04),
+              width: (MediaQuery.sizeOf(context).width * 0.05),
+              height: (MediaQuery.sizeOf(context).height * 0.05),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: Color(0xFFFEA613), width: 2),
