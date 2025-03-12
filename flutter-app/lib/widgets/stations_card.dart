@@ -2,6 +2,7 @@ import 'package:cairo_metro_flutter/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
+import '../screens/all_routes.dart';
 import 'custom_button.dart';
 import 'custom_icon.dart';
 import 'custom_radio_button.dart';
@@ -53,7 +54,12 @@ class StationsCard extends StatelessWidget {
               ],
             ),
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MetroRouteScreen()));
+              },
               btnName: 'Start',
             ),
           ],

@@ -1,5 +1,7 @@
+import 'package:cairo_metro_flutter/widgets/line_shape.dart';
 import 'package:flutter/material.dart';
 
+import 'circle_shape.dart';
 import 'custom_text.dart';
 
 class DialogCard extends StatelessWidget {
@@ -55,28 +57,11 @@ class DialogCard extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    Container(
-                      width: 4,
-                      height: (MediaQuery.sizeOf(context).height * 0.05)
-                          .clamp(40, 1000),
-                      color: Colors.orange,
+                    LineShape(),
+                    CircleShape(
+                      circleColor: isCurrent ? Colors.orange : Colors.grey,
                     ),
-                    Container(
-                      width: 14,
-                      height: 14,
-                      decoration: BoxDecoration(
-                        color: isCurrent
-                            ? Colors.orange
-                            : Colors.grey, // لون الدائرة
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 4,
-                      height: (MediaQuery.sizeOf(context).height * 0.05)
-                          .clamp(40, 1000),
-                      color: Colors.orange,
-                    ),
+                    LineShape(),
                   ],
                 ),
                 Column(
@@ -85,7 +70,6 @@ class DialogCard extends StatelessWidget {
                   children: [
                     CustomText(
                       text: previousStation,
-                      txtFontWeight: FontWeight.bold,
                       txtColor: Colors.black,
                     ),
                     CustomText(
@@ -95,7 +79,6 @@ class DialogCard extends StatelessWidget {
                     ),
                     CustomText(
                       text: nextStation,
-                      txtFontWeight: FontWeight.bold,
                       txtColor: Colors.black,
                     ),
                   ],
