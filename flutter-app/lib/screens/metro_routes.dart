@@ -127,7 +127,6 @@ class MetroRouteScreenLandscape extends StatelessWidget {
           horizontal: screenWidth * 0.02, vertical: screenHeight * 0.02),
       child: Row(
         children: [
-          // 📌 الأزرار والتفاصيل على الجانب الأيسر
           Expanded(
             flex: 3,
             child: Column(
@@ -174,7 +173,6 @@ class MetroRouteScreenLandscape extends StatelessWidget {
             ),
           ),
           SizedBox(width: screenWidth * 0.02),
-          // 📌 قائمة المحطات تأخذ الجزء الأكبر
           Expanded(
             flex: 5,
             child: StationTileListView(stations: stations),
