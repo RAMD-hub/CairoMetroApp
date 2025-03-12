@@ -37,54 +37,50 @@ class MetroRouteScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          spacing: 20,
           children: [
             Expanded(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
+                  Flexible(
+                      flex: 2,
                       child: CustomButton(onPressed: () {}, btnName: 'Back')),
-                  Expanded(
-                    child: Center(
-                      child: CustomText(
-                        text: '1 / 5',
-                        txtFontWeight: FontWeight.bold,
-                      ),
+                  Flexible(
+                    child: CustomText(
+                      text: '1 / 5',
+                      txtFontWeight: FontWeight.bold,
                     ),
                   ),
-                  Expanded(
+                  Flexible(
+                      flex: 2,
                       child: CustomButton(onPressed: () {}, btnName: 'Next')),
                 ],
               ),
             ),
             Expanded(
-              flex: 3,
+              flex: 2,
               child: SizedBox(
                 height: (screenHeight + screenWidth) * 0.07,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
+                    Flexible(
                         child: CustomDetailsCard(text: 'Stations no : 21')),
-                    Expanded(
+                    Flexible(
                         child: CustomDetailsCard(text: 'Time : 1 hrs 54 min')),
-                    Expanded(child: CustomDetailsCard(text: 'Price : 15')),
+                    Flexible(child: CustomDetailsCard(text: 'Price : 15')),
                   ],
                 ),
               ),
             ),
             Expanded(
-              flex: 16,
+              flex: 11,
               child: StationTileListView(
                 stations: stations,
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: CustomButton(onPressed: () {}, btnName: 'Next'),
-              ),
-            ),
+            Expanded(child: CustomButton(onPressed: () {}, btnName: 'Next')),
           ],
         ),
       ),

@@ -10,12 +10,10 @@ class CustomDetailsCard extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(child: CustomText(text: text)),
-        ),
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(child: CustomText(text: text)),
       ),
     );
   }
