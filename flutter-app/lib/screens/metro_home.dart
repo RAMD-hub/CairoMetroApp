@@ -1,5 +1,4 @@
-import 'package:cairo_metro_flutter/widgets/custom_button.dart';
-import 'package:cairo_metro_flutter/widgets/custom_text_field.dart';
+import 'package:cairo_metro_flutter/controller/metro_controller.dart';
 import 'package:cairo_metro_flutter/widgets/dialog_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +10,15 @@ import '../widgets/stations_card.dart';
 class MetroHome extends StatelessWidget {
   MetroHome({super.key});
   final selectedTransfers = 'Less Stations'.obs;
+  final MetroController metroController = Get.put(MetroController());
+
+  List<String> stations() {
+    final List<String> getStationName = [];
+    for (int i = 0; i < metroController.stations.length; i++) {
+      getStationName.add(metroController.stations[i].name);
+    }
+    return getStationName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +42,13 @@ class MetroHome extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: const CustomText(text: 'Where are you going Today?'),
                   ),
-                  const DialogCard(
-                    previousStation: 'New ElMarg',
-                    currentStation: 'El Marg',
-                    nextStation: 'Sakanat El-Maadi',
+                  DialogCard(
+                    stations: stations(),
                   ),
-                  StationsCard(selectedTransfers: selectedTransfers),
+                  StationsCard(
+                    selectedTransfers: selectedTransfers,
+                    stations: stations(),
+                  ),
                   AddressCard(),
                 ],
               ),

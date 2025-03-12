@@ -1,20 +1,22 @@
-import 'package:cairo_metro_flutter/widgets/custom_text.dart';
+import 'package:cairo_metro_flutter/widgets/custom_auto_complete.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-
+import 'package:get/get.dart';
+import '../controller/metro_controller.dart';
 import '../screens/metro_routes.dart';
 import 'custom_button.dart';
 import 'custom_icon.dart';
 import 'custom_radio_button.dart';
-import 'custom_text_field.dart';
 
 class StationsCard extends StatelessWidget {
-  const StationsCard({
+  StationsCard({
     super.key,
     required this.selectedTransfers,
+    required this.stations,
   });
 
+  final MetroController metroController = Get.put(MetroController());
   final RxString selectedTransfers;
+  final List<String> stations;
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +32,9 @@ class StationsCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
           children: [
-            CustomTextField(
-              suffixIcon: Icons.location_on_outlined,
-              hint: 'Enter Start Station',
-            ),
+            CustomAutoComplete(isStart: true),
             CustomIcon(icon: Icons.swap_vert_circle_outlined),
-            CustomTextField(
-              hint: 'Enter Arrival Station',
-            ),
+            CustomAutoComplete(isStart: false),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -55,13 +52,24 @@ class StationsCard extends StatelessWidget {
             ),
             CustomButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MetroRouteScreen()));
+                if (metroController.startStation.value.isEmpty ||
+                    metroController.endStation.value.isEmpty ||
+                    metroController.isSameStation().value) {
+                  Get.snackbar(
+                    'Error',
+                    'Please fill in both station correctly.',
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.red,
+                    colorText: Colors.white,
+                  );
+                  return;
+                }
+                Get.to(() => MetroRouteScreen(
+                      stations: stations,
+                    ));
               },
               btnName: 'Start',
-            ),
+            )
           ],
         ),
       ),

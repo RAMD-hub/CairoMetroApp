@@ -1,29 +1,13 @@
 import 'package:cairo_metro_flutter/screens/metro_trip_progress.dart';
 import 'package:cairo_metro_flutter/screens/route_details_landscape_screen.dart';
 import 'package:cairo_metro_flutter/screens/route_details_portrait_screen.dart';
-import 'package:cairo_metro_flutter/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import '../widgets/custom_details_card.dart';
 import '../widgets/custom_text.dart';
-import '../widgets/station_tile_list_view.dart';
 
 class MetroRouteScreen extends StatelessWidget {
-  MetroRouteScreen({super.key});
-  final List<String> stations = [
-    "helwan (start)",
-    "ain helwan",
-    "helwan university",
-    "wadi hof",
-    "hadayek helwan",
-    "el maasraa (changed)",
-    "el maasraa",
-    "el maasraa",
-    "el maasraa",
-    "el maasraa",
-    "el maasraa (end)",
-  ];
+  const MetroRouteScreen({super.key, required this.stations});
+  final List<String> stations;
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +25,9 @@ class MetroRouteScreen extends StatelessWidget {
           return RouteDetailsPortraitScreen(
             stations: stations,
             onPressedBigNext: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MetroTripProgress(
-                    stations: stations,
-                  ),
+              Get.to(
+                MetroTripProgress(
+                  stations: stations,
                 ),
               );
             },
@@ -56,12 +37,9 @@ class MetroRouteScreen extends StatelessWidget {
           return RouteDetailsLandScapeScreen(
             stations: stations,
             onPressedBigNext: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MetroTripProgress(
-                    stations: stations,
-                  ),
+              Get.to(
+                MetroTripProgress(
+                  stations: stations,
                 ),
               );
             },

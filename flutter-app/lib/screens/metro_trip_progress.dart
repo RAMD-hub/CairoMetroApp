@@ -28,11 +28,7 @@ class MetroTripProgress extends StatelessWidget {
             pathsCount: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => MetroHome()),
-                (Route<dynamic> route) => false,
-              );
+              Get.offAll(() => MetroHome());
             },
             bigButtonName: 'Cancel',
           );
@@ -42,12 +38,7 @@ class MetroTripProgress extends StatelessWidget {
             pathsCount: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => MetroHome()),
-                (Route<dynamic> route) =>
-                    false, // هذا يحذف جميع الصفحات السابقة
-              );
+              Get.offAll(() => MetroHome());
             },
             bigButtonName: 'Cancel',
           );

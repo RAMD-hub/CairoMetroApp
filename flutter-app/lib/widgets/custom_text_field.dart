@@ -8,12 +8,21 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.suffixIcon = Icons.train,
     required this.hint,
+    required this.textController,
+    this.onEditingComplete,
+    this.focusNode,
   });
   final IconData suffixIcon;
   final String hint;
+  final TextEditingController textController;
+  final Function()? onEditingComplete;
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: textController,
+      onEditingComplete: onEditingComplete,
+      focusNode: focusNode,
       decoration: InputDecoration(
         suffixIcon: CustomIcon(icon: suffixIcon),
         label: CustomText(

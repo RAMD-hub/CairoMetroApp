@@ -1,21 +1,18 @@
+import 'package:cairo_metro_flutter/screens/metro_trip_progress.dart';
 import 'package:cairo_metro_flutter/widgets/line_shape.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'circle_shape.dart';
 import 'custom_text.dart';
 
 class DialogCard extends StatelessWidget {
-  final String previousStation;
-  final String currentStation;
-  final String nextStation;
+  final List<String> stations;
   final bool isCurrent;
 
   const DialogCard({
     super.key,
-    required this.previousStation,
-    required this.currentStation,
-    required this.nextStation,
     this.isCurrent = false,
+    required this.stations,
   });
 
   @override
@@ -38,7 +35,9 @@ class DialogCard extends StatelessWidget {
                 ),
                 Spacer(),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(MetroTripProgress(stations: stations));
+                    },
                     child: CustomText(
                       text: 'View All',
                       txtColor: Color(0xFFFEA613),
@@ -69,16 +68,16 @@ class DialogCard extends StatelessWidget {
                   spacing: 11,
                   children: [
                     CustomText(
-                      text: previousStation,
+                      text: stations[0],
                       txtColor: Colors.black,
                     ),
                     CustomText(
-                      text: currentStation,
+                      text: stations[1],
                       txtFontWeight: FontWeight.bold,
                       txtColor: Color(0xFFFEA613),
                     ),
                     CustomText(
-                      text: nextStation,
+                      text: stations[2],
                       txtColor: Colors.black,
                     ),
                   ],

@@ -27,9 +27,10 @@ class AddressCard extends StatelessWidget {
               text: 'Please enter your destination (optional)',
               txtColor: Colors.black87,
             ),
-            const CustomTextField(
+            CustomTextField(
               hint: 'Address',
               suffixIcon: Icons.location_city_outlined,
+              textController: TextEditingController(),
             ),
             CustomButton(onPressed: () {}, btnName: 'Search')
           ],
