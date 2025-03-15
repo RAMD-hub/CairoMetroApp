@@ -6,11 +6,13 @@ import 'package:get/get.dart';
 import '../widgets/custom_text.dart';
 
 class MetroRouteScreen extends StatelessWidget {
-  const MetroRouteScreen({super.key, required this.stations});
-  final List<String> stations;
+  MetroRouteScreen({super.key});
+
+  final pathIndex = 0.obs;
 
   @override
   Widget build(BuildContext context) {
+    final RxList<List<String>> paths = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -22,29 +24,41 @@ class MetroRouteScreen extends StatelessWidget {
       ),
       body: OrientationBuilder(builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
-          return RouteDetailsPortraitScreen(
-            stations: stations,
-            onPressedBigNext: () {
-              Get.to(
-                MetroTripProgress(
-                  stations: stations,
-                ),
-              );
-            },
-            bigButtonName: 'Next',
-          );
+          return Obx(() {
+            return RouteDetailsPortraitScreen(
+              pathIndex: pathIndex.value,
+              paths: paths,
+              onPressedBigNext: () {
+                Get.to(
+                  MetroTripProgress(),
+                  arguments: paths,
+                );
+              },
+              bigButtonName: 'Next',
+              onPressedCounterNext: () =>
+                  pathIndex.value < paths.length - 1 ? pathIndex.value++ : null,
+              onPressedCounterBack: () =>
+                  pathIndex.value > 0 ? pathIndex.value-- : null,
+            );
+          });
         } else {
-          return RouteDetailsLandScapeScreen(
-            stations: stations,
-            onPressedBigNext: () {
-              Get.to(
-                MetroTripProgress(
-                  stations: stations,
-                ),
-              );
-            },
-            bigButtonName: 'Next',
-          );
+          return Obx(() {
+            return RouteDetailsLandScapeScreen(
+              pathIndex: pathIndex.value,
+              paths: paths,
+              onPressedBigNext: () {
+                Get.to(
+                  MetroTripProgress(),
+                  arguments: paths,
+                );
+              },
+              bigButtonName: 'Next',
+              onPressedCounterNext: () =>
+                  pathIndex.value < paths.length ? pathIndex.value++ : null,
+              onPressedCounterBack: () =>
+                  pathIndex.value > 0 ? pathIndex.value-- : null,
+            );
+          });
         }
       }),
     );

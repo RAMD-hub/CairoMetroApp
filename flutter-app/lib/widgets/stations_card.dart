@@ -1,9 +1,9 @@
-import 'package:cairo_metro_flutter/widgets/custom_auto_complete.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/metro_controller.dart';
 import '../screens/metro_routes.dart';
 import 'custom_button.dart';
+import 'custom_drop_down_menu.dart';
 import 'custom_icon.dart';
 import 'custom_radio_button.dart';
 
@@ -11,12 +11,10 @@ class StationsCard extends StatelessWidget {
   StationsCard({
     super.key,
     required this.selectedTransfers,
-    required this.stations,
   });
 
   final MetroController metroController = Get.put(MetroController());
   final RxString selectedTransfers;
-  final List<String> stations;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +30,11 @@ class StationsCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
           children: [
-            CustomAutoComplete(isStart: true),
+            CustomDropDownMenu(),
             CustomIcon(icon: Icons.swap_vert_circle_outlined),
-            CustomAutoComplete(isStart: false),
+            CustomDropDownMenu(
+              isStart: false,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -52,9 +52,11 @@ class StationsCard extends StatelessWidget {
             ),
             CustomButton(
               onPressed: () {
+                final RxList<List<String>> paths = metroController.paths;
                 if (metroController.startStation.value.isEmpty ||
                     metroController.endStation.value.isEmpty ||
-                    metroController.isSameStation().value) {
+                    metroController.startStation ==
+                        metroController.endStation) {
                   Get.snackbar(
                     'Error',
                     'Please fill in both station correctly.',
@@ -64,12 +66,10 @@ class StationsCard extends StatelessWidget {
                   );
                   return;
                 }
-                Get.to(() => MetroRouteScreen(
-                      stations: stations,
-                    ));
+                Get.to(MetroRouteScreen(), arguments: paths);
               },
               btnName: 'Start',
-            )
+            ),
           ],
         ),
       ),
