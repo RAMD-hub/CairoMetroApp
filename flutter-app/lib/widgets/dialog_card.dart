@@ -6,15 +6,13 @@ import 'circle_shape.dart';
 import 'custom_text.dart';
 
 class DialogCard extends StatelessWidget {
-  final List<String> stations;
   final bool isCurrent;
 
-  const DialogCard({
+  DialogCard({
     super.key,
     this.isCurrent = false,
-    required this.stations,
   });
-
+  final List<String> path = [];
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -36,7 +34,7 @@ class DialogCard extends StatelessWidget {
                 Spacer(),
                 TextButton(
                     onPressed: () {
-                      Get.to(MetroTripProgress(stations: stations));
+                      Get.to(MetroTripProgress());
                     },
                     child: CustomText(
                       text: 'View All',
@@ -68,16 +66,16 @@ class DialogCard extends StatelessWidget {
                   spacing: 11,
                   children: [
                     CustomText(
-                      text: stations[0],
+                      text: path.isNotEmpty ? path[0] : '',
                       txtColor: Colors.black,
                     ),
                     CustomText(
-                      text: stations[1],
+                      text: path.isNotEmpty ? path[path.length ~/ 2] : '',
                       txtFontWeight: FontWeight.bold,
                       txtColor: Color(0xFFFEA613),
                     ),
                     CustomText(
-                      text: stations[2],
+                      text: path.isNotEmpty ? path[path.length] : '',
                       txtColor: Colors.black,
                     ),
                   ],

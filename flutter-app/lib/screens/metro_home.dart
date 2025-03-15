@@ -11,15 +11,6 @@ class MetroHome extends StatelessWidget {
   MetroHome({super.key});
   final selectedTransfers = 'Less Stations'.obs;
   final MetroController metroController = Get.put(MetroController());
-
-  List<String> stations() {
-    final List<String> getStationName = [];
-    for (int i = 0; i < metroController.stations.length; i++) {
-      getStationName.add(metroController.stations[i].name);
-    }
-    return getStationName;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,12 +33,9 @@ class MetroHome extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: const CustomText(text: 'Where are you going Today?'),
                   ),
-                  DialogCard(
-                    stations: stations(),
-                  ),
+                  DialogCard(),
                   StationsCard(
                     selectedTransfers: selectedTransfers,
-                    stations: stations(),
                   ),
                   AddressCard(),
                 ],

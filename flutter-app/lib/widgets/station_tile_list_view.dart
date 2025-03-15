@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 class StationTileListView extends StatelessWidget {
   const StationTileListView({
     super.key,
-    required this.stations,
+    required this.path,
   });
 
-  final List<String> stations;
+  final List<String> path;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: stations.length,
+      itemCount: path.length,
       itemBuilder: (context, index) {
         return StationTile(
-          stationName: stations[index],
+          stationName: path[index],
           isFirst: index == 0,
-          isLast: index == stations.length - 1,
+          isLast: index == path.length - 1,
           isInterSection: index == 5,
         );
       },

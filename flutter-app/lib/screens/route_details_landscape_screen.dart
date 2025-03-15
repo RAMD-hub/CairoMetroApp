@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../controller/metro_controller.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_details_card.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/station_tile_list_view.dart';
 
 class RouteDetailsLandScapeScreen extends StatelessWidget {
-  const RouteDetailsLandScapeScreen({
+  RouteDetailsLandScapeScreen({
     super.key,
-    this.stations = const [],
-    this.pathsCount = true,
+    required this.paths,
+    this.isMetroRouteScreen = true,
     this.btnBackgroundColor = const Color(0xFFFEA613),
     required this.onPressedBigNext,
     required this.bigButtonName,
+    this.onPressedCounterNext,
+    this.onPressedCounterBack,
+    this.pathIndex = 0,
   });
 
-  final List<String> stations;
-  final bool pathsCount;
+  final List<List<String>> paths;
+  final bool isMetroRouteScreen;
   final Color btnBackgroundColor;
   final Function() onPressedBigNext;
   final String bigButtonName;
-
+  final Function()? onPressedCounterNext;
+  final Function()? onPressedCounterBack;
+  final int pathIndex;
+  final MetroController metroController = Get.put(MetroController());
   @override
   Widget build(BuildContext context) {
+    final int stationsNumbers = paths[pathIndex].length;
     final double screenWidth = MediaQuery.sizeOf(context).width;
     final double screenHeight = MediaQuery.sizeOf(context).height;
-
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: screenWidth * 0.02, vertical: screenHeight * 0.02),
@@ -36,20 +44,20 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                pathsCount
+                isMetroRouteScreen
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Flexible(
                             flex: 2,
                             child: CustomButton(
-                              onPressed: () {},
+                              onPressed: onPressedCounterBack ?? () {},
                               btnName: 'Back',
                             ),
                           ),
                           Flexible(
                             child: CustomText(
-                              text: '1 / 5',
+                              text: '${pathIndex + 1}/${paths.length}',
                               txtFontWeight: FontWeight.bold,
                               txtFontSize: screenWidth * 0.018,
                             ),
@@ -57,18 +65,23 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
                           Flexible(
                             flex: 2,
                             child: CustomButton(
-                              onPressed: () {},
+                              onPressed: onPressedCounterNext ?? () {},
                               btnName: 'Next',
                             ),
                           ),
                         ],
                       )
                     : SizedBox(),
-                pathsCount ? SizedBox(height: screenHeight * 0.02) : SizedBox(),
-                CustomDetailsCard(text: 'Stations no: 21'),
-                CustomDetailsCard(text: 'Time: 1 hrs 54 min'),
+                isMetroRouteScreen
+                    ? SizedBox(height: screenHeight * 0.02)
+                    : SizedBox(),
+                CustomDetailsCard(text: 'Stations no: $stationsNumbers'),
                 CustomDetailsCard(
-                  text: 'Price: 15',
+                    text:
+                        'Time : ${(stationsNumbers * 3) ~/ 60} hrs ${(stationsNumbers * 3) % 60} min'),
+                CustomDetailsCard(
+                  text:
+                      'Price : ${metroController.calculateTicketPrice(stationsNumbers)}',
                 ),
                 SizedBox(height: screenHeight * 0.02),
                 CustomButton(
@@ -82,7 +95,9 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
           SizedBox(width: screenWidth * 0.02),
           Expanded(
             flex: 5,
-            child: StationTileListView(stations: stations),
+            child: StationTileListView(
+              path: paths[pathIndex],
+            ),
           ),
         ],
       ),

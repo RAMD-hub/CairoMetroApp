@@ -6,12 +6,10 @@ import 'package:get/get.dart';
 import '../widgets/custom_text.dart';
 
 class MetroTripProgress extends StatelessWidget {
-  const MetroTripProgress({super.key, required this.stations});
-
-  final List<String> stations;
-
+  const MetroTripProgress({super.key});
   @override
   Widget build(BuildContext context) {
+    final List<List<String>> stations = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -24,18 +22,18 @@ class MetroTripProgress extends StatelessWidget {
       body: OrientationBuilder(builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
           return RouteDetailsPortraitScreen(
-            stations: stations,
-            pathsCount: false,
+            paths: stations,
+            isMetroRouteScreen: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
-              Get.offAll(() => MetroHome());
+              Get.offAll(MetroHome());
             },
             bigButtonName: 'Cancel',
           );
         } else {
           return RouteDetailsLandScapeScreen(
-            stations: stations,
-            pathsCount: false,
+            paths: stations,
+            isMetroRouteScreen: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
               Get.offAll(() => MetroHome());
