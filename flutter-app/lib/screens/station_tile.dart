@@ -28,18 +28,24 @@ class StationTile extends StatelessWidget {
         children: [
           Column(
             children: [
-              if (!isFirst) LineShape(),
+              if (!isFirst)
+                LineShape(
+                  color: isInterSection ? Colors.blue.shade600 : Colors.orange,
+                ),
               CircleShape(
                 circleColor:
                     isInterSection ? Colors.blue.shade600 : Colors.grey,
               ),
-              if (!isLast) LineShape(),
+              if (!isLast)
+                LineShape(
+                  color: isInterSection ? Colors.blue.shade600 : Colors.orange,
+                ),
             ],
           ),
           Expanded(
             child: CustomText(
               text: isInterSection
-                  ? "$stationName Don't forget this is the exchange station."
+                  ? "$stationName => Is Exchanged Station."
                   : stationName,
               txtFontWeight: isFirst || isLast || isInterSection
                   ? FontWeight.bold

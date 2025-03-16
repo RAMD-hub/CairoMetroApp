@@ -1,4 +1,4 @@
-import 'package:cairo_metro_flutter/services/exchange_stations.dart';
+import 'package:cairo_metro_flutter/widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/metro_controller.dart';
@@ -31,6 +31,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
   final MetroController metroController = Get.put(MetroController());
   @override
   Widget build(BuildContext context) {
+    customSnackBar(pathIndex);
     final int stationsNumbers = paths[pathIndex].length;
     final double screenWidth = (MediaQuery.sizeOf(context).width);
     final double screenHeight = (MediaQuery.sizeOf(context).height);
@@ -64,7 +65,9 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                     ],
                   ),
                 )
-              : SizedBox(),
+              : SizedBox(
+                  height: 0,
+                ),
           Expanded(
             flex: 2,
             child: SizedBox(
@@ -90,6 +93,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
           Expanded(
             flex: 11,
             child: StationTileListView(
+              pathIndex: pathIndex,
               path: paths[pathIndex],
             ),
           ),

@@ -20,7 +20,6 @@ class ExchangeStation {
           orElse: () => -1);
 
       if (newLine != -1 && newLine != currentLine) {
-        // ✅ هنا بنمنع أول محطة من الدخول في القائمة
         if (transferStations.isNotEmpty || i > 0) {
           transferStations.add(station);
         }
