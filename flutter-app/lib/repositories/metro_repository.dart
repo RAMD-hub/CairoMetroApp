@@ -108,9 +108,20 @@ class MetroRepository {
   }
 
   void _buildMetroGraph() {
-    for (var line in lines) {
+    for (int lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+      var line = lines[lineIndex];
       for (int i = 0; i < line.length; i++) {
-        stations.putIfAbsent(line[i], () => MetroStation(line[i]));
+        stations.putIfAbsent(
+            line[i],
+            () => MetroStation(
+                  name: line[i],
+                  lineNumber: [],
+                ));
+
+        if (!stations[line[i]]!.lineNumber.contains(lineIndex + 1)) {
+          stations[line[i]]!.lineNumber.add(lineIndex + 1);
+        }
+
         if (i > 0) {
           stations[line[i]]!.addNeighbor(line[i - 1]);
           stations[line[i - 1]]!.addNeighbor(line[i]);

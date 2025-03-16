@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../widgets/circle_shape.dart';
 import '../widgets/custom_text.dart';
@@ -29,21 +30,26 @@ class StationTile extends StatelessWidget {
             children: [
               if (!isFirst) LineShape(),
               CircleShape(
-                circleColor: Colors.grey,
+                circleColor:
+                    isInterSection ? Colors.blue.shade600 : Colors.grey,
               ),
               if (!isLast) LineShape(),
             ],
           ),
-          CustomText(
-            text: stationName,
-            txtFontWeight: isFirst || isLast || isInterSection
-                ? FontWeight.bold
-                : FontWeight.normal,
-            txtColor: isFirst || isLast
-                ? Colors.orange
-                : isInterSection
-                    ? Colors.red
-                    : Colors.black,
+          Expanded(
+            child: CustomText(
+              text: isInterSection
+                  ? "$stationName Don't forget this is the exchange station."
+                  : stationName,
+              txtFontWeight: isFirst || isLast || isInterSection
+                  ? FontWeight.bold
+                  : FontWeight.normal,
+              txtColor: isFirst || isLast
+                  ? Colors.orange
+                  : isInterSection
+                      ? Colors.blue.shade600
+                      : Colors.black,
+            ),
           ),
         ],
       ),

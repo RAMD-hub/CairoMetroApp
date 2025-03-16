@@ -1,7 +1,7 @@
 import 'package:cairo_metro_flutter/repositories/metro_repository.dart';
 import 'package:cairo_metro_flutter/services/path_finder.dart';
-import 'package:dartx/dartx.dart';
 import 'package:get/get.dart';
+import '../services/exchange_stations.dart';
 import '../services/ticket_service.dart';
 
 class MetroController extends GetxController {
@@ -10,8 +10,10 @@ class MetroController extends GetxController {
       : pathFinder = PathFinder(
           metroRepository: MetroRepository(),
         ),
-        ticketService = TicketService();
+        ticketService = TicketService(),
+        exchangeStation = ExchangeStation();
 
+  final ExchangeStation exchangeStation;
   final MetroRepository metroRepository = MetroRepository();
   final TicketService ticketService;
   final PathFinder pathFinder;
@@ -20,6 +22,7 @@ class MetroController extends GetxController {
   final endStation = ''.obs;
   final allPaths = <List<String>>[].obs;
   final shortPath = <String>[].obs;
+  final exchangeStationsList = <List<String>>[].obs;
   @override
   void onInit() {
     super.onInit();
@@ -29,11 +32,19 @@ class MetroController extends GetxController {
   }
 
   void findPaths() {
-    if (startStation.isNotEmpty && endStation.isNotEmpty) {
+    if (startStation.value.isNotEmpty && endStation.value.isNotEmpty) {
       allPaths.assignAll(
           pathFinder.findAllPaths(startStation.value, endStation.value));
       allPaths.sort((a, b) => a.length.compareTo(b.length));
+      //get shortest path
       shortPath.assignAll(allPaths.first);
+
+      //get all intersection station
+      exchangeStationsList.clear(); // el marg => gamat el dowal
+      for (int i = 0; i < allPaths.length; i++) {
+        exchangeStationsList
+            .add(exchangeStation.getExchangeStations(allPaths[i]));
+      }
     }
   }
 
