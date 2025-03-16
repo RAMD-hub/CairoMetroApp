@@ -7,7 +7,6 @@ import '../widgets/custom_text.dart';
 
 class MetroRouteScreen extends StatelessWidget {
   MetroRouteScreen({super.key});
-
   final pathIndex = 0.obs;
 
   @override

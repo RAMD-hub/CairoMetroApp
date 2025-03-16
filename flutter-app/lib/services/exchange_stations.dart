@@ -1,10 +1,12 @@
+import 'package:dartx/dartx.dart';
+
 import '../repositories/metro_repository.dart';
 
 class ExchangeStation {
   final MetroRepository metroRepository = MetroRepository();
 
-  List<String> getExchangeStations(List<String> path) {
-    List<String> transferStations = [];
+  List<String> getExchangeStations(final List<String> path) {
+    final List<String> transferStations = [];
     int? currentLine;
 
     for (int i = 0; i < path.length - 1; i++) {
@@ -28,5 +30,11 @@ class ExchangeStation {
     }
 
     return transferStations;
+  }
+
+  List<List<String>> sortPathsByExchanges(final List<List<String>> paths) {
+    final ExchangeStation exchangeStation = ExchangeStation();
+    return paths
+        .sortedBy((path) => exchangeStation.getExchangeStations(path).length);
   }
 }

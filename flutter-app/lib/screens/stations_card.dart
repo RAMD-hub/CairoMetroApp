@@ -52,11 +52,15 @@ class StationsCard extends StatelessWidget {
             ),
             CustomButton(
               onPressed: () {
-                final RxList<List<String>> paths = metroController.allPaths;
+                final RxList<List<String>> paths =
+                    selectedTransfers.value == 'Less Stations'
+                        ? metroController.allPaths
+                        : metroController.allPathsByExchanged;
                 if (metroController.startStation.value.isEmpty ||
                     metroController.endStation.value.isEmpty ||
                     metroController.startStation ==
-                        metroController.endStation) {
+                        metroController.endStation ||
+                    selectedTransfers.value.isEmpty) {
                   Get.snackbar(
                     'Error',
                     'Please fill in both station correctly.',

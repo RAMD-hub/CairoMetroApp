@@ -22,7 +22,7 @@ class MetroController extends GetxController {
   final startStation = ''.obs;
   final endStation = ''.obs;
   final allPaths = <List<String>>[].obs;
-  final shortPath = <String>[].obs;
+  final allPathsByExchanged = <List<String>>[].obs;
   final exchangeStationsList = <exchangedStationModel>[].obs;
   @override
   void onInit() {
@@ -40,12 +40,11 @@ class MetroController extends GetxController {
       );
       allPaths.sort((a, b) => a.length.compareTo(b.length));
 
-      //get shortest path => based on Stations Number
-      shortPath.assignAll(allPaths.first);
+      //sort allPaths based on Num of Exchanged stations
+      allPathsByExchanged
+          .assignAll(exchangeStation.sortPathsByExchanges(allPaths));
 
-      //get shortest path => based on number of exchange
-
-      //get all intersection station
+      // get all intersection station
       exchangeStationsList.clear();
       for (int i = 0; i < allPaths.length; i++) {
         exchangeStationsList.add(
