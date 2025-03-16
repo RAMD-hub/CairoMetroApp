@@ -2,8 +2,8 @@ import 'package:cairo_metro_flutter/screens/metro_trip_progress.dart';
 import 'package:cairo_metro_flutter/widgets/line_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'circle_shape.dart';
-import 'custom_text.dart';
+import '../widgets/circle_shape.dart';
+import '../widgets/custom_text.dart';
 
 class DialogCard extends StatelessWidget {
   final bool isCurrent;

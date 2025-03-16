@@ -1,10 +1,10 @@
-import 'package:cairo_metro_flutter/controller/metro_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controllers/metro_controller.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_details_card.dart';
 import '../widgets/custom_text.dart';
-import '../widgets/station_tile_list_view.dart';
+import 'station_tile_list_view.dart';
 
 class RouteDetailsPortraitScreen extends StatelessWidget {
   RouteDetailsPortraitScreen({
@@ -81,7 +81,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                   Flexible(
                       child: CustomDetailsCard(
                           text:
-                              'Price : ${metroController.calculateTicketPrice(stationsNumbers)}')),
+                              'Price : ${metroController.getTicketPrice(stationsNumbers)}')),
                 ],
               ),
             ),

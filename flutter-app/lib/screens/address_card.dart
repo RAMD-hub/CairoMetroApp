@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'custom_button.dart';
-import 'custom_text.dart';
-import 'custom_text_field.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_text.dart';
+import '../widgets/custom_text_field.dart';
 
 class AddressCard extends StatelessWidget {
   const AddressCard({

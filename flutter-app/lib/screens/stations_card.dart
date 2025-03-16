@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/metro_controller.dart';
-import '../screens/metro_routes.dart';
-import 'custom_button.dart';
-import 'custom_drop_down_menu.dart';
-import 'custom_icon.dart';
-import 'custom_radio_button.dart';
+import '../controllers/metro_controller.dart';
+import 'metro_routes.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_drop_down_menu.dart';
+import '../widgets/custom_icon.dart';
+import '../widgets/custom_radio_button.dart';
 
 class StationsCard extends StatelessWidget {
   StationsCard({

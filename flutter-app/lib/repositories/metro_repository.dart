@@ -1,6 +1,6 @@
 import '../models/station.dart';
 
-class MetroService {
+class MetroRepository {
   final Map<String, MetroStation> stations = {};
   final List<List<String>> lines = [
     [
@@ -103,7 +103,7 @@ class MetroService {
     ],
   ];
 
-  MetroService() {
+  MetroRepository() {
     _buildMetroGraph();
   }
 
@@ -117,32 +117,5 @@ class MetroService {
         }
       }
     }
-  }
-
-  List<List<String>> findAllPaths(String start, String end) {
-    if (!stations.containsKey(start) || !stations.containsKey(end)) {
-      return [];
-    }
-    List<List<String>> allPaths = [];
-    _dfs(start, end, [], {}, allPaths);
-    return allPaths;
-  }
-
-  void _dfs(String current, String end, List<String> path, Set<String> visited,
-      List<List<String>> allPaths) {
-    path.add(current);
-    visited.add(current);
-
-    if (current == end) {
-      allPaths.add(List.from(path));
-    } else {
-      for (String neighbor in stations[current]!.neighbors) {
-        if (!visited.contains(neighbor)) {
-          _dfs(neighbor, end, path, visited, allPaths);
-        }
-      }
-    }
-    path.removeLast();
-    visited.remove(current);
   }
 }

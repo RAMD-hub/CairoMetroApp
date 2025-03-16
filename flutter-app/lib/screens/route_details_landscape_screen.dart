@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/metro_controller.dart';
+import '../controllers/metro_controller.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_details_card.dart';
 import '../widgets/custom_text.dart';
-import '../widgets/station_tile_list_view.dart';
+import 'station_tile_list_view.dart';
 
 class RouteDetailsLandScapeScreen extends StatelessWidget {
   RouteDetailsLandScapeScreen({
@@ -81,7 +80,7 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
                         'Time : ${(stationsNumbers * 3) ~/ 60} hrs ${(stationsNumbers * 3) % 60} min'),
                 CustomDetailsCard(
                   text:
-                      'Price : ${metroController.calculateTicketPrice(stationsNumbers)}',
+                      'Price : ${metroController.getTicketPrice(stationsNumbers)}',
                 ),
                 SizedBox(height: screenHeight * 0.02),
                 CustomButton(

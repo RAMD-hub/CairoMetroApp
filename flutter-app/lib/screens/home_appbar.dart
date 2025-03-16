@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'custom_icon.dart';
+import '../widgets/custom_icon.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
