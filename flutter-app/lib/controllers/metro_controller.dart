@@ -1,14 +1,25 @@
 import 'package:cairo_metro_flutter/repositories/metro_repository.dart';
 import 'package:cairo_metro_flutter/services/path_finder.dart';
+import 'package:dartx/dartx.dart';
 import 'package:get/get.dart';
 import '../services/ticket_service.dart';
 
 class MetroController extends GetxController {
+  // Initializer List Constructor
+  MetroController()
+      : pathFinder = PathFinder(
+          metroRepository: MetroRepository(),
+        ),
+        ticketService = TicketService();
+
   final MetroRepository metroRepository = MetroRepository();
-  final RxList<String> stationsNames = <String>[].obs;
+  final TicketService ticketService;
+  final PathFinder pathFinder;
+  final RxSet<String> stationsNames = <String>{}.obs;
   final startStation = ''.obs;
   final endStation = ''.obs;
-  final paths = <List<String>>[].obs;
+  final allPaths = <List<String>>[].obs;
+  final shortPath = <String>[].obs;
   @override
   void onInit() {
     super.onInit();
@@ -18,15 +29,15 @@ class MetroController extends GetxController {
   }
 
   void findPaths() {
-    final PathFinder pathFinder = PathFinder(metroRepository: metroRepository);
     if (startStation.isNotEmpty && endStation.isNotEmpty) {
-      paths.assignAll(
+      allPaths.assignAll(
           pathFinder.findAllPaths(startStation.value, endStation.value));
+      allPaths.sort((a, b) => a.length.compareTo(b.length));
+      shortPath.assignAll(allPaths.first);
     }
   }
 
   int getTicketPrice(int stationCount) {
-    final TicketService ticketService = TicketService();
     return ticketService.calculateTicketPrice(stationCount);
   }
 }

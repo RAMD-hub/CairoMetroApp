@@ -52,7 +52,7 @@ class StationsCard extends StatelessWidget {
             ),
             CustomButton(
               onPressed: () {
-                final RxList<List<String>> paths = metroController.paths;
+                final RxList<List<String>> paths = metroController.allPaths;
                 if (metroController.startStation.value.isEmpty ||
                     metroController.endStation.value.isEmpty ||
                     metroController.startStation ==
