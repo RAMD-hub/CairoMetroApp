@@ -36,14 +36,17 @@ class MetroController extends GetxController {
   void findPaths() {
     if (startStation.value.isNotEmpty && endStation.value.isNotEmpty) {
       allPaths.assignAll(
-          pathFinder.findAllPaths(startStation.value, endStation.value));
+        pathFinder.findAllPaths(startStation.value, endStation.value),
+      );
       allPaths.sort((a, b) => a.length.compareTo(b.length));
+
       //get shortest path => based on Stations Number
       shortPath.assignAll(allPaths.first);
+
       //get shortest path => based on number of exchange
 
       //get all intersection station
-      exchangeStationsList.clear(); // el marg => gamat el dowal
+      exchangeStationsList.clear();
       for (int i = 0; i < allPaths.length; i++) {
         exchangeStationsList.add(
           exchangedStationModel(
