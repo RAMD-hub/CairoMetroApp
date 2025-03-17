@@ -9,7 +9,7 @@ class MetroTripProgress extends StatelessWidget {
   const MetroTripProgress({super.key});
   @override
   Widget build(BuildContext context) {
-    final List<List<String>> stations = Get.arguments;
+    final List<List<String>> path = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -22,7 +22,7 @@ class MetroTripProgress extends StatelessWidget {
       body: OrientationBuilder(builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
           return RouteDetailsPortraitScreen(
-            paths: stations,
+            paths: path,
             isMetroRouteScreen: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
@@ -32,7 +32,7 @@ class MetroTripProgress extends StatelessWidget {
           );
         } else {
           return RouteDetailsLandScapeScreen(
-            paths: stations,
+            paths: path,
             isMetroRouteScreen: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {

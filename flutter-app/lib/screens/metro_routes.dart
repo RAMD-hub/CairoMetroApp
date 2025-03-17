@@ -30,7 +30,7 @@ class MetroRouteScreen extends StatelessWidget {
               onPressedBigNext: () {
                 Get.to(
                   MetroTripProgress(),
-                  arguments: paths,
+                  arguments: [paths[pathIndex.value]],
                 );
               },
               bigButtonName: 'Next',
@@ -48,12 +48,12 @@ class MetroRouteScreen extends StatelessWidget {
               onPressedBigNext: () {
                 Get.to(
                   MetroTripProgress(),
-                  arguments: paths,
+                  arguments: [paths[pathIndex.value]],
                 );
               },
               bigButtonName: 'Next',
               onPressedCounterNext: () =>
-                  pathIndex.value < paths.length ? pathIndex.value++ : null,
+                  pathIndex.value < paths.length - 1 ? pathIndex.value++ : null,
               onPressedCounterBack: () =>
                   pathIndex.value > 0 ? pathIndex.value-- : null,
             );

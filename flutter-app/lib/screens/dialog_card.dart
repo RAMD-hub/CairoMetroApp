@@ -34,7 +34,7 @@ class DialogCard extends StatelessWidget {
                 Spacer(),
                 TextButton(
                     onPressed: () {
-                      Get.to(MetroTripProgress());
+                      // Get.to(MetroTripProgress());
                     },
                     child: CustomText(
                       text: 'View All',

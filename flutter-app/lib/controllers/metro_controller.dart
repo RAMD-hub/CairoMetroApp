@@ -59,6 +59,12 @@ class MetroController extends GetxController {
     }
   }
 
+  void swapStations() {
+    final temp = startStation.value;
+    startStation.value = endStation.value;
+    endStation.value = temp;
+  }
+
   int getTicketPrice(int stationCount) {
     return ticketService.calculateTicketPrice(stationCount);
   }

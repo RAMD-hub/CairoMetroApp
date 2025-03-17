@@ -15,6 +15,7 @@ class StationsCard extends StatelessWidget {
 
   final MetroController metroController = Get.put(MetroController());
   final RxString selectedTransfers;
+  final isSwap = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +31,19 @@ class StationsCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
           children: [
-            CustomDropDownMenu(),
-            CustomIcon(icon: Icons.swap_vert_circle_outlined),
+            CustomDropDownMenu(
+              isSwap: isSwap,
+            ),
+            IconButton(
+              onPressed: () {
+                metroController.swapStations();
+                isSwap.value = true;
+              },
+              icon: CustomIcon(icon: Icons.swap_vert_circle_outlined),
+            ),
             CustomDropDownMenu(
               isStart: false,
+              isSwap: isSwap,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
