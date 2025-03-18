@@ -1,4 +1,3 @@
-import 'package:cairo_metro_flutter/services/exchange_stations.dart';
 import 'package:cairo_metro_flutter/widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +28,7 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
   final Function()? onPressedCounterNext;
   final Function()? onPressedCounterBack;
   final int pathIndex;
-  final MetroController metroController = Get.put(MetroController());
+  final MetroController metroController = Get.find();
   @override
   Widget build(BuildContext context) {
     customSnackBar(pathIndex);

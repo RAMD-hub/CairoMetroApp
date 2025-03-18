@@ -3,11 +3,23 @@ import 'package:cairo_metro_flutter/screens/route_details_landscape_screen.dart'
 import 'package:cairo_metro_flutter/screens/route_details_portrait_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controllers/metro_controller.dart';
 import '../widgets/custom_text.dart';
 
-class MetroRouteScreen extends StatelessWidget {
-  MetroRouteScreen({super.key});
+class MetroRouteScreen extends StatefulWidget {
+  const MetroRouteScreen({super.key});
+
+  @override
+  State<MetroRouteScreen> createState() => _MetroRouteScreenState();
+}
+
+class _MetroRouteScreenState extends State<MetroRouteScreen> {
   final pathIndex = 0.obs;
+  final MetroController metroController = Get.find();
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

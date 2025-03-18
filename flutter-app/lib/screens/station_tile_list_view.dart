@@ -1,5 +1,4 @@
 import 'package:cairo_metro_flutter/screens/station_tile.dart';
-import 'package:cairo_metro_flutter/services/exchange_stations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +12,7 @@ class StationTileListView extends StatelessWidget {
   });
   final int pathIndex;
   final List<String> path;
-  final MetroController metroController = Get.put(MetroController());
-
+  final MetroController metroController = Get.find();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -31,6 +29,6 @@ class StationTileListView extends StatelessWidget {
   }
 
   List<String> exchangeStationInPath() {
-    return metroController.exchangeStationsList[pathIndex].exchangedStationList;
+    return metroController.exchangeStation.getExchangeStations(path);
   }
 }

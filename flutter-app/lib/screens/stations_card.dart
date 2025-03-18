@@ -10,11 +10,9 @@ import '../widgets/custom_radio_button.dart';
 class StationsCard extends StatelessWidget {
   StationsCard({
     super.key,
-    required this.selectedTransfers,
   });
 
-  final MetroController metroController = Get.put(MetroController());
-  final RxString selectedTransfers;
+  final MetroController metroController = Get.find();
   final isSwap = false.obs;
 
   @override
@@ -34,13 +32,18 @@ class StationsCard extends StatelessWidget {
             CustomDropDownMenu(
               isSwap: isSwap,
             ),
-            IconButton(
-              onPressed: () {
-                metroController.swapStations();
-                isSwap.value = true;
-              },
-              icon: CustomIcon(icon: Icons.swap_vert_circle_outlined),
-            ),
+            Obx(() {
+              return IconButton(
+                onPressed: metroController.startStation.value.isNotEmpty &&
+                        metroController.endStation.value.isNotEmpty
+                    ? () {
+                        metroController.swapStations();
+                        isSwap.value = true;
+                      }
+                    : null,
+                icon: CustomIcon(icon: Icons.swap_vert_circle_outlined),
+              );
+            }),
             CustomDropDownMenu(
               isStart: false,
               isSwap: isSwap,
@@ -51,26 +54,30 @@ class StationsCard extends StatelessWidget {
                 CustomRadioButton(
                   text: 'Less Stations',
                   value: 'Less Stations',
-                  groupValue: selectedTransfers,
+                  groupValue: metroController.selectedTransfers,
+                  onChanged: (newValue) =>
+                      metroController.updateSelectedTransfer(newValue),
                 ),
                 CustomRadioButton(
                   text: 'Less Transfer',
                   value: 'Less Transfer',
-                  groupValue: selectedTransfers,
+                  groupValue: metroController.selectedTransfers,
+                  onChanged: (newValue) =>
+                      metroController.updateSelectedTransfer(newValue),
                 ),
               ],
             ),
             CustomButton(
               onPressed: () {
                 final RxList<List<String>> paths =
-                    selectedTransfers.value == 'Less Stations'
+                    metroController.selectedTransfers.value == 'Less Stations'
                         ? metroController.allPaths
-                        : metroController.allPathsByExchanged;
+                        : metroController.allPathsByExchangedNum;
+
                 if (metroController.startStation.value.isEmpty ||
                     metroController.endStation.value.isEmpty ||
                     metroController.startStation ==
-                        metroController.endStation ||
-                    selectedTransfers.value.isEmpty) {
+                        metroController.endStation) {
                   Get.snackbar(
                     'Error',
                     'Please fill in both station correctly.',

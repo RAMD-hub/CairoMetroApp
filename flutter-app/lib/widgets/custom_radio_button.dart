@@ -7,12 +7,14 @@ class CustomRadioButton extends StatelessWidget {
   final String text;
   final String value;
   final RxString groupValue;
+  final Function(String)? onChanged; // إضافة `onChanged` كـ callback
 
   const CustomRadioButton({
     super.key,
     required this.text,
     required this.value,
     required this.groupValue,
+    this.onChanged,
   });
 
   @override
@@ -23,9 +25,11 @@ class CustomRadioButton extends StatelessWidget {
       return GestureDetector(
         onTap: () {
           groupValue.value = value;
+          if (onChanged != null) {
+            onChanged!(value); // استدعاء `onChanged` إذا تم تمريره
+          }
         },
         child: Row(
-          spacing: 8,
           children: [
             Container(
               width: (MediaQuery.sizeOf(context).width * 0.05),
@@ -43,6 +47,7 @@ class CustomRadioButton extends StatelessWidget {
                     )
                   : null,
             ),
+            const SizedBox(width: 8), // إضافة مسافة بين الدائرة والنص
             CustomText(
               text: text,
               txtColor: isSelected ? Color(0xFFFEA613) : Colors.black,

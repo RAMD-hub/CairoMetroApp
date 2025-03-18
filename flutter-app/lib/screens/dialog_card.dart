@@ -1,7 +1,5 @@
-import 'package:cairo_metro_flutter/screens/metro_trip_progress.dart';
 import 'package:cairo_metro_flutter/widgets/line_shape.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../widgets/circle_shape.dart';
 import '../widgets/custom_text.dart';
 

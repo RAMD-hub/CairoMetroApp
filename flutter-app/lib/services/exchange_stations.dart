@@ -1,5 +1,3 @@
-import 'package:dartx/dartx.dart';
-
 import '../repositories/metro_repository.dart';
 
 class ExchangeStation {
@@ -30,11 +28,5 @@ class ExchangeStation {
     }
 
     return transferStations;
-  }
-
-  List<List<String>> sortPathsByExchanges(final List<List<String>> paths) {
-    final ExchangeStation exchangeStation = ExchangeStation();
-    return paths
-        .sortedBy((path) => exchangeStation.getExchangeStations(path).length);
   }
 }

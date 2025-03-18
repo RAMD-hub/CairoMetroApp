@@ -28,7 +28,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
   final Function()? onPressedCounterNext;
   final Function()? onPressedCounterBack;
   final int pathIndex;
-  final MetroController metroController = Get.put(MetroController());
+  final MetroController metroController = Get.find();
   @override
   Widget build(BuildContext context) {
     customSnackBar(pathIndex);
