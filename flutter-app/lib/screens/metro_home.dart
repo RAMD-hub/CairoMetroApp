@@ -7,10 +7,21 @@ import '../widgets/custom_text.dart';
 import 'home_appbar.dart';
 import 'stations_card.dart';
 
-class MetroHome extends StatelessWidget {
-  MetroHome({super.key});
-  final selectedTransfers = 'Less Stations'.obs;
-  final MetroController metroController = Get.put(MetroController());
+class MetroHome extends StatefulWidget {
+  const MetroHome({super.key});
+
+  @override
+  State<MetroHome> createState() => _MetroHomeState();
+}
+
+class _MetroHomeState extends State<MetroHome> {
+  final MetroController metroController = Get.find();
+  @override
+  void initState() {
+    metroController.playWelcomeUserInApp();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +45,7 @@ class MetroHome extends StatelessWidget {
                     child: const CustomText(text: 'Where are you going Today?'),
                   ),
                   DialogCard(),
-                  StationsCard(
-                    selectedTransfers: selectedTransfers,
-                  ),
+                  StationsCard(),
                   AddressCard(),
                 ],
               ),
