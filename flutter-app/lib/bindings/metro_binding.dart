@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import '../controllers/metro_controller.dart';
-import '../services/audio_services.dart';
 import '../services/exchange_stations.dart';
 import '../services/path_finder.dart';
 import '../services/sorted_paths.dart';
@@ -15,17 +14,17 @@ class MetroBinding extends Bindings {
     Get.lazyPut(() => TicketService());
     Get.lazyPut(() => SortedPaths());
     Get.lazyPut(() => ExchangeStation());
-    Get.lazyPut(() => AudioService());
 
-    Get.put(
-      MetroController(
+    Get.lazyPut(
+      () => MetroController(
         pathFinder: Get.find(),
         ticketService: Get.find(),
         sortedPaths: Get.find(),
-        audioService: Get.find(),
         exchangeStation: Get.find(),
         metroRepository: Get.find(),
       ),
     );
+
+    // );
   }
 }

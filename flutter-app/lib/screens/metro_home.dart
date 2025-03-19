@@ -7,46 +7,36 @@ import '../widgets/custom_text.dart';
 import 'home_appbar.dart';
 import 'stations_card.dart';
 
-class MetroHome extends StatefulWidget {
+class MetroHome extends StatelessWidget {
   const MetroHome({super.key});
 
   @override
-  State<MetroHome> createState() => _MetroHomeState();
-}
-
-class _MetroHomeState extends State<MetroHome> {
-  final MetroController metroController = Get.find();
-  @override
-  void initState() {
-    metroController.playWelcomeUserInApp();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final MetroController metroController = Get.find();
+
     return Scaffold(
       backgroundColor: const Color(0xFFF7F6F2),
       body: CustomScrollView(
         slivers: [
-          HomeAppBar(),
+          const HomeAppBar(),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: const CustomText(
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: CustomText(
                         text: 'Welcome', txtColor: Color(0xFFFEA613)),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: const CustomText(text: 'Where are you going Today?'),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: CustomText(text: 'Where are you going Today?'),
                   ),
                   DialogCard(),
                   StationsCard(),
-                  AddressCard(),
+                  const AddressCard(),
                 ],
               ),
             ),

@@ -62,9 +62,6 @@ class CustomDropDownMenu extends StatelessWidget {
           shadowColor: WidgetStatePropertyAll(Colors.red),
           alignment: Alignment.bottomCenter,
           elevation: WidgetStatePropertyAll(2),
-          backgroundColor: WidgetStatePropertyAll(
-            Color(0xFFFEA613),
-          ),
           side: WidgetStatePropertyAll(
             BorderSide(color: Colors.blue, width: 2),
           ),

@@ -37,7 +37,6 @@ dependencies:
   get: ^4.7.2
   flutter_launcher_icons: ^0.14.3
   dartx: ^1.2.0
-  just_audio: ^0.9.46
 
 flutter_icons:
   android: true

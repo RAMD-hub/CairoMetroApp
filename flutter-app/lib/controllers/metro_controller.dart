@@ -3,7 +3,6 @@ import 'package:cairo_metro_flutter/repositories/metro_repository.dart';
 import 'package:cairo_metro_flutter/services/path_finder.dart';
 import 'package:cairo_metro_flutter/services/sorted_paths.dart';
 import 'package:get/get.dart';
-import '../services/audio_services.dart';
 import '../services/exchange_stations.dart';
 import '../services/ticket_service.dart';
 
@@ -12,7 +11,6 @@ class MetroController extends GetxController {
     required this.pathFinder,
     required this.ticketService,
     required this.sortedPaths,
-    required this.audioService,
     required this.exchangeStation,
     required this.metroRepository,
   });
@@ -21,7 +19,6 @@ class MetroController extends GetxController {
   final TicketService ticketService;
   final PathFinder pathFinder;
   final SortedPaths sortedPaths;
-  final AudioService audioService;
   final RxSet<String> stationsNames = <String>{}.obs;
   final startStation = ''.obs;
   final endStation = ''.obs;
@@ -76,10 +73,6 @@ class MetroController extends GetxController {
     return ticketService.calculateTicketPrice(stationCount);
   }
 
-  void playWelcomeUserInApp() {
-    audioService.playSound();
-  }
-
   void updateSelectedTransfer(String value) {
     selectedTransfers.value = value;
   }
@@ -92,7 +85,6 @@ class MetroController extends GetxController {
     allPathsByExchangedNum.clear();
     metroPaths.clear();
     stationsNames.clear();
-    audioService.dispose();
     super.onClose();
   }
 }

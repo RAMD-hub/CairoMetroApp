@@ -1,7 +1,7 @@
 import '../models/station.dart';
 
 class MetroRepository {
-  final Map<String, MetroStation> stations = {};
+  final Map<String, MetroStation> stations = {}; // json
   final List<List<String>> lines = [
     [
       'new marg',
