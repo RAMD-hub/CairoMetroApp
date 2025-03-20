@@ -1,5 +1,3 @@
-import 'package:dartx/dartx.dart';
-
 import '../models/metro_path.dart';
 
 class SortedPaths {

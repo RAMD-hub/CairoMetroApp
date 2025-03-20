@@ -12,8 +12,6 @@ class MetroHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MetroController metroController = Get.find();
-
     return Scaffold(
       backgroundColor: const Color(0xFFF7F6F2),
       body: CustomScrollView(

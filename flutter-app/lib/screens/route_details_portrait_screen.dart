@@ -33,8 +33,8 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     customSnackBar(pathIndex);
     final int stationsNumbers = paths[pathIndex].length;
-    final double screenWidth = (MediaQuery.sizeOf(context).width);
-    final double screenHeight = (MediaQuery.sizeOf(context).height);
+    final double screenWidth = Get.width;
+    final double screenHeight = Get.height;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(

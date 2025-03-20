@@ -33,8 +33,8 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     customSnackBar(pathIndex);
     final int stationsNumbers = paths[pathIndex].length;
-    final double screenWidth = MediaQuery.sizeOf(context).width;
-    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = Get.width;
+    final double screenHeight = Get.height;
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: screenWidth * 0.02, vertical: screenHeight * 0.02),
