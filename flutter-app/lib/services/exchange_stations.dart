@@ -19,7 +19,6 @@ class ExchangeStation {
           metroRepository.findStation(stationName).lineNumber;
       final List<int> nextStationLines =
           metroRepository.findStation(nextStationName).lineNumber;
-      debugPrint('$stationLines ✅✅✅✅✅✅✅✅✅✅');
       final int newLine = stationLines.firstWhere(
           (line) => nextStationLines.contains(line),
           orElse: () => -1);

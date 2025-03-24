@@ -31,7 +31,7 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
   final MetroController metroController = Get.find();
   @override
   Widget build(BuildContext context) {
-    customSnackBar(pathIndex);
+    if (isMetroRouteScreen && pathIndex == 0) customSnackBar(pathIndex);
     final int stationsNumbers = paths[pathIndex].length;
     final double screenWidth = Get.width;
     final double screenHeight = Get.height;

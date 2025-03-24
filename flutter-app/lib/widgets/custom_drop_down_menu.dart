@@ -57,15 +57,14 @@ class CustomDropDownMenu extends StatelessWidget {
             ),
           ),
         ),
-        menuHeight: MediaQuery.sizeOf(context).height * 0.25,
+        menuHeight: Get.height * 0.25,
         menuStyle: MenuStyle(
-          shadowColor: WidgetStatePropertyAll(Colors.red),
           alignment: Alignment.bottomCenter,
           elevation: WidgetStatePropertyAll(2),
           side: WidgetStatePropertyAll(
-            BorderSide(color: Colors.blue, width: 2),
+            BorderSide(color: Color(0xFFE69500), width: 2),
           ),
-          padding: WidgetStatePropertyAll(EdgeInsets.all(10)),
+          padding: WidgetStatePropertyAll(EdgeInsets.all(20)),
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),

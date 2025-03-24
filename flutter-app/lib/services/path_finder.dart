@@ -25,7 +25,6 @@ class PathFinder {
     } else {
       final List<String> currentNeighbors =
           metroRepository.findStation(current).neighbors;
-      debugPrint('$currentNeighbors  ✅✅✅ ');
       for (String neighbor in currentNeighbors) {
         if (!visited.contains(neighbor)) {
           _dfs(neighbor, end, path, visited, allPaths);

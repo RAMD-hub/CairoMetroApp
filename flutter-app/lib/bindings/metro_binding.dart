@@ -9,11 +9,11 @@ import '../repositories/metro_repository.dart';
 class MetroBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => MetroRepository());
     Get.lazyPut(() => PathFinder(metroRepository: Get.find()));
     Get.lazyPut(() => TicketService());
     Get.lazyPut(() => SortedPaths());
     Get.lazyPut(() => ExchangeStation(metroRepository: Get.find()));
+    Get.lazyPut(() => MetroRepository());
     Get.find<MetroRepository>().loadJsonData();
     Get.lazyPut(
       () => MetroController(

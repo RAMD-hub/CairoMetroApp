@@ -19,7 +19,7 @@ class MetroController extends GetxController {
   final TicketService ticketService;
   final PathFinder pathFinder;
   final SortedPaths sortedPaths;
-  final RxSet<String> stationsNames = <String>{}.obs;
+  final RxList<String> stationsNames = <String>[].obs;
   final startStation = ''.obs;
   final endStation = ''.obs;
   final selectedTransfers = 'Less Stations'.obs;
@@ -29,16 +29,19 @@ class MetroController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    stationsNames.assignAll(metroRepository.lines.expand((list) => list));
+    ever(metroRepository.stationsNames, (_) {
+      stationsNames.assignAll(metroRepository.stationsNames);
+    });
     everAll([startStation, endStation], (_) {
       findPaths();
     });
   }
 
-  Future<void> findPaths() async {
+  void findPaths() {
     if (startStation.value.isNotEmpty && endStation.value.isNotEmpty) {
       allPaths.assignAll(
-        pathFinder.findAllPaths(startStation.value, endStation.value),
+        pathFinder.findAllPaths(
+            startStation.value.toLowerCase(), endStation.value.toLowerCase()),
       );
     }
     // get pathIndex and path and exchange stations
