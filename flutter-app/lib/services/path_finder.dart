@@ -1,12 +1,13 @@
 import 'package:cairo_metro_flutter/repositories/metro_repository.dart';
+import 'package:flutter/cupertino.dart';
 
 class PathFinder {
   final MetroRepository metroRepository;
   PathFinder({required this.metroRepository});
 
   List<List<String>> findAllPaths(String start, String end) {
-    if (!metroRepository.stations.containsKey(start) ||
-        !metroRepository.stations.containsKey(end)) {
+    if (metroRepository.findStation(start).name.isEmpty ||
+        metroRepository.findStation(end).name.isEmpty) {
       return [];
     }
     List<List<String>> allPaths = [];
@@ -22,7 +23,10 @@ class PathFinder {
     if (current == end) {
       allPaths.add(List.from(path));
     } else {
-      for (String neighbor in metroRepository.stations[current]!.neighbors) {
+      final List<String> currentNeighbors =
+          metroRepository.findStation(current).neighbors;
+      debugPrint('$currentNeighbors  ✅✅✅ ');
+      for (String neighbor in currentNeighbors) {
         if (!visited.contains(neighbor)) {
           _dfs(neighbor, end, path, visited, allPaths);
         }

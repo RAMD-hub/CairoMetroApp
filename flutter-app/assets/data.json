@@ -1,0 +1,507 @@
+[
+  {
+    "name": "new marg",
+    "lineNumber": [1],
+    "neighbors": ["el marg"],
+    "coordinates": [30.16390834007935, 31.338396413653353]
+  },
+  {
+    "name": "el marg",
+    "lineNumber": [1],
+    "neighbors": ["new marg", "ezbet el nakhl"],
+    "coordinates": [30.16387213012298, 31.338373899999993]
+  },
+  {
+    "name": "ezbet el nakhl",
+    "lineNumber": [1],
+    "neighbors": ["el marg", "ain shams"],
+    "coordinates": [30.139909082028137, 31.324329276901647]
+  },
+  {
+    "name": "ain shams",
+    "lineNumber": [1],
+    "neighbors": ["ezbet el nakhl", "el matareyya"],
+    "coordinates": [30.131194536916304, 31.319149477599222]
+  },
+  {
+    "name": "el matareyya",
+    "lineNumber": [1],
+    "neighbors": ["ain shams", "helmeyet el zaitoun"],
+    "coordinates": [30.12161800317332, 31.31378505957707]
+  },
+  {
+    "name": "helmeyet el zaitoun",
+    "lineNumber": [1],
+    "neighbors": ["el matareyya", "hadayeq el zaitoun"],
+    "coordinates": [30.113423390618454, 31.313935263265353]
+  },
+  {
+    "name": "hadayeq el zaitoun",
+    "lineNumber": [1],
+    "neighbors": ["helmeyet el zaitoun", "saray el qobba"],
+    "coordinates": [30.105945826265085, 31.310497808878953]
+  },
+  {
+    "name": "saray el qobba",
+    "lineNumber": [1],
+    "neighbors": ["hadayeq el zaitoun", "hammamat el qobba"],
+    "coordinates": [30.097824171908353, 31.304554033734203]
+  },
+  {
+    "name": "hammamat el qobba",
+    "lineNumber": [1],
+    "neighbors": ["saray el qobba", "kobri el qobba"],
+    "coordinates":[30.091289236386555, 31.29892139480632]
+  },
+  {
+    "name": "kobri el qobba",
+    "lineNumber": [1],
+    "neighbors": ["hammamat el qobba", "mansheiet el sadr"],
+    "coordinates":[30.08744691693159, 31.294092085922088]
+  },
+  {
+    "name": "mansheiet el sadr",
+    "lineNumber": [1],
+    "neighbors": ["kobri el qobba", "el demerdash"],
+    "coordinates":[30.082127473700723, 31.28751530942225]
+  },
+  {
+    "name": "el demerdash",
+    "lineNumber": [1],
+    "neighbors": ["mansheiet el sadr", "ghamra"],
+    "coordinates":[30.077485491938674, 31.277805712807016]
+  },
+  {
+    "name": "ghamra",
+    "lineNumber": [1],
+    "neighbors": ["el demerdash", "al shohadaa"],
+    "coordinates":[30.069296505098574, 31.2646199732985]
+  },
+  {
+    "name": "al shohadaa",
+    "lineNumber": [1, 2],
+    "neighbors": ["ghamra", "orabi", "masarra", "ataba"],
+    "coordinates":[30.061069697686236, 31.24606981578609]
+  },
+  {
+    "name": "orabi",
+    "lineNumber": [1],
+    "neighbors": ["al shohadaa", "nasser"],
+    "coordinates":[30.056836536500157, 31.24199630808251]
+  },
+  {
+    "name": "nasser",
+    "lineNumber": [1, 3],
+    "neighbors": ["orabi", "sadat", "ataba", "maspero"],
+    "coordinates":[30.053707065087725, 31.238724013089644]
+  },
+  {
+    "name": "sadat",
+    "lineNumber": [1, 2],
+    "neighbors": ["nasser", "saad zaghloul", "mohamed naguib", "opera"],
+    "coordinates":[30.044123024096905, 31.234378834476384]
+  },
+  {
+    "name": "saad zaghloul",
+    "lineNumber": [1],
+    "neighbors": ["sadat", "al sayeda zeinab"],
+    "coordinates": [30.037447412937567, 31.238293708257967]
+  },
+  {
+    "name": "al sayeda zeinab",
+    "lineNumber": [1],
+    "neighbors": ["saad zaghloul", "el malek el saleh"],
+    "coordinates": [30.02965550255097, 31.23540917713055]
+  },
+  {
+    "name": "el malek el saleh",
+    "lineNumber": [1],
+    "neighbors": ["al sayeda zeinab", "mar girgis"],
+    "coordinates": [30.01804155346186, 31.23120059889018]
+  },
+  {
+    "name": "mar girgis",
+    "lineNumber": [1],
+    "neighbors": ["el malek el saleh", "el zahraa"],
+    "coordinates": [30.006303395757413, 31.229624352357774]
+  },
+  {
+    "name": "el zahraa",
+    "lineNumber": [1],
+    "neighbors": ["mar girgis", "dar el salam"],
+    "coordinates": [29.995487999666768, 31.231131851890293]
+  },
+  {
+    "name": "dar el salam",
+    "lineNumber": [1],
+    "neighbors": ["el zahraa", "hadayek el maadi"],
+    "coordinates": [29.9824645683445, 31.24216432189302]
+  },
+  {
+    "name": "hadayek el maadi",
+    "lineNumber": [1],
+    "neighbors": ["dar el salam", "maadi"],
+    "coordinates": [29.970367179130818, 31.250581478331352]
+  },
+  {
+    "name": "maadi",
+    "lineNumber": [1],
+    "neighbors": ["hadayek el maadi", "sakanat el maadi"],
+    "coordinates": [29.96048063410076, 31.25759577536756]
+  },
+  {
+    "name": "sakanat el maadi",
+    "lineNumber": [1],
+    "neighbors": ["maadi", "tora el balad"],
+    "coordinates": [29.95364452613168, 31.262893135580896]
+  },
+  {
+    "name": "tora el balad",
+    "lineNumber": [1],
+    "neighbors": ["sakanat el maadi", "kozzika"],
+    "coordinates": [29.946990043547878, 31.27305634442901]
+  },
+  {
+    "name": "kozzika",
+    "lineNumber": [1],
+    "neighbors": ["tora el balad", "tura el esmant"],
+    "coordinates": [29.93656845793134, 31.28180451271346]
+  },
+  {
+    "name": "tura el esmant",
+    "lineNumber": [1],
+    "neighbors": ["kozzika", "el maasraa"],
+    "coordinates": [29.926264463026072, 31.287526955479887]
+  },
+  {
+    "name": "el maasraa",
+    "lineNumber": [1],
+    "neighbors": ["tura el esmant", "hadayek helwan"],
+    "coordinates": [29.906151562870363, 31.299519200254636]
+  },
+  {
+    "name": "hadayek helwan",
+    "lineNumber": [1],
+    "neighbors": ["el maasraa", "wadi hof"],
+    "coordinates": [29.897464093104627, 31.304190214573747]
+  },
+  {
+    "name": "wadi hof",
+    "lineNumber": [1],
+    "neighbors": ["hadayek helwan", "helwan university"],
+    "coordinates": [29.879342950828875, 31.31350583151044]
+  },
+  {
+    "name": "helwan university",
+    "lineNumber": [1],
+    "neighbors": ["wadi hof", "ain helwan"],
+    "coordinates": [29.869693425172255, 31.320092205118847]
+  },
+  {
+    "name": "ain helwan",
+    "lineNumber": [1],
+    "neighbors": ["helwan university", "helwan"],
+    "coordinates": [29.86284091818019, 31.32476763678763]
+  },
+  {
+    "name": "helwan",
+    "lineNumber": [1],
+    "neighbors": ["ain helwan"],
+    "coordinates": [29.84921897554949, 31.334252431680213]
+  },
+  {
+    "name": "shubra el khaimah",
+    "lineNumber": [2],
+    "neighbors": ["koliet el zeraa"],
+    "coordinates":  [30.122589931428383, 31.24449916118427]
+  },
+  {
+    "name": "koliet el zeraa",
+    "lineNumber": [2],
+    "neighbors": ["shubra el khaimah", "mezallat"],
+    "coordinates":  [30.11385711651997, 31.248683407283796]
+  },
+  {
+    "name": "mezallat",
+    "lineNumber": [2],
+    "neighbors": ["koliet el zeraa", "khalafawy"],
+    "coordinates":  [30.104232493235813, 31.245647146670017]
+  },
+  {
+    "name": "khalafawy",
+    "lineNumber": [2],
+    "neighbors": ["mezallat", "st. teresa"],
+    "coordinates":  [30.097419512425027, 31.245550587132325]
+  },
+  {
+    "name": "st. teresa",
+    "lineNumber": [2],
+    "neighbors": ["khalafawy", "rod el farag"],
+    "coordinates":  [30.088118200199023, 31.24548621413994]
+  },
+  {
+    "name": "rod el farag",
+    "lineNumber": [2],
+    "neighbors": ["st. teresa", "masarra"],
+    "coordinates":  [30.080774929514526, 31.245368196931825]
+  },
+  {
+    "name": "masarra",
+    "lineNumber": [2],
+    "neighbors": ["rod el farag", "al shohadaa"],
+    "coordinates":  [30.07097995899341, 31.245099976037768]
+  },
+  {
+    "name": "ataba",
+    "lineNumber": [2, 3],
+    "neighbors": ["al shohadaa", "mohamed naguib", "nasser", "bab el shaaria"],
+    "coordinates":  [30.052566504153496, 31.246784403285112]
+  },
+  {
+    "name": "mohamed naguib",
+    "lineNumber": [2],
+    "neighbors": ["ataba", "sadat"],
+    "coordinates":  [30.045554934098394, 31.244123651914116]
+  },
+  {
+    "name": "opera",
+    "lineNumber": [2],
+    "neighbors": ["sadat", "dokki"],
+    "coordinates":[30.04199788163627, 31.224951221893708]
+  },
+  {
+    "name": "dokki",
+    "lineNumber": [2],
+    "neighbors": ["opera", "el bohooth"],
+    "coordinates":[30.03844070147971, 31.212237551232505]
+  },
+  {
+    "name": "el bohooth",
+    "lineNumber": [2],
+    "neighbors": ["dokki", "cairo university"],
+    "coordinates":[30.03589579970286, 31.200167610643636]
+  },
+  {
+    "name": "cairo university",
+    "lineNumber": [2, 4],
+    "neighbors": ["el bohooth", "faisal", "boulak el dakrour"],
+    "coordinates":[30.026003498722588, 31.201122477023866]
+  },
+  {
+    "name": "faisal",
+    "lineNumber": [2],
+    "neighbors": ["cairo university", "giza"],
+    "coordinates":[30.017483982818987, 31.20390443924889]
+  },
+  {
+    "name": "giza",
+    "lineNumber": [2],
+    "neighbors": ["faisal", "omm el masryeen"],
+    "coordinates":[30.01073467275148, 31.2070972827205]
+  },
+  {
+    "name": "omm el masryeen",
+    "lineNumber": [2],
+    "neighbors": ["giza", "saqiyet makky"],
+    "coordinates":[30.00568877260364, 31.208145071004214]
+  },
+  {
+    "name": "saqiyet makky",
+    "lineNumber": [2],
+    "neighbors": ["omm el masryeen", "el monib"],
+    "coordinates":[29.995586942733755, 31.20865827342239]
+  },
+  {
+    "name": "el monib",
+    "lineNumber": [2],
+    "neighbors": ["saqiyet makky"],
+    "coordinates":[29.981196309856315, 31.21231484068156]
+  },
+  {
+    "name": "adly mansour",
+    "lineNumber": [3],
+    "neighbors": ["haykestep"],
+    "coordinates":[30.14712037929661, 31.421206208686606]
+  },
+  {
+    "name": "haykestep",
+    "lineNumber": [3],
+    "neighbors": ["adly mansour", "omar ibn el khattab"],
+    "coordinates":[30.143833716292516, 31.40468434768364]
+  },
+  {
+    "name": "omar ibn el khattab",
+    "lineNumber": [3],
+    "neighbors": ["haykestep", "qubaa"],
+    "coordinates":[30.140391572091005, 31.394351380406547]
+
+  },
+  {
+    "name": "qubaa",
+    "lineNumber": [3],
+    "neighbors": ["omar ibn el khattab", "hesham barakat"],
+    "coordinates":[30.134852349112577, 31.383760194321127]
+  },
+  {
+    "name": "hesham barakat",
+    "lineNumber": [3],
+    "neighbors": ["qubaa", "el nozha"],
+    "coordinates":[30.13080424625952, 31.372928402583753]
+  },
+  {
+    "name": "el nozha",
+    "lineNumber": [3],
+    "neighbors": ["hesham barakat", "nadi el shams"],
+    "coordinates":[30.12798112620501, 31.360232803921388]
+  },
+  {
+    "name": "nadi el shams",
+    "lineNumber": [3],
+    "neighbors": ["el nozha", "alf maskan"],
+    "coordinates":[30.12566823010573, 31.348893185291324]
+  },
+  {
+    "name": "alf maskan",
+    "lineNumber": [3],
+    "neighbors": ["nadi el shams", "heliopolis square"],
+    "coordinates":[30.119011198221273, 31.340188697953348]
+  },
+  {
+    "name": "heliopolis square",
+    "lineNumber": [3],
+    "neighbors": ["alf maskan", "haroun"],
+    "coordinates":[30.10841678553546, 31.33825755942842]
+  },
+  {
+    "name": "haroun",
+    "lineNumber": [3],
+    "neighbors": ["heliopolis square", "al ahram"],
+    "coordinates":[30.10142192196846, 31.33295918280869]
+  },
+  {
+    "name": "al ahram",
+    "lineNumber": [3],
+    "neighbors": ["haroun", "koleyet el banat"],
+    "coordinates":[30.091718167539824, 31.32630490295478]
+  },
+  {
+    "name": "koleyet el banat",
+    "lineNumber": [3],
+    "neighbors": ["al ahram", "stadium"],
+    "coordinates": [30.084063380768164, 31.329008136189614]
+  },
+  {
+    "name": "stadium",
+    "lineNumber": [3],
+    "neighbors": ["koleyet el banat", "fair zone"],
+    "coordinates":  [30.07311764143083, 31.31712692530709]
+  },
+  {
+    "name": "fair zone",
+    "lineNumber": [3],
+    "neighbors": ["stadium", "abbasseya"],
+    "coordinates":  [30.07357678775154, 31.300796887062152]
+  },
+  {
+    "name": "abbasseya",
+    "lineNumber": [3],
+    "neighbors": ["fair zone", "abdou pasha"],
+    "coordinates": [30.07215523857578, 31.283350249057815]
+  },
+  {
+    "name": "abdou pasha",
+    "lineNumber": [3],
+    "neighbors": ["abbasseya", "el geish"],
+    "coordinates": [30.065011900393788, 31.274743185938753]
+  },
+  {
+    "name": "el geish",
+    "lineNumber": [3],
+    "neighbors": ["abdou pasha", "bab el shaaria"],
+    "coordinates": [30.061863813944427, 31.266877643958285]
+  },
+  {
+    "name": "bab el shaaria",
+    "lineNumber": [3],
+    "neighbors": ["el geish", "ataba"],
+    "coordinates": [30.0543204820955, 31.255881203802293]
+  },
+  {
+    "name": "maspero",
+    "lineNumber": [3],
+    "neighbors": ["nasser", "safa hegazy"],
+    "coordinates": [30.055711319249117, 31.23211219375498]
+  },
+  {
+    "name": "safa hegazy",
+    "lineNumber": [3],
+    "neighbors": ["maspero", "kit kat"],
+    "coordinates": [30.062328640470874, 31.22329697551513]
+  },
+  {
+    "name": "kit kat",
+    "lineNumber": [3],
+    "neighbors": ["safa hegazy", "sudan", "tawfikia"],
+    "coordinates":[30.066597585505427, 31.213013840330483]
+  },
+  {
+    "name": "sudan",
+    "lineNumber": [3],
+    "neighbors": ["kit kat", "imbaba"],
+    "coordinates": [30.0700581510512, 31.204735552971062]
+  },
+  {
+    "name": "imbaba",
+    "lineNumber": [3],
+    "neighbors": ["sudan", "el bohy"],
+    "coordinates": [30.07586168303746, 31.207470359419787]
+  },
+  {
+    "name": "el bohy",
+    "lineNumber": [3],
+    "neighbors": ["imbaba", "el qawmia"],
+    "coordinates": [30.082152206003176, 31.21055540495042]
+  },
+  {
+    "name": "el qawmia",
+    "lineNumber": [3],
+    "neighbors": ["el bohy", "ring road"],
+    "coordinates": [30.09325049030221, 31.208994507289464]
+  },
+  {
+    "name": "ring road",
+    "lineNumber": [3],
+    "neighbors": ["el qawmia", "rod el farag corridor"],
+    "coordinates": [30.09642507727801, 31.199565251317367]
+  },
+  {
+    "name": "rod el farag corridor",
+    "lineNumber": [3],
+    "neighbors": ["ring road"],
+    "coordinates":[30.10193197732157, 31.184402076205934]
+  },
+  {
+    "name": "tawfikia",
+    "lineNumber": [3],
+    "neighbors": ["kit kat", "wadi el nile"],
+    "coordinates":[30.065036426729225, 31.20242747297661]
+  },
+  {
+    "name": "wadi el nile",
+    "lineNumber": [3],
+    "neighbors": ["tawfikia", "gamat el dowal"],
+    "coordinates":[30.057094002353097, 31.20120657505059]
+  },
+  {
+    "name": "gamat el dowal",
+    "lineNumber": [3],
+    "neighbors": ["wadi el nile", "boulak el dakrour"],
+    "coordinates":[30.050125726771757, 31.198981999858955]
+  },
+  {
+    "name": "boulak el dakrour",
+    "lineNumber": [3],
+    "neighbors": ["gamat el dowal", "cairo university"],
+    "coordinates":[30.03757827344112, 31.195593446747615]
+  }
+]

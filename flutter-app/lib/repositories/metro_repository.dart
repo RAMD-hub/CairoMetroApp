@@ -1,7 +1,9 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import '../models/station.dart';
 
 class MetroRepository {
-  final Map<String, MetroStation> stations = {}; // json
+  final List<MetroStation> stations = [];
   final List<List<String>> lines = [
     [
       'new marg',
@@ -103,30 +105,40 @@ class MetroRepository {
     ],
   ];
 
-  MetroRepository() {
-    _buildMetroGraph();
+  Future<void> loadJsonData() async {
+    String jsonString = await rootBundle.loadString('assets/data.json');
+    List<dynamic> jsonData = jsonDecode(jsonString);
+    for (var item in jsonData) {
+      stations.add(
+        MetroStation(
+          name: item['name'] ?? '',
+          lineNumber: (item['lineNumber'] as List<dynamic>)
+              .map((e) => e as int)
+              .toList(),
+          neighbors: (item['neighbors'] as List<dynamic>)
+              .map((e) => e.toString())
+              .toList(),
+          coordinates: (item['coordinates'] as List<dynamic>)
+              .map((e) => e as double)
+              .toList(),
+        ),
+      );
+    }
+    print("Total Stations Loaded: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅${stations.length}");
   }
 
-  void _buildMetroGraph() {
-    for (int lineIndex = 0; lineIndex < lines.length; lineIndex++) {
-      var line = lines[lineIndex];
-      for (int i = 0; i < line.length; i++) {
-        stations.putIfAbsent(
-            line[i],
-            () => MetroStation(
-                  name: line[i],
-                  lineNumber: [],
-                ));
-
-        if (!stations[line[i]]!.lineNumber.contains(lineIndex + 1)) {
-          stations[line[i]]!.lineNumber.add(lineIndex + 1);
-        }
-
-        if (i > 0) {
-          stations[line[i]]!.addNeighbor(line[i - 1]);
-          stations[line[i - 1]]!.addNeighbor(line[i]);
-        }
+  MetroStation findStation(String stationName) {
+    for (var station in stations) {
+      if (station.name.trim().toLowerCase() ==
+          stationName.trim().toLowerCase()) {
+        return station;
       }
     }
+    return MetroStation(
+      name: 'Unknown Station',
+      lineNumber: [-1],
+      neighbors: [],
+      coordinates: [],
+    );
   }
 }

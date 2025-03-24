@@ -35,7 +35,7 @@ class MetroController extends GetxController {
     });
   }
 
-  void findPaths() {
+  Future<void> findPaths() async {
     if (startStation.value.isNotEmpty && endStation.value.isNotEmpty) {
       allPaths.assignAll(
         pathFinder.findAllPaths(startStation.value, endStation.value),

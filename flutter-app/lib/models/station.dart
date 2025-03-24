@@ -1,10 +1,12 @@
 class MetroStation {
   final String name;
-  final Set<String> neighbors = {};
+  final List<String> neighbors;
   final List<int> lineNumber;
-  MetroStation({required this.name, required this.lineNumber});
-
-  void addNeighbor(String station) {
-    neighbors.add(station);
-  }
+  final List<double> coordinates;
+  MetroStation({
+    required this.name,
+    required this.lineNumber,
+    required this.neighbors,
+    required this.coordinates,
+  });
 }

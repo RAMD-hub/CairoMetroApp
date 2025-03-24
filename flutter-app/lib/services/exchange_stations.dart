@@ -1,27 +1,32 @@
+import 'package:cairo_metro_flutter/models/station.dart';
+import 'package:flutter/cupertino.dart';
+
 import '../repositories/metro_repository.dart';
 
 class ExchangeStation {
-  final MetroRepository metroRepository = MetroRepository();
+  final MetroRepository metroRepository;
+
+  ExchangeStation({required this.metroRepository});
 
   List<String> getExchangeStations(final List<String> path) {
     final List<String> transferStations = [];
     int? currentLine;
 
     for (int i = 0; i < path.length - 1; i++) {
-      String station = path[i];
-      String nextStation = path[i + 1];
-
-      List<int> stationLines = metroRepository.stations[station]!.lineNumber;
-      List<int> nextStationLines =
-          metroRepository.stations[nextStation]!.lineNumber;
-
-      int newLine = stationLines.firstWhere(
+      final String stationName = path[i];
+      final String nextStationName = path[i + 1];
+      final List<int> stationLines =
+          metroRepository.findStation(stationName).lineNumber;
+      final List<int> nextStationLines =
+          metroRepository.findStation(nextStationName).lineNumber;
+      debugPrint('$stationLines ✅✅✅✅✅✅✅✅✅✅');
+      final int newLine = stationLines.firstWhere(
           (line) => nextStationLines.contains(line),
           orElse: () => -1);
 
       if (newLine != -1 && newLine != currentLine) {
         if (transferStations.isNotEmpty || i > 0) {
-          transferStations.add(station);
+          transferStations.add(stationName);
         }
         currentLine = newLine;
       }

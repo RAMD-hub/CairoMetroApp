@@ -13,8 +13,8 @@ class MetroBinding extends Bindings {
     Get.lazyPut(() => PathFinder(metroRepository: Get.find()));
     Get.lazyPut(() => TicketService());
     Get.lazyPut(() => SortedPaths());
-    Get.lazyPut(() => ExchangeStation());
-
+    Get.lazyPut(() => ExchangeStation(metroRepository: Get.find()));
+    Get.find<MetroRepository>().loadJsonData();
     Get.lazyPut(
       () => MetroController(
         pathFinder: Get.find(),
@@ -24,7 +24,5 @@ class MetroBinding extends Bindings {
         metroRepository: Get.find(),
       ),
     );
-
-    // );
   }
 }
