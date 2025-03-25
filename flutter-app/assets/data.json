@@ -283,7 +283,7 @@
   },
   {
     "name": "cairo university",
-    "lineNumber": [2, 4],
+    "lineNumber": [2, 3],
     "neighbors": ["el bohooth", "faisal", "boulak el dakrour"],
     "coordinates":[30.026003498722588, 31.201122477023866]
   },
