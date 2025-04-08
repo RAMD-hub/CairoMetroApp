@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">cairoMetro</string>
+    <string name="other_path">Other Path</string>
+    <string name="metrologo">metrologo</string>
+    <string name="shortest_path">Shortest path</string>
+    <string name="pervious_path">Pervious path</string>
+    <string name="next_path">Next path</string>
+    <string name="enter_your_trip">🚇Enter your trip🚇</string>
+    <string name="getdetails">get details</string>
+    <string name="start">Start</string>
+    <string name="enter_start_station">Enter start station</string>
+    <string name="enter_arrival_station">Enter arrival station</string>
+    <string name="please_enter_your_destination_optional">Please enter your destination (optional)</string>
+    <string name="address">Address</string>
+    <string name="search">Search</string>
+    <string name="less_transfer">Less Transfer</string>
+    <string name="less_stations">less stations</string>
+    <string name="where_are_you_going_today">Where are you going Today?</string>
+    <string name="welcome">Welcome</string>
+    <string name="stations_view_all"> view all</string>
+    <string name="stations">stations</string>
+    <string name="no_near_station_from_your_location">no near station from your location</string>
+    <string name="enter_station_in_start_station">enter station in start station</string>
+    <string name="the_address_is_not_valid">the address is not valid</string>
+    <string name="error_while_loading_the_data_try_again">error while loading the data, try again</string>
+    <string name="no_near_station_to_your_destination">no near station to your destination</string>
+    <string name="select_a_station">Select a station</string>
+    <string name="arrival_and_start_station_can_t_be_the_same">Arrival and start station can\'t be the same</string>
+    <string name="location_service_stopped">Location service stopped</string>
+    <string name="all_routes">All routes</string>
+    <string name="shortest_route">Shortest Route</string>
+    <string name="next">Next</string>
+    <string name="back">back</string>
+    <string name="Start">Start</string>
+    <string name="price">Price \n%1$s</string>
+    <string name="station_no">Station no. \n%1$s</string>
+    <string name="time_hrs_mins">Time \n%1$s hr %2$s mins</string>
+    <string name="time_min">Time \n%1$s mins</string>
+
+    <string name="station">station</string>
+    <string name="cancel">cancel</string>
+    <string name="tracking_your_location_during_the_trip">Tracking your location during the trip</string>
+    <string name="station_alert">Alert!</string>
+    <string name="location_service_channel">Location Service Channel</string>
+    <string name="location_permissions_are_required">Location permissions are required</string>
+    <string name="choose_language">Choose Language</string>
+    <string name="start_trip_tracking">start trip tracking</string>
+    <string name="this_will_start_tracking_your_location_and_may_consume_battery">check your internet connection and GPS before start to get the best results.</string>
+    <string name="start_trip">Start</string>
+    <string name="cancel_trip">Cancel</string>
+    <string name="wrong_station_name">wrong station name</string>
+    <string name="start_station">Start station!</string>
+    <string name="arrival_station">Arrival Station!</string>
+    <string name="intersection_station">Intersection station!</string>
+    <string name="starting_trip_soon_in_have_a_nice_trip">Starting trip soon in %1$s</string>
+    <string name="reaching_destination_soon_in">Reaching destination soon in %1$s</string>
+    <string name="reaching_an_intersection_soon_in">Reaching an intersection soon in %1$s</string>
+    <string name="can_t_change_language_while_trip_is_processing">can\'t change language while trip is processing</string>
+    <string name="start_in">%1$s (start in %2$s)</string>
+    <string name="end_in">%1$s (end in %2$s)</string>
+    <string name="change_to">%1$s (change to %2$s)</string>
+    <string name="time_mins">Time \n%1$s mins</string>
+    <string name="please_input_an_address">please input an address</string>
+
+
+</resources>
