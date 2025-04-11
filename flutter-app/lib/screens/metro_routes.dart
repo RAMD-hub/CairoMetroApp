@@ -40,8 +40,8 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
               pathIndex: pathIndex.value,
               paths: paths,
               onPressedBigNext: () {
-                Get.to(
-                  MetroTripProgress(),
+                Get.toNamed(
+                  '/MetroTripProgress',
                   arguments: [paths[pathIndex.value]],
                 );
               },
@@ -58,8 +58,8 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
               pathIndex: pathIndex.value,
               paths: paths,
               onPressedBigNext: () {
-                Get.to(
-                  MetroTripProgress(),
+                Get.toNamed(
+                  '/MetroTripProgress',
                   arguments: [paths[pathIndex.value]],
                 );
               },

@@ -26,7 +26,7 @@ class MetroTripProgress extends StatelessWidget {
             isMetroRouteScreen: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
-              Get.to(MetroHome());
+              Get.toNamed('/MetroHome');
             },
             bigButtonName: 'Cancel',
           );
@@ -36,7 +36,7 @@ class MetroTripProgress extends StatelessWidget {
             isMetroRouteScreen: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
-              Get.to(MetroHome());
+              Get.toNamed('/MetroHome');
             },
             bigButtonName: 'Cancel',
           );

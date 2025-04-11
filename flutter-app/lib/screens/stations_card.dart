@@ -87,7 +87,7 @@ class StationsCard extends StatelessWidget {
                   );
                   return;
                 }
-                Get.to(MetroRouteScreen(), arguments: paths);
+                Get.toNamed('/MetroRouteScreen', arguments: paths);
               },
               btnName: 'Start',
             ),

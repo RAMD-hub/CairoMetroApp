@@ -1,4 +1,6 @@
 import 'package:cairo_metro_flutter/screens/metro_home.dart';
+import 'package:cairo_metro_flutter/screens/metro_routes.dart';
+import 'package:cairo_metro_flutter/screens/metro_trip_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +20,16 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: MetroBinding(),
-      home: MetroHome(),
+      initialRoute: '/MetroHome',
+      getPages: [
+        GetPage(name: '/MetroHome', page: () => MetroHome()),
+        GetPage(name: '/MetroRouteScreen', page: () => MetroRouteScreen()),
+        GetPage(
+          name: '/MetroTripProgress',
+          page: () => MetroTripProgress(),
+          transition: Transition.zoom,
+        ),
+      ],
     );
   }
 }
