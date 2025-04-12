@@ -68,7 +68,7 @@
     "line": "الخط الاول",
     "intersection": false,
     "id": 9,
-    "neighbourStations": ["كوبري القبةa","سراي القبة" ],
+    "neighbourStations": ["كوبري القبة","سراي القبة" ],
     "coordinates":[30.091289236386555, 31.29892139480632]
   },
   {

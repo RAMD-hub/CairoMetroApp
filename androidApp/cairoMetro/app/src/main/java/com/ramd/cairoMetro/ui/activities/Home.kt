@@ -41,7 +41,8 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
+//        loadLocale()
+        setupApplication()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding= ActivityHomeBinding.inflate(layoutInflater)
@@ -52,7 +53,7 @@ class Home : AppCompatActivity(),AirLocation.Callback {
             insets
         }
 
-        setupApplication()
+//        setupApplication()
 
         homeDataLoadLanguageChange()
 
