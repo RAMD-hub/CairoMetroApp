@@ -36,11 +36,10 @@
     <string name="station_no">Station no. \n%1$s</string>
     <string name="time_hrs_mins">Time \n%1$s hr %2$s mins</string>
     <string name="time_min">Time \n%1$s mins</string>
-
     <string name="station">station</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel Trip</string>
     <string name="tracking_your_location_during_the_trip">Tracking your location during the trip</string>
-    <string name="station_alert">Alert!</string>
+    <string name="station_alert">Focus!</string>
     <string name="location_service_channel">Location Service Channel</string>
     <string name="location_permissions_are_required">Location permissions are required</string>
     <string name="choose_language">Choose Language</string>
@@ -61,6 +60,8 @@
     <string name="change_to">%1$s (change to %2$s)</string>
     <string name="time_mins">Time \n%1$s mins</string>
     <string name="please_input_an_address">please input an address</string>
+    <string name="gps_and_network_providers_are_disabled_in_system_settings">GPS and Network providers are disabled in system settings.</string>
+    <string name="location_is_not_available_gps_may_be_disabled_or_signal_is_weak">Location is not available. GPS may be disabled or signal is weak.</string>
 
 
 </resources>

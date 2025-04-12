@@ -68,6 +68,7 @@ class LocationService : Service() {
     }
 
     override fun onCreate() {
+//        loadLocale()
         super.onCreate()
 
         val application = application as Application
@@ -95,11 +96,13 @@ class LocationService : Service() {
                     val currentTime = System.currentTimeMillis()
                     if (currentTime - lastGpsLogTime > GPS_LOG_INTERVAL) {
                         Log.e(TAG, "Location is not available. GPS may be disabled or signal is weak.")
-                        Toast.makeText(this@LocationService, "Location is not available. GPS may be disabled or signal is weak.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LocationService,
+                            getString(R.string.location_is_not_available_gps_may_be_disabled_or_signal_is_weak), Toast.LENGTH_SHORT).show()
 
                         if (!isLocationEnabled()) {
                             Log.e(TAG, "GPS and Network providers are disabled in system settings.")
-                            Toast.makeText(this@LocationService, "GPS and Network providers are disabled in system settings.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@LocationService,
+                                getString(R.string.gps_and_network_providers_are_disabled_in_system_settings), Toast.LENGTH_SHORT).show()
 
                         }
                         lastGpsLogTime = currentTime
@@ -247,6 +250,8 @@ class LocationService : Service() {
     }
 
     private fun createNotification() =
+
+
         NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_stat_notificon)
             .setColor(Color.RED)
@@ -272,8 +277,14 @@ class LocationService : Service() {
             null
         }
 
-        val bigPicture = BitmapFactory.decodeResource(resources, R.drawable.ic_stat_notificon)
-
+        val bigPicture =BitmapFactory.decodeResource(resources,
+            when(stage){
+                "start"->R.drawable.start
+                "end"->R.drawable.end
+                "change"->R.drawable.change
+                else -> R.drawable.ic_stat_notificon
+            }
+        )
         val notification = NotificationCompat.Builder(this, PUSH_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_stat_notificon)
             .setColor(Color.RED)

@@ -1,42 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<resources>-->
+<!--    <string name="start">إبدأ</string>-->
+<!--    <string name="enter_start_station">أدخل محطة البداية</string>-->
+<!--    <string name="enter_arrival_station">أدخل محطة الوصول</string>-->
+<!--    <string name="please_enter_your_destination_optional">من فضلك أدخل وجهتك (اختياري)</string>-->
+<!--    <string name="address">العنوان</string>-->
+<!--    <string name="search">إبحث</string>-->
+<!--    <string name="less_transfer">أقل تحويلات</string>-->
+<!--    <string name="less_stations">أقل محطات</string>-->
+<!--    <string name="where_are_you_going_today">إلى أين أنت ذاهب اليوم؟</string>-->
+<!--    <string name="welcome">مرحباً</string>-->
+<!--    <string name="stations_view_all"> عرض الكل</string>-->
+<!--    <string name="stations">المحطات</string>-->
+<!--    <string name="no_near_station_from_your_location">لا توجد محطة قريبة من موقعك</string>-->
+<!--    <string name="enter_station_in_start_station">أدخل المحطة في محطة البداية</string>-->
+<!--    <string name="the_address_is_not_valid">العنوان غير صالح</string>-->
+<!--    <string name="error_while_loading_the_data_try_again">خطأ أثناء تحميل البيانات، حاول مرة أخري</string>-->
+<!--    <string name="no_near_station_to_your_destination">لا توجد محطة قريبة من وجهتك</string>-->
+<!--    <string name="select_a_station">حدد المحطة</string>-->
+<!--    <string name="arrival_and_start_station_can_t_be_the_same">لا يمكن أن تكون محطة الوصول ومحطة البداية هي نفسها</string>-->
+<!--    <string name="location_service_stopped">تم إيقاف خدمة الموقع</string>-->
+<!--    <string name="all_routes">كل الطرق</string>-->
+<!--    <string name="shortest_route">أقصر طريق</string>-->
+<!--    <string name="next">التالي</string>-->
+<!--    <string name="back">السابق</string>-->
+<!--    <string name="Start">إبدأ</string>-->
+<!--    <string name="price">التكلفة \n%1$s</string>-->
+<!--    <string name="station_no">عدد المحطات \n%1$s</string>-->
+<!--    <string name="time_hrs_mins">الوقت \n%1$s ساعة %2$s دقيقة</string>-->
+<!--    <string name="time_min">الوقت \n%1$s دقيقة</string>-->
+
+<!--    <string name="station">محطة</string>-->
+<!--    <string name="cancel">إلغاء</string>-->
+<!--    <string name="tracking_your_location_during_the_trip">تتبع موقعك أثناء الرحلة</string>-->
+<!--    <string name="station_alert">تنبيه!</string>-->
+
+<!--    <string name="location_service_channel">قناة خدمة الموقع</string>-->
+<!--    <string name="location_permissions_are_required">مطلوب أذونات الموقع</string>-->
+<!--    <string name="choose_language">اختر اللغة</string>-->
+<!--    <string name="start_trip_tracking">بدأ تتبع الرحلة</string>-->
+<!--    <string name="this_will_start_tracking_your_location_and_may_consume_battery">تأكد من اتصالك بالانترنت وتفعيل تتبع الموقع للحصول علي افضل النتائج.</string>-->
+<!--    <string name="start_trip">أبدا</string>-->
+<!--    <string name="cancel_trip">إلغاء</string>-->
+<!--    <string name="wrong_station_name">خطأ في اسم المحطة</string>-->
+<!--    <string name="start_station">محطة البداية!</string>-->
+<!--    <string name="arrival_station">محطة الوصول!</string>-->
+<!--    <string name="intersection_station">محطة تبادل!</string>-->
+<!--    <string name="starting_trip_soon_in_have_a_nice_trip">ستبدا الرحلة قريبا عند %1$s</string>-->
+<!--    <string name="reaching_destination_soon_in">ستصل الي محطة الوصول قريبا عند %1$s</string>-->
+<!--    <string name="reaching_an_intersection_soon_in">ستصل الي محطة تبادل قريبا عند %1$s</string>-->
+<!--    <string name="can_t_change_language_while_trip_is_processing"> لا تستطيع تغيير اللغة اثناء وجود رحلة </string>-->
+<!--    <string name="start_in">%1$s (البداية في  %2$s)</string>-->
+<!--    <string name="end_in">%1$s (النهاية في %2$s)</string>-->
+<!--    <string name="change_to">%1$s ( تغيير الي %2$s)</string>-->
+<!--    <string name="time_mins">الوقت\n %1$s دقائق</string>-->
+<!--    <string name="please_input_an_address"> من فضلك ادخل العنوان </string>-->
+
+
+<!--</resources>-->
+
+
+
+
+
 <resources>
-    <string name="start">إبدأ</string>
+    <string name="start">تفاصيل رحلتك</string>
     <string name="enter_start_station">أدخل محطة البداية</string>
     <string name="enter_arrival_station">أدخل محطة الوصول</string>
-    <string name="please_enter_your_destination_optional">من فضلك أدخل وجهتك (اختياري)</string>
+    <string name="please_enter_your_destination_optional">لو سمحت أدخل وجهتك (اختياري)</string>
+
     <string name="address">العنوان</string>
     <string name="search">إبحث</string>
     <string name="less_transfer">أقل تحويلات</string>
     <string name="less_stations">أقل محطات</string>
-    <string name="where_are_you_going_today">إلى أين أنت ذاهب اليوم؟</string>
-    <string name="welcome">مرحباً</string>
+
+
+    <string name="where_are_you_going_today">هتروح فين النهاردة؟</string>
+    <string name="welcome">ازيك</string>
     <string name="stations_view_all"> عرض الكل</string>
     <string name="stations">المحطات</string>
-    <string name="no_near_station_from_your_location">لا توجد محطة قريبة من موقعك</string>
+    <string name="no_near_station_from_your_location">مافيش محطة قريبة من موقعك</string>
     <string name="enter_station_in_start_station">أدخل المحطة في محطة البداية</string>
+
+
     <string name="the_address_is_not_valid">العنوان غير صالح</string>
     <string name="error_while_loading_the_data_try_again">خطأ أثناء تحميل البيانات، حاول مرة أخري</string>
-    <string name="no_near_station_to_your_destination">لا توجد محطة قريبة من وجهتك</string>
+    <string name="no_near_station_to_your_destination">مافيش محطة قريبة من وجهتك</string>
     <string name="select_a_station">حدد المحطة</string>
-    <string name="arrival_and_start_station_can_t_be_the_same">لا يمكن أن تكون محطة الوصول ومحطة البداية هي نفسها</string>
+    <string name="arrival_and_start_station_can_t_be_the_same">ما ينفعش محطة الوصول ومحطة البداية هي نفسها</string>
     <string name="location_service_stopped">تم إيقاف خدمة الموقع</string>
     <string name="all_routes">كل الطرق</string>
     <string name="shortest_route">أقصر طريق</string>
     <string name="next">التالي</string>
     <string name="back">السابق</string>
-    <string name="Start">إبدأ</string>
+    <string name="Start">يلا بينا </string>
     <string name="price">التكلفة \n%1$s</string>
     <string name="station_no">عدد المحطات \n%1$s</string>
     <string name="time_hrs_mins">الوقت \n%1$s ساعة %2$s دقيقة</string>
-    <string name="time_min">الوقت \n%1$s دقيقة</string>
-
     <string name="station">محطة</string>
-    <string name="cancel">إلغاء</string>
+    <string name="cancel">إلغاء الرحلة</string>
     <string name="tracking_your_location_during_the_trip">تتبع موقعك أثناء الرحلة</string>
-    <string name="station_alert">تنبيه!</string>
-
+    <string name="station_alert">ركز!</string>
+    <string name="starting_trip_soon_in_have_a_nice_trip">هنتحرك قريبا من  %1$s, رحلة ممتعة</string>
     <string name="location_service_channel">قناة خدمة الموقع</string>
-    <string name="location_permissions_are_required">مطلوب أذونات الموقع</string>
+    <string name="location_permissions_are_required">عاوزين أذونات الموقع</string>
     <string name="choose_language">اختر اللغة</string>
     <string name="start_trip_tracking">بدأ تتبع الرحلة</string>
     <string name="this_will_start_tracking_your_location_and_may_consume_battery">تأكد من اتصالك بالانترنت وتفعيل تتبع الموقع للحصول علي افضل النتائج.</string>
@@ -46,15 +113,16 @@
     <string name="start_station">محطة البداية!</string>
     <string name="arrival_station">محطة الوصول!</string>
     <string name="intersection_station">محطة تبادل!</string>
-    <string name="starting_trip_soon_in_have_a_nice_trip">ستبدا الرحلة قريبا عند %1$s</string>
-    <string name="reaching_destination_soon_in">ستصل الي محطة الوصول قريبا عند %1$s</string>
-    <string name="reaching_an_intersection_soon_in">ستصل الي محطة تبادل قريبا عند %1$s</string>
+    <string name="reaching_destination_soon_in">اخيرا .. قربنا نوصل إلي %1$s</string>
+    <string name="reaching_an_intersection_soon_in">هنوصل لمحطة تغير في %1$s, خالي بالك</string>
     <string name="can_t_change_language_while_trip_is_processing"> لا تستطيع تغيير اللغة اثناء وجود رحلة </string>
     <string name="start_in">%1$s (البداية في  %2$s)</string>
     <string name="end_in">%1$s (النهاية في %2$s)</string>
     <string name="change_to">%1$s ( تغيير الي %2$s)</string>
     <string name="time_mins">الوقت\n %1$s دقائق</string>
+    <string name="time_min">الوقت \n%1$s دقيقة</string>
     <string name="please_input_an_address"> من فضلك ادخل العنوان </string>
-
+    <string name="gps_and_network_providers_are_disabled_in_system_settings">تم تعطيل نظام تحديد المواقع العالمي (GPS) وموفري الشبكة في إعدادات النظام.</string>
+    <string name="location_is_not_available_gps_may_be_disabled_or_signal_is_weak">الموقع غير متاح. قد يكون نظام تحديد المواقع العالمي (GPS) معطلاً أو الإشارة ضعيفة.</string>
 
 </resources>
