@@ -10,9 +10,11 @@ class StationTileListView extends StatelessWidget {
     required this.path,
     required this.pathIndex,
   });
-  final int pathIndex;
-  final List<String> path;
+
+  final RxInt pathIndex;
+  final RxList<String> path;
   final MetroController metroController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomIcon extends StatelessWidget {
   const CustomIcon({
@@ -16,9 +17,7 @@ class CustomIcon extends StatelessWidget {
     return Icon(
       icon,
       color: color,
-      size: iconSize == 0
-          ? (MediaQuery.sizeOf(context).width * 0.07).clamp(14.0, 36.0)
-          : iconSize,
+      size: iconSize == 0 ? (Get.width * 0.07).clamp(14.0, 36.0) : iconSize,
     );
   }
 }

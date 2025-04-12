@@ -17,8 +17,8 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
     required this.bigButtonName,
     this.onPressedCounterNext,
     this.onPressedCounterBack,
-    this.pathIndex = 0,
-  });
+    RxInt? pathIndex,
+  }) : pathIndex = pathIndex ?? 0.obs;
 
   final List<List<String>> paths;
   final bool isMetroRouteScreen;
@@ -27,12 +27,15 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
   final String bigButtonName;
   final Function()? onPressedCounterNext;
   final Function()? onPressedCounterBack;
-  final int pathIndex;
+  final RxInt pathIndex;
   final MetroController metroController = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    if (isMetroRouteScreen && pathIndex == 0) customSnackBar(pathIndex);
-    final int stationsNumbers = paths[pathIndex].length;
+    if (isMetroRouteScreen && pathIndex.value == 0) {
+      customSnackBar(pathIndex.value);
+    }
+    // final RxInt stationsNumbers = paths[pathIndex.value].length.obs;
     final double screenWidth = Get.width;
     final double screenHeight = Get.height;
     return Padding(
@@ -52,10 +55,12 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                             btnName: 'Back'),
                       ),
                       Flexible(
-                        child: CustomText(
-                          text: '${pathIndex + 1}/${paths.length}',
-                          txtFontWeight: FontWeight.bold,
-                        ),
+                        child: Obx(() {
+                          return CustomText(
+                            text: '${pathIndex.value + 1}/${paths.length}',
+                            txtFontWeight: FontWeight.bold,
+                          );
+                        }),
                       ),
                       Flexible(
                           flex: 2,
@@ -75,27 +80,35 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Flexible(
-                      child: CustomDetailsCard(
-                          text: 'Stations no : $stationsNumbers')),
-                  Flexible(
-                      child: CustomDetailsCard(
-                          text:
-                              'Time : ${(stationsNumbers * 3) ~/ 60} hrs ${(stationsNumbers * 3) % 60} min')),
-                  Flexible(
-                      child: CustomDetailsCard(
-                          text:
-                              'Price : ${metroController.getTicketPrice(stationsNumbers)}')),
+                  Flexible(child: CustomDetailsCard(text: Obx(() {
+                    final stationsNumbers = paths[pathIndex.value].length.obs;
+                    return CustomText(
+                        text: 'Stations no : ${stationsNumbers.value}');
+                  }))),
+                  Flexible(child: CustomDetailsCard(text: Obx(() {
+                    final stationsNumbers = paths[pathIndex.value].length.obs;
+                    return CustomText(
+                        text:
+                            'Time : ${(stationsNumbers.value * 3) ~/ 60} hrs ${(stationsNumbers.value * 3) % 60} min');
+                  }))),
+                  Flexible(child: CustomDetailsCard(text: Obx(() {
+                    final stationsNumbers = paths[pathIndex.value].length.obs;
+                    return CustomText(
+                        text:
+                            'Price : ${metroController.getTicketPrice(stationsNumbers.value)}');
+                  }))),
                 ],
               ),
             ),
           ),
           Expanded(
             flex: 11,
-            child: StationTileListView(
-              pathIndex: pathIndex,
-              path: paths[pathIndex],
-            ),
+            child: Obx(() {
+              return StationTileListView(
+                pathIndex: pathIndex,
+                path: paths[pathIndex.value].obs,
+              );
+            }),
           ),
           Expanded(
               child: CustomButton(

@@ -17,8 +17,8 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
     required this.bigButtonName,
     this.onPressedCounterNext,
     this.onPressedCounterBack,
-    this.pathIndex = 0,
-  });
+    RxInt? pathIndex,
+  }) : pathIndex = pathIndex ?? 0.obs;
 
   final List<List<String>> paths;
   final bool isMetroRouteScreen;
@@ -27,12 +27,14 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
   final String bigButtonName;
   final Function()? onPressedCounterNext;
   final Function()? onPressedCounterBack;
-  final int pathIndex;
+  final RxInt pathIndex;
   final MetroController metroController = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    if (isMetroRouteScreen && pathIndex == 0) customSnackBar(pathIndex);
-    final int stationsNumbers = paths[pathIndex].length;
+    if (isMetroRouteScreen && pathIndex.value == 0) {
+      customSnackBar(pathIndex.value);
+    }
     final double screenWidth = Get.width;
     final double screenHeight = Get.height;
     return Padding(
@@ -57,11 +59,13 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
                             ),
                           ),
                           Flexible(
-                            child: CustomText(
-                              text: '${pathIndex + 1}/${paths.length}',
-                              txtFontWeight: FontWeight.bold,
-                              txtFontSize: screenWidth * 0.018,
-                            ),
+                            child: Obx(() {
+                              return CustomText(
+                                text: '${pathIndex.value + 1}/${paths.length}',
+                                txtFontWeight: FontWeight.bold,
+                                txtFontSize: screenWidth * 0.018,
+                              );
+                            }),
                           ),
                           Flexible(
                             flex: 2,
@@ -76,14 +80,23 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
                 isMetroRouteScreen
                     ? SizedBox(height: screenHeight * 0.02)
                     : SizedBox(),
-                CustomDetailsCard(text: 'Stations no: $stationsNumbers'),
-                CustomDetailsCard(
-                    text:
-                        'Time : ${(stationsNumbers * 3) ~/ 60} hrs ${(stationsNumbers * 3) % 60} min'),
-                CustomDetailsCard(
-                  text:
-                      'Price : ${metroController.getTicketPrice(stationsNumbers)}',
-                ),
+                CustomDetailsCard(text: Obx(() {
+                  final stationsNumbers = paths[pathIndex.value].length.obs;
+                  return CustomText(
+                      text: 'Stations no : ${stationsNumbers.value}');
+                })),
+                CustomDetailsCard(text: Obx(() {
+                  final stationsNumbers = paths[pathIndex.value].length.obs;
+                  return CustomText(
+                      text:
+                          'Time : ${(stationsNumbers.value * 3) ~/ 60} hrs ${(stationsNumbers.value * 3) % 60} min');
+                })),
+                CustomDetailsCard(text: Obx(() {
+                  final stationsNumbers = paths[pathIndex.value].length.obs;
+                  return CustomText(
+                      text:
+                          'Price : ${metroController.getTicketPrice(stationsNumbers.value)}');
+                })),
                 SizedBox(height: screenHeight * 0.02),
                 CustomButton(
                   onPressed: onPressedBigNext,
@@ -96,10 +109,12 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
           SizedBox(width: screenWidth * 0.02),
           Expanded(
             flex: 5,
-            child: StationTileListView(
-              path: paths[pathIndex],
-              pathIndex: pathIndex,
-            ),
+            child: Obx(() {
+              return StationTileListView(
+                path: paths[pathIndex.value].obs,
+                pathIndex: pathIndex,
+              );
+            }),
           ),
         ],
       ),

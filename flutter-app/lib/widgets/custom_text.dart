@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText({
@@ -18,7 +19,7 @@ class CustomText extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: txtFontSize == 0
-            ? (MediaQuery.sizeOf(context).width * 0.045).clamp(12.0, 18.0)
+            ? (Get.width * 0.045).clamp(12.0, 18.0)
             : txtFontSize,
         color: txtColor,
         fontWeight: txtFontWeight,

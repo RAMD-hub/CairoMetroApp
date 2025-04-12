@@ -1,4 +1,3 @@
-import 'package:cairo_metro_flutter/screens/metro_trip_progress.dart';
 import 'package:cairo_metro_flutter/screens/route_details_landscape_screen.dart';
 import 'package:cairo_metro_flutter/screens/route_details_portrait_screen.dart';
 import 'package:flutter/material.dart';
@@ -35,41 +34,37 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
       ),
       body: OrientationBuilder(builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
-          return Obx(() {
-            return RouteDetailsPortraitScreen(
-              pathIndex: pathIndex.value,
-              paths: paths,
-              onPressedBigNext: () {
-                Get.toNamed(
-                  '/MetroTripProgress',
-                  arguments: [paths[pathIndex.value]],
-                );
-              },
-              bigButtonName: 'Next',
-              onPressedCounterNext: () =>
-                  pathIndex.value < paths.length - 1 ? pathIndex.value++ : null,
-              onPressedCounterBack: () =>
-                  pathIndex.value > 0 ? pathIndex.value-- : null,
-            );
-          });
+          return RouteDetailsPortraitScreen(
+            pathIndex: pathIndex,
+            paths: paths,
+            onPressedBigNext: () {
+              Get.toNamed(
+                '/MetroTripProgress',
+                arguments: [paths[pathIndex.value]],
+              );
+            },
+            bigButtonName: 'Next',
+            onPressedCounterNext: () =>
+                pathIndex.value < paths.length - 1 ? pathIndex.value++ : null,
+            onPressedCounterBack: () =>
+                pathIndex.value > 0 ? pathIndex.value-- : null,
+          );
         } else {
-          return Obx(() {
-            return RouteDetailsLandScapeScreen(
-              pathIndex: pathIndex.value,
-              paths: paths,
-              onPressedBigNext: () {
-                Get.toNamed(
-                  '/MetroTripProgress',
-                  arguments: [paths[pathIndex.value]],
-                );
-              },
-              bigButtonName: 'Next',
-              onPressedCounterNext: () =>
-                  pathIndex.value < paths.length - 1 ? pathIndex.value++ : null,
-              onPressedCounterBack: () =>
-                  pathIndex.value > 0 ? pathIndex.value-- : null,
-            );
-          });
+          return RouteDetailsLandScapeScreen(
+            pathIndex: pathIndex,
+            paths: paths,
+            onPressedBigNext: () {
+              Get.toNamed(
+                '/MetroTripProgress',
+                arguments: [paths[pathIndex.value]],
+              );
+            },
+            bigButtonName: 'Next',
+            onPressedCounterNext: () =>
+                pathIndex.value < paths.length - 1 ? pathIndex.value++ : null,
+            onPressedCounterBack: () =>
+                pathIndex.value > 0 ? pathIndex.value-- : null,
+          );
         }
       }),
     );

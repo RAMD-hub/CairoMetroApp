@@ -43,7 +43,7 @@ class StationTile extends StatelessWidget {
           Expanded(
             child: CustomText(
               text: isInterSection
-                  ? "$stationName => Exchanged Station."
+                  ? '$stationName => Exchanged Station.'
                   : stationName,
               txtFontWeight: isFirst || isLast || isInterSection
                   ? FontWeight.bold
