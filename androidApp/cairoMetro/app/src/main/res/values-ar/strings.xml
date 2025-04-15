@@ -99,8 +99,8 @@
     <string name="time_hrs_mins">الوقت \n%1$s ساعة %2$s دقيقة</string>
     <string name="station">محطة</string>
     <string name="cancel">إلغاء الرحلة</string>
-    <string name="tracking_your_location_during_the_trip">تتبع موقعك أثناء الرحلة</string>
-    <string name="station_alert">ركز!</string>
+    <string name="tracking_your_location_during_the_trip">بيتم تتبع موقعك أثناء الرحلة</string>
+    <string name="station_alert">خد بالك!</string>
     <string name="starting_trip_soon_in_have_a_nice_trip">هنتحرك قريبا من  %1$s, رحلة ممتعة</string>
     <string name="location_service_channel">قناة خدمة الموقع</string>
     <string name="location_permissions_are_required">عاوزين أذونات الموقع</string>

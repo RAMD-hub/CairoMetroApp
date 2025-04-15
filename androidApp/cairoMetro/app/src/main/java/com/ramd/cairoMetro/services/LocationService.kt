@@ -68,7 +68,6 @@ class LocationService : Service() {
     }
 
     override fun onCreate() {
-//        loadLocale()
         super.onCreate()
 
         val application = application as Application
