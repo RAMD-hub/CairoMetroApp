@@ -132,6 +132,7 @@ class LocationService : Service() {
         language = application.language
         if (language != currentLanguage) {
             loadLocale()
+            notificationManager.notify(NOTIFICATION_ID, createNotification())
         }
 
         nearestStation = LocationCalculations().nearestStationPath(
@@ -257,7 +258,8 @@ class LocationService : Service() {
             .setContentTitle(getString(R.string.station_alert))
             .setContentText(getString(R.string.tracking_your_location_during_the_trip))
             .setPriority(NotificationCompat.PRIORITY_LOW)
-            .setAutoCancel(true)
+            .setAutoCancel(false)
+            .setOngoing(true)
             .setWhen(System.currentTimeMillis())
             .build()
 
