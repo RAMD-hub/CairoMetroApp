@@ -39,7 +39,7 @@
     <string name="station">station</string>
     <string name="cancel">Cancel Trip</string>
     <string name="tracking_your_location_during_the_trip">Tracking your location during the trip</string>
-    <string name="station_alert">Focus!</string>
+    <string name="station_alert">Attention!</string>
     <string name="location_service_channel">Location Service Channel</string>
     <string name="location_permissions_are_required">Location permissions are required</string>
     <string name="choose_language">Choose Language</string>

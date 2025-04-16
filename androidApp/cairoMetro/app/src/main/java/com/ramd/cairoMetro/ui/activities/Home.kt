@@ -41,7 +41,6 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        loadLocale()
         setupApplication()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -52,8 +51,6 @@ class Home : AppCompatActivity(),AirLocation.Callback {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-//        setupApplication()
 
         homeDataLoadLanguageChange()
 

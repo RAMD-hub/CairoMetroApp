@@ -71,11 +71,11 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        getCurrentStationFromHome(application)
 
 
         getPath(application)
 
-        getCurrentStationFromHome(application)
 
         setUpActivityData()
 
@@ -131,6 +131,7 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
         var pathCheck = intent.getStringArrayListExtra("allRoutesPath")
         if (!pathCheck.isNullOrEmpty()) {
             path = pathCheck
+            previousStation = path[0]
             checkPermissionsAndStartService()
             readAndWriteData.saveSimpleData(this, true, "indicator")
         } else {
