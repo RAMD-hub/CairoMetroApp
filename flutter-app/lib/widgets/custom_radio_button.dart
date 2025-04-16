@@ -3,6 +3,8 @@ import 'package:cairo_metro_flutter/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../constant.dart';
+
 class CustomRadioButton extends StatelessWidget {
   final String text;
   final String value;
@@ -32,12 +34,12 @@ class CustomRadioButton extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: (MediaQuery.sizeOf(context).width * 0.05),
-              height: (MediaQuery.sizeOf(context).height * 0.05),
+              width: (Get.width * 0.05),
+              height: (Get.height * 0.05),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: Color(0xFFFEA613), width: 2),
-                color: isSelected ? Color(0xFFFEA613) : Colors.transparent,
+                border: Border.all(color: kPrimaryColor, width: 2),
+                color: isSelected ? kPrimaryColor : Colors.transparent,
               ),
               child: isSelected
                   ? CustomIcon(
@@ -47,10 +49,10 @@ class CustomRadioButton extends StatelessWidget {
                     )
                   : null,
             ),
-            const SizedBox(width: 8), // إضافة مسافة بين الدائرة والنص
+            const SizedBox(width: 8),
             CustomText(
               text: text,
-              txtColor: isSelected ? Color(0xFFFEA613) : Colors.black,
+              txtColor: isSelected ? kPrimaryColor : Colors.black,
             )
           ],
         ),

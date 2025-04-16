@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/metro_controller.dart';
-import 'metro_routes.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_drop_down_menu.dart';
 import '../widgets/custom_icon.dart';
@@ -14,7 +13,6 @@ class StationsCard extends StatelessWidget {
 
   final MetroController metroController = Get.find();
   final isSwap = false.obs;
-
   @override
   Widget build(BuildContext context) {
     return Card(

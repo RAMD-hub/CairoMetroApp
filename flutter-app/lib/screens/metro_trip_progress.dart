@@ -1,8 +1,8 @@
-import 'package:cairo_metro_flutter/screens/metro_home.dart';
 import 'package:cairo_metro_flutter/screens/route_details_landscape_screen.dart';
 import 'package:cairo_metro_flutter/screens/route_details_portrait_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../constant.dart';
 import '../widgets/custom_text.dart';
 
 class MetroTripProgress extends StatelessWidget {
@@ -15,7 +15,7 @@ class MetroTripProgress extends StatelessWidget {
         centerTitle: true,
         title: CustomText(
           text: 'station',
-          txtColor: const Color(0xFFFEA613),
+          txtColor: kPrimaryColor,
           txtFontWeight: FontWeight.bold,
         ),
       ),

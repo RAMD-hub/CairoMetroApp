@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../constant.dart';
 import 'custom_text.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.onPressed,
-    this.btnBackgroundColor = const Color(0xFFFEA613),
+    this.btnBackgroundColor = kPrimaryColor,
     required this.btnName,
     this.txtColor = Colors.white,
   });

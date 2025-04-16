@@ -1,5 +1,6 @@
 import 'package:cairo_metro_flutter/widgets/line_shape.dart';
 import 'package:flutter/material.dart';
+import '../constant.dart';
 import '../widgets/circle_shape.dart';
 import '../widgets/custom_text.dart';
 
@@ -27,7 +28,7 @@ class DialogCard extends StatelessWidget {
                 ),
                 CustomText(
                   text: 'Stations',
-                  txtColor: Color(0xFFFEA613),
+                  txtColor: kPrimaryColor,
                 ),
                 Spacer(),
                 TextButton(
@@ -36,7 +37,7 @@ class DialogCard extends StatelessWidget {
                     },
                     child: CustomText(
                       text: 'View All',
-                      txtColor: Color(0xFFFEA613),
+                      txtColor: kPrimaryColor,
                     ))
               ],
             ),
@@ -54,7 +55,7 @@ class DialogCard extends StatelessWidget {
                   children: [
                     LineShape(),
                     CircleShape(
-                      circleColor: isCurrent ? Colors.orange : Colors.grey,
+                      circleColor: isCurrent ? kPrimaryColor: Colors.grey,
                     ),
                     LineShape(),
                   ],
@@ -70,7 +71,7 @@ class DialogCard extends StatelessWidget {
                     CustomText(
                       text: path.isNotEmpty ? path[path.length ~/ 2] : '',
                       txtFontWeight: FontWeight.bold,
-                      txtColor: Color(0xFFFEA613),
+                      txtColor: kPrimaryColor,
                     ),
                     CustomText(
                       text: path.isNotEmpty ? path[path.length] : '',

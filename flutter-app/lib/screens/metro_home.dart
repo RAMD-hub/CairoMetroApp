@@ -1,7 +1,6 @@
 import 'package:cairo_metro_flutter/screens/dialog_card.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../controllers/metro_controller.dart';
+import '../constant.dart';
 import 'address_card.dart';
 import '../widgets/custom_text.dart';
 import 'home_appbar.dart';
@@ -25,8 +24,7 @@ class MetroHome extends StatelessWidget {
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(left: 8.0),
-                    child: CustomText(
-                        text: 'Welcome', txtColor: Color(0xFFFEA613)),
+                    child: CustomText(text: 'Welcome', txtColor: kPrimaryColor),
                   ),
                   const Padding(
                     padding: EdgeInsets.only(left: 8.0),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../constant.dart';
+
 class CustomIcon extends StatelessWidget {
   const CustomIcon({
     super.key,
-    this.color = const Color(0xFFFEA613),
+    this.color = kPrimaryColor,
     required this.icon,
     this.iconSize = 0,
   });

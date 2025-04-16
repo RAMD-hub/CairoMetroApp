@@ -1,6 +1,7 @@
 import 'package:cairo_metro_flutter/widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../constant.dart';
 import '../controllers/metro_controller.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_details_card.dart';
@@ -12,7 +13,7 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
     super.key,
     required this.paths,
     this.isMetroRouteScreen = true,
-    this.btnBackgroundColor = const Color(0xFFFEA613),
+    this.btnBackgroundColor = kPrimaryColor,
     required this.onPressedBigNext,
     required this.bigButtonName,
     this.onPressedCounterNext,
