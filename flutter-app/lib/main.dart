@@ -1,9 +1,8 @@
-import 'package:cairo_metro_flutter/screens/metro_home.dart';
-import 'package:cairo_metro_flutter/screens/metro_routes.dart';
-import 'package:cairo_metro_flutter/screens/metro_trip_progress.dart';
+import 'package:cairo_metro_flutter/app/modules/metro_home/views/metro_home.dart';
+import 'package:cairo_metro_flutter/app/modules/metro_routes/views/metro_routes.dart';
+import 'package:cairo_metro_flutter/app/modules/metro_trip_progress/views/metro_trip_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'bindings/metro_binding.dart';
 
 void main() {

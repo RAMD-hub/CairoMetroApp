@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../constant.dart';
+import '../../../core/constants/constant.dart';
 
 customSnackBar(final int pathIndex) {
   Future.delayed(Duration.zero, () {

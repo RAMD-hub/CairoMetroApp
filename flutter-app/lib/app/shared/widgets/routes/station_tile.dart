@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../constant.dart';
-import '../widgets/circle_shape.dart';
-import '../widgets/custom_text.dart';
-import '../widgets/line_shape.dart';
+import '../../../../core/constants/constant.dart';
+import '../circle_shape.dart';
+import '../custom_text.dart';
+import '../line_shape.dart';
 
 class StationTile extends StatelessWidget {
   final String stationName;

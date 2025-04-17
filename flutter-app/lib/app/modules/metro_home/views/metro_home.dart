@@ -1,12 +1,12 @@
-import 'package:cairo_metro_flutter/screens/dialog_card.dart';
+import 'package:cairo_metro_flutter/app/modules/metro_home/widgets/dialog_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constant.dart';
-import '../widgets/custom_icon.dart';
-import 'address_card.dart';
-import '../widgets/custom_text.dart';
-import 'custom_appbar.dart';
-import 'stations_card.dart';
+import '../../../../core/constants/constant.dart';
+import '../../../shared/widgets/custom_icon.dart';
+import '../widgets/address_card.dart';
+import '../../../shared/widgets/custom_text.dart';
+import '../../../shared/widgets/appbar/custom_appbar.dart';
+import '../widgets/stations_card.dart';
 
 class MetroHome extends StatelessWidget {
   const MetroHome({super.key});

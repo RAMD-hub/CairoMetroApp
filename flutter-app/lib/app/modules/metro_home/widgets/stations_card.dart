@@ -1,11 +1,11 @@
-import 'package:cairo_metro_flutter/constant.dart';
+import 'package:cairo_metro_flutter/core/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/metro_controller.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_drop_down_menu.dart';
-import '../widgets/custom_icon.dart';
-import '../widgets/custom_radio_button.dart';
+import '../../../../controllers/metro_controller.dart';
+import '../../../shared/widgets/custom_button.dart';
+import 'custom_drop_down_menu.dart';
+import '../../../shared/widgets/custom_icon.dart';
+import '../../../shared/widgets/custom_radio_button.dart';
 
 class StationsCard extends StatelessWidget {
   StationsCard({

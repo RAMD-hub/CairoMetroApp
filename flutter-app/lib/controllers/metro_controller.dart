@@ -1,10 +1,10 @@
-import 'package:cairo_metro_flutter/models/metro_path.dart';
-import 'package:cairo_metro_flutter/repositories/metro_repository.dart';
-import 'package:cairo_metro_flutter/services/path_finder.dart';
-import 'package:cairo_metro_flutter/services/sorted_paths.dart';
+import 'package:cairo_metro_flutter/core/algorithms/path_finder.dart';
+import 'package:cairo_metro_flutter/core/algorithms/sorted_paths.dart';
 import 'package:get/get.dart';
-import '../services/exchange_stations.dart';
-import '../services/ticket_service.dart';
+import '../app/data/models/metro_path.dart';
+import '../app/data/repositories/metro_repository.dart';
+import '../core/algorithms/exchange_stations.dart';
+import '../core/algorithms/ticket_service.dart';
 
 class MetroController extends GetxController {
   MetroController({

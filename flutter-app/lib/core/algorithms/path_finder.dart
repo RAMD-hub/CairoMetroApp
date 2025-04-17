@@ -1,5 +1,4 @@
-import 'package:cairo_metro_flutter/repositories/metro_repository.dart';
-import 'package:flutter/cupertino.dart';
+import '../../app/data/repositories/metro_repository.dart';
 
 class PathFinder {
   final MetroRepository metroRepository;

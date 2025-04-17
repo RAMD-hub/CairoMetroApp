@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../constant.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_text.dart';
-import '../widgets/custom_text_field.dart';
+import '../../../../core/constants/constant.dart';
+import '../../../shared/widgets/custom_button.dart';
+import '../../../shared/widgets/custom_text.dart';
+import '../../../shared/widgets/custom_text_field.dart';
 
 class AddressCard extends StatelessWidget {
   const AddressCard({

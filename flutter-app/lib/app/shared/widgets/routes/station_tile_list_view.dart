@@ -1,8 +1,8 @@
-import 'package:cairo_metro_flutter/screens/station_tile.dart';
+import 'package:cairo_metro_flutter/app/shared/widgets/routes/station_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/metro_controller.dart';
+import '../../../../controllers/metro_controller.dart';
 
 class StationTileListView extends StatelessWidget {
   StationTileListView({

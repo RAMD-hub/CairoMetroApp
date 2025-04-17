@@ -1,6 +1,6 @@
 import 'package:dartx/dartx.dart';
 
-import '../models/metro_path.dart';
+import '../../app/data/models/metro_path.dart';
 
 class SortedPaths {
   List<List<String>> sortMetroPathsByLengthOfStations(

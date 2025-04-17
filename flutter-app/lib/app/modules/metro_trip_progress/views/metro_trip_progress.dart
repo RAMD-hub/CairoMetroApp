@@ -1,5 +1,5 @@
-import 'package:cairo_metro_flutter/screens/route_details_landscape_screen.dart';
-import 'package:cairo_metro_flutter/screens/route_details_portrait_screen.dart';
+import 'package:cairo_metro_flutter/app/shared/widgets/routes/route_details_landscape_screen.dart';
+import 'package:cairo_metro_flutter/app/shared/widgets/routes/route_details_portrait_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

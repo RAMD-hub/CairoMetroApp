@@ -1,7 +1,4 @@
-import 'package:cairo_metro_flutter/models/station.dart';
-import 'package:flutter/cupertino.dart';
-
-import '../repositories/metro_repository.dart';
+import '../../app/data/repositories/metro_repository.dart';
 
 class ExchangeStation {
   final MetroRepository metroRepository;

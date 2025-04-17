@@ -1,4 +1,4 @@
-import 'package:cairo_metro_flutter/constant.dart';
+import 'package:cairo_metro_flutter/core/constants/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_icon.dart';
