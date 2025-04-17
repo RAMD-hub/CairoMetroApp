@@ -13,6 +13,9 @@ class StationsCard extends StatelessWidget {
 
   final MetroController metroController = Get.find();
   final isSwap = false.obs;
+  final startCont = TextEditingController();
+  final endCont = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -29,22 +32,21 @@ class StationsCard extends StatelessWidget {
           children: [
             CustomDropDownMenu(
               isSwap: isSwap,
+              startCont: startCont,
             ),
-            Obx(() {
-              return IconButton(
-                onPressed: metroController.startStation.value.isNotEmpty &&
-                        metroController.endStation.value.isNotEmpty
-                    ? () {
-                        metroController.swapStations();
-                        isSwap.value = true;
-                      }
-                    : null,
-                icon: CustomIcon(icon: Icons.swap_vert_circle_outlined),
-              );
-            }),
+            IconButton(
+              onPressed: () {
+                metroController.startStation.value = startCont.text;
+                metroController.endStation.value = endCont.text;
+                metroController.swapStations();
+                isSwap.value = true;
+              },
+              icon: CustomIcon(icon: Icons.swap_vert_circle_outlined),
+            ),
             CustomDropDownMenu(
               isStart: false,
               isSwap: isSwap,
+              endCont: endCont,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -67,25 +69,54 @@ class StationsCard extends StatelessWidget {
             ),
             CustomButton(
               onPressed: () {
-                final RxList<List<String>> paths =
-                    metroController.selectedTransfers.value == 'Less Stations'
-                        ? metroController.allPaths
-                        : metroController.allPathsByExchangedNum;
+                final startText = startCont.text.toLowerCase().trim();
+                final endText = endCont.text.toLowerCase().trim();
 
-                if (metroController.startStation.value.isEmpty ||
-                    metroController.endStation.value.isEmpty ||
-                    metroController.startStation ==
-                        metroController.endStation) {
+                final startInStations =
+                    metroController.stationsNames.contains(startText);
+                final endInStations =
+                    metroController.stationsNames.contains(endText);
+
+                // Validation logic
+                if (startText.isEmpty || endText.isEmpty) {
                   Get.snackbar(
-                    'Error',
-                    'Please fill in both station correctly.',
-                    snackPosition: SnackPosition.BOTTOM,
+                    'Missing Input',
+                    'Please enter both the start and end stations.',
+                    snackPosition: SnackPosition.TOP,
                     backgroundColor: Colors.red,
                     colorText: Colors.white,
                   );
                   return;
                 }
-                Get.toNamed('/MetroRouteScreen', arguments: paths);
+
+                if (!startInStations || !endInStations) {
+                  Get.snackbar(
+                    'Invalid Station',
+                    'One or both stations do not exist. Please check the station names.',
+                    snackPosition: SnackPosition.TOP,
+                    backgroundColor: Colors.red,
+                    colorText: Colors.white,
+                  );
+                  return;
+                }
+
+                if (startText == endText) {
+                  Get.snackbar(
+                    'Same Station',
+                    'Start and End stations cannot be the same.',
+                    snackPosition: SnackPosition.TOP,
+                    backgroundColor: Colors.red,
+                    colorText: Colors.white,
+                  );
+                  return;
+                }
+
+                // Set the stations after successful validation
+                metroController.startStation.value = startText;
+                metroController.endStation.value = endText;
+
+                // Navigate to the next screen
+                Get.toNamed('/MetroRouteScreen');
               },
               btnName: 'Start',
             ),

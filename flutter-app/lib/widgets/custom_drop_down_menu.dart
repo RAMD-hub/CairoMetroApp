@@ -8,9 +8,13 @@ class CustomDropDownMenu extends StatelessWidget {
     super.key,
     this.isStart = true,
     required this.isSwap,
+    this.startCont,
+    this.endCont,
   });
 
   final bool isStart;
+  final TextEditingController? startCont;
+  final TextEditingController? endCont;
   final RxBool isSwap;
   final MetroController metroController = Get.find();
   final FocusNode dropMenuFocusNode = FocusNode();
@@ -20,6 +24,7 @@ class CustomDropDownMenu extends StatelessWidget {
     return Obx(() {
       return DropdownMenu<String>(
         width: Get.width,
+        controller: isStart ? startCont : endCont,
         hintText: 'Please Selected Station',
         onSelected: (station) {
           station != null && isStart

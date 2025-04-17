@@ -15,15 +15,23 @@ class MetroRouteScreen extends StatefulWidget {
 
 class _MetroRouteScreenState extends State<MetroRouteScreen> {
   final pathIndex = 0.obs;
+  final RxList<List<String>> paths = [
+    ['']
+  ].obs;
   final MetroController metroController = Get.find();
+
   @override
-  void dispose() {
-    super.dispose();
+  void initState() {
+    super.initState();
+    metroController.getPaths.value = true;
+    paths.value = metroController.selectedTransfers.value == 'Less Stations'
+        ? metroController.allPaths
+        : metroController.allPathsByExchangedNum;
   }
 
   @override
   Widget build(BuildContext context) {
-    final RxList<List<String>> paths = Get.arguments;
+    metroController.getPaths.value = false;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

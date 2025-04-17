@@ -26,14 +26,20 @@ class MetroController extends GetxController {
   final allPaths = <List<String>>[].obs;
   final allPathsByExchangedNum = <List<String>>[].obs;
   final metroPaths = <MetroPath>[].obs;
+  final getPaths =
+      false.obs; // دا زي متغير كدا لما هعمله Listener لاستدعاء داله allPaths
   @override
   void onInit() {
     super.onInit();
     ever(metroRepository.stationsNames, (_) {
       stationsNames.assignAll(metroRepository.stationsNames);
     });
-    everAll([startStation, endStation], (_) {
-      findPaths();
+    ever(getPaths, (_) {
+      if (startStation.value.isNotEmpty &&
+          endStation.value.isNotEmpty &&
+          getPaths.value != false) {
+        findPaths();
+      }
     });
   }
 
@@ -64,6 +70,8 @@ class MetroController extends GetxController {
     // get all paths based on num of exchange stations
     allPathsByExchangedNum
         .assignAll(sortedPaths.sortMetroPathsByExchangeStations(metroPaths));
+
+    print('${allPaths[0]}');
   }
 
   void swapStations() {
