@@ -2,9 +2,7 @@ import 'package:cairo_metro_flutter/screens/route_details_landscape_screen.dart'
 import 'package:cairo_metro_flutter/screens/route_details_portrait_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constant.dart';
 import '../controllers/metro_controller.dart';
-import '../widgets/custom_text.dart';
 
 class MetroRouteScreen extends StatefulWidget {
   const MetroRouteScreen({super.key});
@@ -15,32 +13,23 @@ class MetroRouteScreen extends StatefulWidget {
 
 class _MetroRouteScreenState extends State<MetroRouteScreen> {
   final pathIndex = 0.obs;
-  final RxList<List<String>> paths = [
-    ['']
-  ].obs;
+  final RxList<List<String>> paths = <List<String>>[].obs;
   final MetroController metroController = Get.find();
 
   @override
   void initState() {
     super.initState();
     metroController.getPaths.value = true;
-    paths.value = metroController.selectedTransfers.value == 'Less Stations'
+    paths.assignAll(metroController.selectedTransfers.value == 'Less Stations'
         ? metroController.allPaths
-        : metroController.allPathsByExchangedNum;
+        : metroController.allPathsByExchangedNum);
+    metroController.getPaths.value = false; // reset boolean
   }
 
   @override
   Widget build(BuildContext context) {
-    metroController.getPaths.value = false;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: CustomText(
-          text: 'All routes',
-          txtColor: kPrimaryColor,
-          txtFontWeight: FontWeight.bold,
-        ),
-      ),
+      extendBodyBehindAppBar: true,
       body: OrientationBuilder(builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
           return RouteDetailsPortraitScreen(

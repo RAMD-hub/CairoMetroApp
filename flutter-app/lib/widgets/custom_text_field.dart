@@ -1,3 +1,4 @@
+import 'package:cairo_metro_flutter/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_icon.dart';
@@ -27,10 +28,13 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: CustomIcon(icon: suffixIcon),
         label: CustomText(
           text: hint,
-          txtColor: Colors.grey,
+          txtColor: kHintTextColor,
+          txtFontWeight: FontWeight.w600,
+          txtFontSize: 14,
+          txtLetterSpacing: 0.8,
         ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: kTextFieldFillColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide.none,

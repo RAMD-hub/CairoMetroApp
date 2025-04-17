@@ -38,87 +38,111 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
     }
     final double screenWidth = Get.width;
     final double screenHeight = Get.height;
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: screenWidth * 0.02, vertical: screenHeight * 0.02),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                isMetroRouteScreen
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: CustomButton(
-                              onPressed: onPressedCounterBack ?? () {},
-                              btnName: 'Back',
-                            ),
-                          ),
-                          Flexible(
-                            child: Obx(() {
-                              return CustomText(
-                                text: '${pathIndex.value + 1}/${paths.length}',
-                                txtFontWeight: FontWeight.bold,
-                                txtFontSize: screenWidth * 0.018,
-                              );
-                            }),
-                          ),
-                          Flexible(
-                            flex: 2,
-                            child: CustomButton(
-                              onPressed: onPressedCounterNext ?? () {},
-                              btnName: 'Next',
-                            ),
-                          ),
-                        ],
-                      )
-                    : SizedBox(),
-                isMetroRouteScreen
-                    ? SizedBox(height: screenHeight * 0.02)
-                    : SizedBox(),
-                CustomDetailsCard(text: Obx(() {
-                  final stationsNumbers = paths[pathIndex.value].length.obs;
-                  return CustomText(
-                      text: 'Stations no : ${stationsNumbers.value}');
-                })),
-                CustomDetailsCard(text: Obx(() {
-                  final stationsNumbers = paths[pathIndex.value].length.obs;
-                  return CustomText(
-                      text:
-                          'Time : ${(stationsNumbers.value * 3) ~/ 60} hrs ${(stationsNumbers.value * 3) % 60} min');
-                })),
-                CustomDetailsCard(text: Obx(() {
-                  final stationsNumbers = paths[pathIndex.value].length.obs;
-                  return CustomText(
-                      text:
-                          'Price : ${metroController.getTicketPrice(stationsNumbers.value)}');
-                })),
-                SizedBox(height: screenHeight * 0.02),
-                CustomButton(
-                  onPressed: onPressedBigNext,
-                  btnName: bigButtonName,
-                  btnBackgroundColor: btnBackgroundColor,
+    return Stack(
+      children: [
+        ColorFiltered(
+          colorFilter: ColorFilter.mode(
+            Colors.black.withOpacity(0.4),
+            BlendMode.darken,
+          ),
+          child: Image.asset(
+            kBackgroundImage,
+            fit: BoxFit.fill,
+            width: Get.width,
+            height: Get.height,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.02, vertical: screenHeight * 0.02),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    isMetroRouteScreen
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                flex: 2,
+                                child: CustomButton(
+                                  onPressed: onPressedCounterBack ?? () {},
+                                  btnName: 'Back',
+                                ),
+                              ),
+                              Flexible(
+                                child: Obx(() {
+                                  return CustomText(
+                                    text:
+                                        '${pathIndex.value + 1}/${paths.length}',
+                                    txtFontWeight: FontWeight.bold,
+                                    txtFontSize: screenWidth * 0.018,
+                                    txtColor: kSecondaryTextColor,
+                                  );
+                                }),
+                              ),
+                              Flexible(
+                                flex: 2,
+                                child: CustomButton(
+                                  onPressed: onPressedCounterNext ?? () {},
+                                  btnName: 'Next',
+                                ),
+                              ),
+                            ],
+                          )
+                        : SizedBox(),
+                    isMetroRouteScreen
+                        ? SizedBox(height: screenHeight * 0.02)
+                        : SizedBox(),
+                    CustomDetailsCard(text: Obx(() {
+                      final stationsNumbers = paths[pathIndex.value].length.obs;
+                      return CustomText(
+                        text: 'Stations no : ${stationsNumbers.value}',
+                        txtColor: kSecondaryTextColor,
+                      );
+                    })),
+                    CustomDetailsCard(text: Obx(() {
+                      final stationsNumbers = paths[pathIndex.value].length.obs;
+                      return CustomText(
+                        text:
+                            'Time : ${(stationsNumbers.value * 3) ~/ 60} hrs ${(stationsNumbers.value * 3) % 60} min',
+                        txtColor: kSecondaryTextColor,
+                      );
+                    })),
+                    CustomDetailsCard(text: Obx(() {
+                      final stationsNumbers = paths[pathIndex.value].length.obs;
+                      return CustomText(
+                        text:
+                            'Price : ${metroController.getTicketPrice(stationsNumbers.value)}',
+                        txtColor: kSecondaryTextColor,
+                      );
+                    })),
+                    SizedBox(height: screenHeight * 0.02),
+                    CustomButton(
+                      onPressed: onPressedBigNext,
+                      btnName: bigButtonName,
+                      btnBackgroundColor: btnBackgroundColor,
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              SizedBox(width: screenWidth * 0.02),
+              Expanded(
+                flex: 5,
+                child: Obx(() {
+                  return StationTileListView(
+                    path: paths[pathIndex.value].obs,
+                    pathIndex: pathIndex,
+                  );
+                }),
+              ),
+            ],
           ),
-          SizedBox(width: screenWidth * 0.02),
-          Expanded(
-            flex: 5,
-            child: Obx(() {
-              return StationTileListView(
-                path: paths[pathIndex.value].obs,
-                pathIndex: pathIndex,
-              );
-            }),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../constant.dart';
 import '../widgets/circle_shape.dart';
@@ -22,22 +23,34 @@ class StationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: kOpacityCardColor,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+          color: Colors.white.withOpacity(0.3),
+        ),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 10,
         children: [
           Column(
             children: [
-              if (!isFirst)
+              if (!isFirst && !isLast)
                 LineShape(
-                  color: isInterSection ? Colors.red.shade600 : kPrimaryColor,
+                  color: isInterSection ? kAlertImportantColor : kPrimaryColor,
                 ),
               CircleShape(
-                circleColor: isInterSection ? Colors.red.shade600 : Colors.grey,
+                circleColor: isInterSection
+                    ? kAlertImportantColor
+                    : isLast || isFirst
+                        ? kPrimaryColor
+                        : Colors.white,
               ),
-              if (!isLast)
+              if (!isLast && !isFirst)
                 LineShape(
-                  color: isInterSection ? Colors.red.shade600 : kPrimaryColor,
+                  color: isInterSection ? kAlertImportantColor : kPrimaryColor,
                 ),
             ],
           ),
@@ -47,13 +60,16 @@ class StationTile extends StatelessWidget {
                   ? '$stationName => Exchanged Station.'
                   : stationName,
               txtFontWeight: isFirst || isLast || isInterSection
-                  ? FontWeight.bold
+                  ? FontWeight.w700
                   : FontWeight.normal,
+              txtFontSize: isFirst || isLast || isInterSection
+                  ? (Get.width * 0.08).clamp(12.0, 18.0)
+                  : (Get.width * 0.45).clamp(12.0, 18.0),
               txtColor: isFirst || isLast
                   ? kPrimaryColor
                   : isInterSection
-                      ? Colors.red.shade600
-                      : Colors.black,
+                      ? kAlertImportantColor
+                      : kSecondaryTextColor,
             ),
           ),
         ],

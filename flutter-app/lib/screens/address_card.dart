@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../constant.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/custom_text_field.dart';
@@ -12,10 +13,14 @@ class AddressCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: kOpacityCardColor,
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+          color: Colors.white.withOpacity(0.3),
+        ),
       ),
-      elevation: 5,
       shadowColor: Colors.grey,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -23,9 +28,9 @@ class AddressCard extends StatelessWidget {
           spacing: 16,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomText(
+            CustomText(
               text: 'Please enter your destination (optional)',
-              txtColor: Colors.black87,
+              txtColor: kSecondaryTextColor,
             ),
             CustomTextField(
               hint: 'Address',

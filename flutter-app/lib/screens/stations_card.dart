@@ -1,3 +1,4 @@
+import 'package:cairo_metro_flutter/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/metro_controller.dart';
@@ -15,14 +16,18 @@ class StationsCard extends StatelessWidget {
   final isSwap = false.obs;
   final startCont = TextEditingController();
   final endCont = TextEditingController();
-
+  final temp = ''.obs;
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: kOpacityCardColor,
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+          color: Colors.white.withOpacity(0.3),
+        ),
       ),
-      elevation: 5,
       shadowColor: Colors.grey,
       child: Padding(
         padding: EdgeInsets.all(16.0),
@@ -36,10 +41,9 @@ class StationsCard extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                metroController.startStation.value = startCont.text;
-                metroController.endStation.value = endCont.text;
-                metroController.swapStations();
-                isSwap.value = true;
+                if (startCont.text.isNotEmpty || endCont.text.isNotEmpty) {
+                  swapStation();
+                }
               },
               icon: CustomIcon(icon: Icons.swap_vert_circle_outlined),
             ),
@@ -124,5 +128,12 @@ class StationsCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void swapStation() {
+    temp.value = startCont.text;
+    startCont.text = endCont.text;
+    endCont.text = temp.value;
+    isSwap.value = true;
   }
 }

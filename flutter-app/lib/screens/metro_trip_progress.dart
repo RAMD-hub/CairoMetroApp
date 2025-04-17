@@ -2,8 +2,6 @@ import 'package:cairo_metro_flutter/screens/route_details_landscape_screen.dart'
 import 'package:cairo_metro_flutter/screens/route_details_portrait_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constant.dart';
-import '../widgets/custom_text.dart';
 
 class MetroTripProgress extends StatelessWidget {
   const MetroTripProgress({super.key});
@@ -11,14 +9,6 @@ class MetroTripProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<List<String>> path = Get.arguments;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: CustomText(
-          text: 'station',
-          txtColor: kPrimaryColor,
-          txtFontWeight: FontWeight.bold,
-        ),
-      ),
       body: OrientationBuilder(builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
           return RouteDetailsPortraitScreen(
@@ -26,7 +16,7 @@ class MetroTripProgress extends StatelessWidget {
             isMetroRouteScreen: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
-              Get.toNamed('/MetroHome');
+              Get.offNamed('/MetroHome');
             },
             bigButtonName: 'Cancel',
           );
@@ -36,7 +26,7 @@ class MetroTripProgress extends StatelessWidget {
             isMetroRouteScreen: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
-              Get.toNamed('/MetroHome');
+              Get.offNamed('/MetroHome');
             },
             bigButtonName: 'Cancel',
           );

@@ -8,9 +8,11 @@ class CustomText extends StatelessWidget {
     this.txtFontSize = 0,
     this.txtColor = Colors.black,
     this.txtFontWeight = FontWeight.normal,
+    this.txtLetterSpacing,
   });
   final String text;
   final double txtFontSize;
+  final double? txtLetterSpacing;
   final Color txtColor;
   final FontWeight txtFontWeight;
   @override
@@ -23,6 +25,7 @@ class CustomText extends StatelessWidget {
             : txtFontSize,
         color: txtColor,
         fontWeight: txtFontWeight,
+        letterSpacing: txtLetterSpacing,
       ),
     );
   }

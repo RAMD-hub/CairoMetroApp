@@ -9,7 +9,7 @@ class CustomRadioButton extends StatelessWidget {
   final String text;
   final String value;
   final RxString groupValue;
-  final Function(String)? onChanged; // إضافة `onChanged` كـ callback
+  final Function(String)? onChanged;
 
   const CustomRadioButton({
     super.key,
@@ -28,7 +28,7 @@ class CustomRadioButton extends StatelessWidget {
         onTap: () {
           groupValue.value = value;
           if (onChanged != null) {
-            onChanged!(value); // استدعاء `onChanged` إذا تم تمريره
+            onChanged!(value);
           }
         },
         child: Row(
@@ -52,7 +52,7 @@ class CustomRadioButton extends StatelessWidget {
             const SizedBox(width: 8),
             CustomText(
               text: text,
-              txtColor: isSelected ? kPrimaryColor : Colors.black,
+              txtColor: isSelected ? kPrimaryColor : kSecondaryTextColor,
             )
           ],
         ),

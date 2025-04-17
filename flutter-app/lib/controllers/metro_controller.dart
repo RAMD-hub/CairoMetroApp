@@ -70,14 +70,6 @@ class MetroController extends GetxController {
     // get all paths based on num of exchange stations
     allPathsByExchangedNum
         .assignAll(sortedPaths.sortMetroPathsByExchangeStations(metroPaths));
-
-    print('${allPaths[0]}');
-  }
-
-  void swapStations() {
-    final temp = startStation.value;
-    startStation.value = endStation.value;
-    endStation.value = temp;
   }
 
   int getTicketPrice(int stationCount) {
@@ -92,10 +84,6 @@ class MetroController extends GetxController {
   void onClose() {
     startStation.value = '';
     endStation.value = '';
-    allPaths.clear();
-    allPathsByExchangedNum.clear();
-    metroPaths.clear();
-    stationsNames.clear();
     super.onClose();
   }
 }

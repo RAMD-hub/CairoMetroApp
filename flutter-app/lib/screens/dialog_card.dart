@@ -15,8 +15,14 @@ class DialogCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 3,
+      color: kOpacityCardColor,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+          color: Colors.white.withOpacity(0.3),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -55,7 +61,7 @@ class DialogCard extends StatelessWidget {
                   children: [
                     LineShape(),
                     CircleShape(
-                      circleColor: isCurrent ? kPrimaryColor: Colors.grey,
+                      circleColor: isCurrent ? kPrimaryColor : Colors.grey,
                     ),
                     LineShape(),
                   ],
