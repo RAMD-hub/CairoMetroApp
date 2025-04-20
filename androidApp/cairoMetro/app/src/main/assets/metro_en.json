@@ -618,7 +618,7 @@
   {
     "name": "kit kat",
     "line": "line three",
-    "intersection": true,
+    "intersection": false,
     "id": 78,
     "neighbourStations": ["sudan","safa hegazy"],
     "coordinates":[30.066597585505427, 31.213013840330483]
@@ -673,15 +673,15 @@
   },
   {
     "name": "kit kat",
-    "line": "line three1",
-    "intersection": true,
+    "line": "line three",
+    "intersection": false,
     "id": 85,
     "neighbourStations": ["tawfikia","sudan","safa hegazy"],
     "coordinates":[30.0666443269399, 31.21300218873246]
   },
   {
     "name": "tawfikia",
-    "line": "line three1",
+    "line": "line three",
     "intersection": false,
     "id": 86,
     "neighbourStations": ["kit kat","wadi el nile" ],
@@ -689,7 +689,7 @@
   },
   {
     "name": "wadi el nile",
-    "line": "line three1",
+    "line": "line three",
     "intersection": false,
     "id": 87,
     "neighbourStations": ["tawfikia" ,"gamat el dowal"],
@@ -697,7 +697,7 @@
   },
   {
     "name": "gamat el dowal",
-    "line": "line three1",
+    "line": "line three",
     "intersection": false,
     "id": 88,
     "neighbourStations": [ "wadi el nile","boulak el dakrour"],
@@ -705,7 +705,7 @@
   },
   {
     "name": "boulak el dakrour",
-    "line": "line three1",
+    "line": "line three",
     "intersection": false,
     "id": 89,
     "neighbourStations": ["gamat el dowal","cairo university" ],
@@ -713,7 +713,7 @@
   },
   {
     "name": "cairo university",
-    "line":"line three1",
+    "line":"line three",
     "intersection": true,
     "id": 90,
     "neighbourStations": ["faisal","boulak el dakrour" ],

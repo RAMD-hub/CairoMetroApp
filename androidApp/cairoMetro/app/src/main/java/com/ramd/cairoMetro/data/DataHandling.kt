@@ -36,7 +36,6 @@ class DataHandling {
             pathChanged.add(station)
             }
         }
-        Log.d("pathlanguage"," in shared1: ${pathChanged.size} , $pathChanged")
 
         val gson = Gson()
         val json = gson.toJson(pathChanged)
@@ -60,20 +59,14 @@ class DataHandling {
             }
 
         }
-        Log.d("pathlanguage"," in shared ${pathChanged.size} , $pathChanged")
 
         return pathChanged.toList()
     }
 
 
-    fun getID(context: Context, key:String): Int {
-        val file: SharedPreferences = context.getSharedPreferences("previousID", MODE_PRIVATE)
-        val data = file.getInt(key, 0)
-        return data
-    }
 
     fun saveID(context: Context, data:Int, key:String) {
-        val file: SharedPreferences =context.getSharedPreferences("previousID", MODE_PRIVATE)
+        val file: SharedPreferences =context.getSharedPreferences("savedData", MODE_PRIVATE)
         file.edit {
             putInt(key, data)
         }

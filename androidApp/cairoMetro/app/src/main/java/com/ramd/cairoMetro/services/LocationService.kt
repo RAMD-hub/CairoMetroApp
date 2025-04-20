@@ -7,17 +7,20 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
 import android.media.RingtoneManager
+import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
 import com.ramd.cairoMetro.R
 import com.ramd.cairoMetro.coreApp.Application
@@ -26,46 +29,30 @@ import com.ramd.cairoMetro.data.DataItem
 import com.ramd.cairoMetro.businessLogic.Direction
 import com.ramd.cairoMetro.businessLogic.LocationCalculations
 import com.ramd.cairoMetro.ui.activities.TripProgress
-import java.lang.ref.WeakReference
 import java.util.Locale
 
 class LocationService : Service() {
-    private val TAG = "LocationService"
-    private val NOTIFICATION_ID = 1001
+    private val NOTIFICATION_ID = 1
     private val CHANNEL_ID = "location_service_channel"
     private val PUSH_CHANNEL_ID = "push_notification_channel"
     private val UPDATE_INTERVAL = 10000L // 10 seconds
     private val FASTEST_INTERVAL = 5000L // 5 seconds
-    private val SMALLEST_DISPLACEMENT = 10f // 10 meters
-    private var lastGpsLogTime = 0L
-    private val GPS_LOG_INTERVAL = 60000L // Only log GPS issues once per minute
+    private val SMALLEST_DISPLACEMENT = 5f // 10 meters
 
-    companion object {
-        private var locationUpdateListener: WeakReference<LocationUpdateListener>? = null
-
-        fun setLocationUpdateListener(listener: LocationUpdateListener?) {
-            locationUpdateListener = listener?.let { WeakReference(it) }
-        }
-    }
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
-    private var lastLocation: Location? = null
+
     private var path = emptyList<String>()
     private var nearestStation = ""
     private var previousStation = ""
     private var stationData = emptyArray<DataItem>()
-    var language = ""
-    var currentLanguage = ""
+    private var language = ""
+    private var currentLanguage = ""
     private var locationManager: LocationManager? = null
-    private var isRequestingLocationUpdates = false
     private var startTrip = false
-
-    interface LocationUpdateListener {
-        fun onLocationChanged(location: Location)
-    }
 
     override fun onCreate() {
         super.onCreate()
@@ -82,45 +69,19 @@ class LocationService : Service() {
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-                locationResult.lastLocation?.let { location ->
-                    lastLocation = location
+                for (location in locationResult.locations) {
+
                     getStationAndNotification(readAndWriteData, application, location)
-                    locationUpdateListener?.get()?.onLocationChanged(location)
                 }
             }
 
-            override fun onLocationAvailability(locationAvailability: LocationAvailability) {
-                if (!locationAvailability.isLocationAvailable) {
-                    // Log GPS issues with rate limiting to avoid log spam
-                    val currentTime = System.currentTimeMillis()
-                    if (currentTime - lastGpsLogTime > GPS_LOG_INTERVAL) {
-                        Log.e(TAG, "Location is not available. GPS may be disabled or signal is weak.")
-                        Toast.makeText(this@LocationService,
-                            getString(R.string.location_is_not_available_gps_may_be_disabled_or_signal_is_weak), Toast.LENGTH_SHORT).show()
 
-                        if (!isLocationEnabled()) {
-                            Log.e(TAG, "GPS and Network providers are disabled in system settings.")
-                            Toast.makeText(this@LocationService,
-                                getString(R.string.gps_and_network_providers_are_disabled_in_system_settings), Toast.LENGTH_SHORT).show()
-
-                        }
-                        lastGpsLogTime = currentTime
-                    }
-
-                    // Try to restart location updates if possible
-                    if (isLocationEnabled() && !isRequestingLocationUpdates) {
-                        Log.d(TAG, "Location providers available but not getting updates. Attempting to restart.")
-                        startLocationUpdates()
-                    }
-                }
-            }
         }
     }
 
-    private fun isLocationEnabled(): Boolean {
-        return locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER) == true ||
-                locationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER) == true
-    }
+
+
+
 
     private fun getStationAndNotification(
         readAndWriteData: DataHandling,
@@ -137,28 +98,24 @@ class LocationService : Service() {
 
         nearestStation = LocationCalculations().nearestStationPath(
             stationData,
-            1000F,
+            500F,
             path,
             location.latitude,
             location.longitude
         )
 
-        val getID = readAndWriteData.getID(this@LocationService, "previousService")
+        val getID = application.previousStationID
         if (getID != 0 && startTrip) {
             previousStation = stationData.firstOrNull { it.id == getID }?.name ?: ""
         }
 
         if (nearestStation.isNotEmpty() && previousStation!= nearestStation) {
-
             if (previousStation == "") {
                 startTrip =true
                 previousStation = nearestStation
             }
 
-            if (previousStation in path && path.indexOf(previousStation) <= path.indexOf(
-                    nearestStation
-                )
-            ) {
+            if (previousStation in path && path.indexOf(previousStation) <= path.indexOf(nearestStation)) {
                 notifyUsingDistance(nearestStation)
                 previousStation = nearestStation
 
@@ -171,11 +128,7 @@ class LocationService : Service() {
                         stopSelf()
                     }
                 }
-
-
             }
-
-//            Log.d(TAG, "From service current: $nearestStation")
         }
     }
 
@@ -194,70 +147,52 @@ class LocationService : Service() {
 
     private fun createLocationRequest() {
         locationRequest = LocationRequest.create().apply {
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY  // Changed from BALANCED_POWER_ACCURACY for better GPS precision
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
             interval = UPDATE_INTERVAL
             fastestInterval = FASTEST_INTERVAL
             smallestDisplacement = SMALLEST_DISPLACEMENT
-            maxWaitTime = UPDATE_INTERVAL * 2 // Allow batching of updates to save battery
+            maxWaitTime = UPDATE_INTERVAL * 2
+            numUpdates = Int.MAX_VALUE
         }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+        Application().language
+        loadLocale()
         startForeground(NOTIFICATION_ID, createNotification())
         startLocationUpdates()
 
         return START_STICKY
     }
 
+
     private fun startLocationUpdates() {
-        if (isRequestingLocationUpdates) {
-            Log.d(TAG, "Location updates already requested")
-            return
-        }
-
-        try {
-            val builder = LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest)
-
-            val client = LocationServices.getSettingsClient(this)
-            client.checkLocationSettings(builder.build())
-                .addOnSuccessListener {
-                    isRequestingLocationUpdates = true
-                    fusedLocationClient.requestLocationUpdates(
-                        locationRequest,
-                        locationCallback,
-                        Looper.getMainLooper()
-                    )
-                    Log.d(TAG, "Location updates started successfully")
-                }
-                .addOnFailureListener { e ->
-                    isRequestingLocationUpdates = false
-                    Log.e(TAG, "Location settings are not satisfied: ${e.message}")
-                    // Instead of showing notification, just log the issue
-                    Log.e(TAG, "GPS or Network location is disabled. Location tracking may not work properly.")
-                }
-        } catch (e: SecurityException) {
-            Log.e(TAG, "Lost location permission: ${e.message}")
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.getMainLooper()
+            )
         }
     }
 
     private fun stopLocationUpdates() {
-        if (isRequestingLocationUpdates) {
             fusedLocationClient.removeLocationUpdates(locationCallback)
-            isRequestingLocationUpdates = false
-            Log.d(TAG, "Location updates stopped")
-        }
+
     }
 
     private fun createNotification() =
-
-
         NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_stat_notificon)
             .setColor(Color.RED)
             .setContentTitle(getString(R.string.station_alert))
             .setContentText(getString(R.string.tracking_your_location_during_the_trip))
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(false)
             .setOngoing(true)
             .setWhen(System.currentTimeMillis())
@@ -278,7 +213,7 @@ class LocationService : Service() {
             null
         }
 
-        val bigPicture =BitmapFactory.decodeResource(resources,
+        val bigPicture = BitmapFactory.decodeResource(resources,
             when(stage){
                 "start"->R.drawable.start
                 "end"->R.drawable.end
@@ -347,12 +282,15 @@ class LocationService : Service() {
         }
     }
 
-    override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onDestroy() {
+
         super.onDestroy()
         DataHandling().saveID(this@LocationService, 0, "previousService")
         stopLocationUpdates()
-        locationUpdateListener = null
+    }
+
+    override fun onBind(p0: Intent?): IBinder? {
+        return null
     }
 }

@@ -150,21 +150,20 @@ class AllRoutes : AppCompatActivity() {
         index = indexMins
     }
     fun start(view: View) {
+            MaterialAlertDialogBuilder(this, R.style.CustomAlertDialogTheme)
+                .setTitle(getString(R.string.start_trip_tracking))
+                .setMessage(getString(R.string.this_will_start_tracking_your_location_and_may_consume_battery))
+                .setPositiveButton(getString(R.string.start_trip)) { _, _ ->
 
-        MaterialAlertDialogBuilder(this, R.style.CustomAlertDialogTheme)
-            .setTitle(getString(R.string.start_trip_tracking))
-            .setMessage(getString(R.string.this_will_start_tracking_your_location_and_may_consume_battery))
-            .setPositiveButton(getString(R.string.start_trip)) { _, _ ->
-
-                readAndWriteData.saveListData( this , sorting[index] .toTypedArray(), "path")
-                val b = Intent(this, TripProgress::class.java)
-                b.putExtra("allRoutesPath",sorting[index] as ArrayList<String>)
-                startActivity(b)
-            }
-            .setNegativeButton(getString(R.string.cancel_trip)) { _, _ ->
-                // Respond to positive button press
-            }
-            .show()
+                    readAndWriteData.saveListData(this, sorting[index].toTypedArray(), "path")
+                    val b = Intent(this, TripProgress::class.java)
+                    b.putExtra("allRoutesPath", sorting[index] as ArrayList<String>)
+                    startActivity(b)
+                }
+                .setNegativeButton(getString(R.string.cancel_trip)) { _, _ ->
+                    // Respond to positive button press
+                }
+                .show()
     }
 
     @SuppressLint("StringFormatMatches")
@@ -176,7 +175,7 @@ class AllRoutes : AppCompatActivity() {
         for (index in path.indices)
         {
             if(index != path.size-1)
-                line = direction.findLine(path[index] ,path[index+1] )
+                line = direction.findLine(path[index], path[index + 1])
 
 
             if (index == 0 )
