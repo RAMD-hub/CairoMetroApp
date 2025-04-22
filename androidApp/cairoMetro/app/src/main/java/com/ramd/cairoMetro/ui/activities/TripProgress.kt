@@ -18,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramd.cairoMetro.R
 import com.ramd.cairoMetro.ui.customViews.StationItem
@@ -31,6 +32,8 @@ import com.ramd.cairoMetro.services.LocationService
 import com.ramd.cairoMetro.systemIntegration.Permissions
 import com.ramd.cairoMetro.businessLogic.Price
 import com.xwray.groupie.GroupieAdapter
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import mumayank.com.airlocationlibrary.AirLocation
 import java.util.Locale
 
@@ -47,6 +50,8 @@ class TripProgress : AppCompatActivity() , AirLocation.Callback{
     var language = ""; var indicator = false
 
 
+
+
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -55,8 +60,8 @@ class TripProgress : AppCompatActivity() , AirLocation.Callback{
         if (allGranted) {
             startLocationService()
         } else {
-            Toast.makeText(this,
-                getString(R.string.location_permissions_are_required), Toast.LENGTH_LONG).show()
+            showToast(
+                getString(R.string.location_permissions_are_required))
         }
     }
 
@@ -253,21 +258,23 @@ class TripProgress : AppCompatActivity() , AirLocation.Callback{
         airLocation.start()
     }
 
+
     override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
-        when (locationFailedEnum) {
-            AirLocation.LocationFailedEnum.HIGH_PRECISION_LOCATION_NA_TRY_AGAIN_PREFERABLY_WITH_NETWORK_CONNECTIVITY -> {
-                startLocation()
-            }
-            AirLocation.LocationFailedEnum.DEVICE_IN_FLIGHT_MODE -> {
-                Toast.makeText(this, getString(R.string.device_is_flight_mode), Toast.LENGTH_SHORT).show()
-            }
-            else -> {
-                Toast.makeText(this, getString(R.string.check_location_permission), Toast.LENGTH_SHORT).show()
-            }
+        if (locationFailedEnum == AirLocation.LocationFailedEnum.HIGH_PRECISION_LOCATION_NA_TRY_AGAIN_PREFERABLY_WITH_NETWORK_CONNECTIVITY)
+        {
+            startLocation()
         }
     }
 
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+
+
     override fun onSuccess(locations: ArrayList<Location>) {
+
         nearestStation = LocationCalculations().nearestStationPath(stationData, 300F, path, locations[0].latitude, locations[0].longitude)
         Log.d("LocationService","${locations[0].latitude} , ${locations[0].longitude}")
 

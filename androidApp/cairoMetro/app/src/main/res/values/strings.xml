@@ -62,7 +62,19 @@
     <string name="please_input_an_address">please input an address</string>
     <string name="gps_and_network_providers_are_disabled_in_system_settings">GPS and Network providers are disabled in system settings.</string>
     <string name="location_is_not_available_gps_may_be_disabled_or_signal_is_weak">Location is not available. GPS may be disabled or signal is weak.</string>
-    <string name="device_is_flight_mode">disable device flight mode</string>
+    <string name="device_is_flight_mode">disable device flight mode, close app and open it again</string>
     <string name="check_location_permission">check app permissions, the update of google play and your internet connection</string>
+    <string name="safa_hegazy">safa hegazy</string>
+    <string name="sudan">sudan</string>
+    <string name="tawfikia">tawfikia</string>
+    <string name="kit_kat">kit kat</string>
+    <string name="ok">OK</string>
+    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_rod_el_farag_corridor">make sure to take metro in direction from kit kat to rod el farag corridor</string>
+    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_cairo_university_el_monib">make sure to take metro in direction from kit kat to cairo university (el monib)</string>
+    <string name="make_sure_to_take_metro_in_direction_from_rod_el_farag_corridor_to_kit_kat">make sure to take metro in direction from rod el farag corridor to kit kat</string>
+    <string name="make_sure_to_take_metro_in_direction_from_cairo_university_el_monib_to_kit_kat">make sure to take metro in direction from cairo university (el monib) to kit kat</string>
+    <string name="then_come_out_wait_the_next_metro_and">" after arriving kit kat station come out take the next metro and  "</string>
+    <string name="there_is_a_path_has_a_kit_kat_station_if_you_choose_that_path">there is a path from paths has kit kat station , if you choose that path</string>
+    <string name="make_sure_you_are_connect_to_internet">make sure you are connect to internet</string>
 
 </resources>

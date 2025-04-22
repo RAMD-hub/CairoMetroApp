@@ -23,8 +23,11 @@ import android.content.res.Configuration
 import android.util.Log
 import com.ramd.cairoMetro.coreApp.Application
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ramd.cairoMetro.ui.customViews.CustomArrayAdapter
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class Home : AppCompatActivity(),AirLocation.Callback {
     lateinit var binding: ActivityHomeBinding
@@ -217,7 +220,7 @@ class Home : AppCompatActivity(),AirLocation.Callback {
         a.putExtra("startStation",start)
         a.putExtra("arrivalStation",arrival)
         a.putExtra("shortType",shortRoute)
-        a.putExtra("tripAvailability",station.isNotEmpty())
+        a.putExtra("tripAvailability",station.isNotEmpty() )
         startActivity(a)
     }
 
@@ -229,8 +232,8 @@ class Home : AppCompatActivity(),AirLocation.Callback {
             if (station.isEmpty())
                 showToast(getString(R.string.no_near_station_from_your_location))
             else binding.start.setText(station, false)
-
         }
+
     }
 
     fun map(view: View) {
@@ -305,7 +308,8 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
     private fun stationDialog () {
 
-        if(  indicator && path.isNotEmpty()) {
+        if(  indicator && path.isNotEmpty() ) {
+
             currentStation = location.nearestStationPath(stationData,300F,path,currentLocation[0],currentLocation[1])
 
             if (currentStation.isNotEmpty()) {
@@ -374,26 +378,22 @@ class Home : AppCompatActivity(),AirLocation.Callback {
         currentLocation.add(locations[0].latitude)
         currentLocation.add(locations[0].longitude)
         stationDialog ()
+
     }
 
     override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
-        when (locationFailedEnum) {
-            AirLocation.LocationFailedEnum.HIGH_PRECISION_LOCATION_NA_TRY_AGAIN_PREFERABLY_WITH_NETWORK_CONNECTIVITY -> {
+        if (locationFailedEnum == AirLocation.LocationFailedEnum.HIGH_PRECISION_LOCATION_NA_TRY_AGAIN_PREFERABLY_WITH_NETWORK_CONNECTIVITY)
+             {
+                lifecycleScope.launch {
+                    delay(10000)
+                    if (currentLocation.isEmpty() ) {
+                        showToast(getString(R.string.make_sure_you_are_connect_to_internet))
+                    }
+                }
                 startLocation()
-                stationDialog ()
             }
-            AirLocation.LocationFailedEnum.DEVICE_IN_FLIGHT_MODE -> {
-                showToast(getString(R.string.device_is_flight_mode))
-//                startLocation()
-            }
-            else -> {
-                showToast(getString(R.string.check_location_permission))
-//                startLocation()
-            }
-        }
 
     }
-
 
 
     private fun homeDataLoadLanguageChange(){

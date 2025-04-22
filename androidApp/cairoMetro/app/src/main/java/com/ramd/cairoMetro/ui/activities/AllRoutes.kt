@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 
 import androidx.activity.enableEdgeToEdge
@@ -35,8 +36,8 @@ class AllRoutes : AppCompatActivity() {
     val price = Price()
     var adapter = GroupieAdapter()
     var index =0  ; var indexPlus = 1 ;var  indexMins = 0
-    var language=""
-
+    var language="" ;
+    val direction = Direction(stationData)
 
     @SuppressLint("SetTextI18n", "StringFormatMatches")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,8 +83,6 @@ class AllRoutes : AppCompatActivity() {
         val shortType = intent.getBooleanExtra("shortType",false)
         val tripAvailability =  intent.getBooleanExtra("tripAvailability",false)
 
-
-        val direction = Direction(stationData)
         val pathsCalculations = PathsCalculations(stationData)
 
         if(!startStation.isNullOrEmpty() && !arrivalStation.isNullOrEmpty()) {
@@ -105,12 +104,21 @@ class AllRoutes : AppCompatActivity() {
             direction.sortingByIntersections(paths)
         }
 
+        kitkatDialog(sorting[0])
+
         setRecyclerList(sorting[0])
         binding.notesText.isVisible =true
         binding.priceText.text =
             getString(R.string.price, price.calculatePrice(sorting[0].size))
 
         binding.startBtn.isEnabled = tripAvailability
+    }
+
+    private fun kitkatDialog(path: List<String>) {
+        val directionKitkat = direction.direction(path, this)
+        if (directionKitkat.isNotEmpty() ) {
+            dialog(directionKitkat)
+        }
     }
 
 
@@ -123,8 +131,10 @@ class AllRoutes : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun next(view: View) {
+
         binding.notesText.isVisible = sorting[indexPlus] == sorting[0]
         index = indexPlus
+        kitkatDialog(sorting[index])
         setRecyclerList(sorting[indexPlus])
         indexMins=indexPlus
         binding.numberText.text= "${indexMins+1} / ${sorting.size}"
@@ -149,6 +159,7 @@ class AllRoutes : AppCompatActivity() {
         if(indexMins <= 0){ binding.backBtn.isEnabled=false ;indexPlus=1 ;return}
         index = indexMins
     }
+
     fun start(view: View) {
             MaterialAlertDialogBuilder(this, R.style.CustomAlertDialogTheme)
                 .setTitle(getString(R.string.start_trip_tracking))
@@ -164,6 +175,15 @@ class AllRoutes : AppCompatActivity() {
                     // Respond to positive button press
                 }
                 .show()
+    }
+
+    fun dialog(text:String)
+    {
+        MaterialAlertDialogBuilder(this, R.style.CustomAlertDialogTheme)
+            .setMessage(text)
+            .setPositiveButton(getString(R.string.ok)) { _, _ ->
+            }
+            .show()
     }
 
     @SuppressLint("StringFormatMatches")

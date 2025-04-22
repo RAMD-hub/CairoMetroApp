@@ -618,7 +618,7 @@
   {
     "name": "الكيت كات",
     "line": "الخط الثالث",
-    "intersection": true,
+    "intersection": false,
     "id": 78,
     "neighbourStations": ["السودان","صفاء حجازي"],
     "coordinates":[30.066597585505427, 31.213013840330483]
@@ -673,15 +673,15 @@
   },
   {
     "name": "الكيت كات",
-    "line": "الخط الثالث1",
-    "intersection": true,
+    "line": "الخط الثالث",
+    "intersection": false,
     "id": 85,
     "neighbourStations": ["التوفيقية","السودان","صفاء حجازي"],
     "coordinates":[30.0666443269399, 31.21300218873246]
   },
   {
     "name": "التوفيقية",
-    "line": "الخط الثالث1",
+    "line": "الخط الثالث",
     "intersection": false,
     "id": 86,
     "neighbourStations": ["الكيت كات","وادي النيل" ],
@@ -689,7 +689,7 @@
   },
   {
     "name": "وادي النيل",
-    "line": "الخط الثالث1",
+    "line": "الخط الثالث",
     "intersection": false,
     "id": 87,
     "neighbourStations": ["التوفيقية" ,"جامعة الدول"],
@@ -697,7 +697,7 @@
   },
   {
     "name": "جامعة الدول",
-    "line": "الخط الثالث1",
+    "line": "الخط الثالث",
     "intersection": false,
     "id": 88,
     "neighbourStations": [ "وادي النيل","بولاق الدكرور"],
@@ -705,7 +705,7 @@
   },
   {
     "name": "بولاق الدكرور",
-    "line": "الخط الثالث1",
+    "line": "الخط الثالث",
     "intersection": false,
     "id": 89 ,
     "neighbourStations": ["جامعة الدول","جامعة القاهرة" ],
@@ -713,7 +713,7 @@
   },
   {
     "name": "جامعة القاهرة",
-    "line":"الخط الثالث1",
+    "line":"الخط الثالث",
     "intersection": true,
     "id": 90,
     "neighbourStations": ["فيصل","بولاق الدكرور" ],
