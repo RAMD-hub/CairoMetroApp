@@ -88,10 +88,9 @@ class Permissions (val context: Context) {
                      ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
                  }) {
                  // Request background location permission separately
-                 permissionLauncher.launch(arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION))
+                 permissionLauncher.launch(arrayOf(ACCESS_BACKGROUND_LOCATION))
              }
          } else {
-             // For Android 9 and below, only request location permissions
              permissionLauncher.launch(arrayOf(
                  ACCESS_FINE_LOCATION,
                  ACCESS_COARSE_LOCATION

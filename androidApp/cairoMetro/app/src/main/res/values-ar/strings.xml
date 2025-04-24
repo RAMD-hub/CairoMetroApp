@@ -124,5 +124,20 @@
     <string name="please_input_an_address"> من فضلك ادخل العنوان </string>
     <string name="gps_and_network_providers_are_disabled_in_system_settings">تم تعطيل نظام تحديد المواقع العالمي (GPS) وموفري الشبكة في إعدادات النظام.</string>
     <string name="location_is_not_available_gps_may_be_disabled_or_signal_is_weak">الموقع غير متاح. قد يكون نظام تحديد المواقع العالمي (GPS) معطلاً أو الإشارة ضعيفة.</string>
+    <string name="device_is_flight_mode"> الغي وضع الطيران وبعدين اقفل التطبيق وافتحه تاني</string>
+    <string name="check_location_permission">  تاكد من اذونات التطبيق و تحديث جوجل بلاي ومن اتصالك بالانترنت </string>
+    <string name="safa_hegazy">صفاء حجازي</string>
+    <string name="sudan">السودان</string>
+    <string name="tawfikia">التوفيقية</string>
+    <string name="kit_kat">الكيت كات</string>
+    <string name="ok">تمام</string>
+    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_rod_el_farag_corridor">اتاكد انك واخد المترو اللي اتجاهه من الكيت كات متجه لمحور روض الفرج</string>
+    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_cairo_university_el_monib">اتاكد انك واخد المترو اللي اتجاهه من الكيت كات متجه لجامعه القاهرة</string>
+    <string name="make_sure_to_take_metro_in_direction_from_rod_el_farag_corridor_to_kit_kat">اتاكد انك واخد المترو اللي اتجاهه من محور روض الفرج متجه الي الكيت كات</string>
+    <string name="make_sure_to_take_metro_in_direction_from_cairo_university_el_monib_to_kit_kat">اتاكد انك واخد المترو  اللي اتجاهه من جامعه القاهرة متجه الي الكيت كات</string>
+    <string name="then_come_out_wait_the_next_metro_and">" بعد ما توصل الكيت كات انزل وخد المترو الجاي و "</string>
+    <string name="there_is_a_path_has_a_kit_kat_station_if_you_choose_that_path">فيه طريق من الطرق موجود فيه محطة الكيت كات لو هتختار الطريق ده </string>
+    <string name="make_sure_you_are_connect_to_internet">اتاكد انك مشغل الانترنت </string>
+
 
 </resources>

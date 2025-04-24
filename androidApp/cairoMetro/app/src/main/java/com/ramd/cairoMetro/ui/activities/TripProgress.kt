@@ -1,12 +1,15 @@
 package com.ramd.cairoMetro.ui.activities
 
-
 import android.annotation.SuppressLint
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.content.res.Configuration
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.IBinder
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -15,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramd.cairoMetro.R
 import com.ramd.cairoMetro.ui.customViews.StationItem
@@ -28,19 +32,25 @@ import com.ramd.cairoMetro.services.LocationService
 import com.ramd.cairoMetro.systemIntegration.Permissions
 import com.ramd.cairoMetro.businessLogic.Price
 import com.xwray.groupie.GroupieAdapter
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import mumayank.com.airlocationlibrary.AirLocation
 import java.util.Locale
 
-
-class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener{
+class TripProgress : AppCompatActivity() , AirLocation.Callback{
 
     lateinit var binding: ActivityTripProgressBinding
+    lateinit var airLocation:AirLocation
     var items = mutableListOf<StationItem>()
     var adapter = GroupieAdapter()
     var path: List<String> = emptyList()
     var stationData: Array<DataItem> = emptyArray()
-    lateinit var readAndWriteData : DataHandling
-    var previousStation ="" ;  var nearestStation =""
-    var language="" ; var indicator =false
+    lateinit var readAndWriteData: DataHandling
+    var previousStation = ""; var nearestStation = ""
+    var language = ""; var indicator = false
+
+
+
 
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -50,15 +60,12 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
         if (allGranted) {
             startLocationService()
         } else {
-            Toast.makeText(this,
-                getString(R.string.location_permissions_are_required), Toast.LENGTH_LONG).show()
+            showToast(
+                getString(R.string.location_permissions_are_required))
         }
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
         val application = setUp()
 
         super.onCreate(savedInstanceState)
@@ -71,23 +78,15 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         getCurrentStationFromHome(application)
-
-
         getPath(application)
-
-
         setUpActivityData()
-
-
-
+        startLocation()
     }
-
-
 
     @SuppressLint("StringFormatMatches")
     private fun setUpActivityData() {
-
         setDataInRecycler(previousStation)
         val pathCount = path.size
         val price = Price()
@@ -109,23 +108,14 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
     private fun getCurrentStationFromHome(application: Application) {
         previousStation = intent.getStringExtra("currentStation") ?: ""
 
+        if (previousStation.isEmpty()) {
+            val getID =application.previousStationID
 
-        if (previousStation.isEmpty() ){
-            val getID = readAndWriteData.getID(this, "previousService")
-
-            if (getID != 0 ) {
+            if (getID != 0) {
                 previousStation = stationData.firstOrNull { it.id == getID }?.name ?: ""
-
             }
         }
-
-        Log.d("LocationServiceTRIP" , "${application.indicator} , PREVIOUS STATION 2 $previousStation")
-
-
-
     }
-
-
 
     private fun getPath(application: Application) {
         var pathCheck = intent.getStringArrayListExtra("allRoutesPath")
@@ -141,7 +131,6 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
             } else {
                 if (indicator) {
                     path = application.path.toList()
-
                 } else {
                     stopLocationService()
                     finish()
@@ -150,23 +139,18 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
         }
     }
 
-
-
     private fun setUp(): Application {
-
         val application = application as Application
         stationData = application.stationData
         readAndWriteData = application.readAndWriteData
         path = application.path.toList()
-        indicator =application.indicator
+        indicator = application.indicator
         language = application.language
         loadLocale()
         return application
     }
 
-
     private fun loadLocale() {
-
         val locale = Locale(language)
         Locale.setDefault(locale)
 
@@ -178,8 +162,6 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
         baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
     }
 
-
-
     override fun onDestroy() {
         items.clear()
         adapter.clear()
@@ -187,15 +169,12 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
         super.onDestroy()
     }
 
-
     override fun onBackPressed() {
-
         readAndWriteData.saveListData(this, path.toTypedArray(), "path")
         val a = Intent(this, Home::class.java)
         startActivity(a)
         super.onBackPressed()
     }
-
 
     fun cancel(view: View) {
         cancelProcess()
@@ -203,22 +182,21 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
         startActivity(a)
     }
 
-
-
     private fun setDataInRecycler(station: String) {
         val layoutManager = binding.recyclerView.layoutManager as LinearLayoutManager
         items.clear()
         val intersections = Direction(stationData).findIntersections(path)
-        var line=""
+        var line = ""
         items.addAll(path.mapIndexed { index, stationName ->
             val isCurrentStation = stationName == station
-            if(index != path.size-1)
-            { line = Direction(stationData).findLine(path[index] ,path[index+1] )}
+            if (index != path.size - 1) {
+                line = Direction(stationData).findLine(path[index], path[index + 1])
+            }
             val stationItem = when {
-                index == 0 -> StationItem(stationName, start = true, stationState = isCurrentStation, context = this, line =line )
+                index == 0 -> StationItem(stationName, start = true, stationState = isCurrentStation, context = this, line = line)
                 index == path.size - 1 -> StationItem(stationName, end = true, stationState = isCurrentStation, context = this, line = line)
-                stationName in intersections -> StationItem(stationName, change = true, stationState = isCurrentStation, context = this , line = line)
-                else -> StationItem(stationName, stationState = isCurrentStation, context = this )
+                stationName in intersections -> StationItem(stationName, change = true, stationState = isCurrentStation, context = this, line = line)
+                else -> StationItem(stationName, stationState = isCurrentStation, context = this)
             }
             stationItem
         })
@@ -230,23 +208,15 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
         layoutManager.scrollToPosition(state)
     }
 
-
     override fun onResume() {
         super.onResume()
-        if (readAndWriteData.getSimpleData(this,"indicator")) {
-            LocationService.setLocationUpdateListener(this)
-        }
-        else
-        {
+        if (! readAndWriteData.getSimpleData(this, "indicator")) {
             val a = Intent(this, Home::class.java)
             startActivity(a)
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        LocationService.setLocationUpdateListener(null)
-    }
+
 
     private fun checkPermissionsAndStartService() {
         if (Permissions(this).hasRequiredPermissions()) {
@@ -255,7 +225,6 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
             Permissions(this).requestLocationPermissions(permissionLauncher)
         }
     }
-
 
     private fun startLocationService() {
         val serviceIntent = Intent(this, LocationService::class.java)
@@ -269,38 +238,14 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
     }
 
 
+
+
+
     private fun stopLocationService() {
         val serviceIntent = Intent(this, LocationService::class.java)
         stopService(serviceIntent)
     }
 
-
-
-    override fun onLocationChanged(location: Location) {
-        runOnUiThread {
-
-            nearestStation = LocationCalculations().nearestStationPath(stationData,1000F,path, location.latitude, location.longitude)
-
-            if ( nearestStation.isNotEmpty() && previousStation != nearestStation ) {
-
-                if (previousStation == "") {
-                    previousStation = nearestStation
-                }
-                if (path.indexOf(previousStation) <= path.indexOf(nearestStation) ) {
-                    setDataInRecycler(nearestStation)
-                    previousStation = nearestStation
-
-                    if (nearestStation == path[path.size-1] )
-                    {
-                        cancelProcess()
-
-                    }
-                }
-
-            }
-
-        }
-    }
 
     private fun cancelProcess() {
         readAndWriteData.saveSimpleData(this, false, "indicator")
@@ -308,5 +253,45 @@ class TripProgress : AppCompatActivity(), LocationService.LocationUpdateListener
         readAndWriteData.saveID(this, 0, "previousTP")
     }
 
+    private fun startLocation() {
+        airLocation = AirLocation(this, this, false, 5000)
+        airLocation.start()
+    }
 
+
+    override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
+        if (locationFailedEnum == AirLocation.LocationFailedEnum.HIGH_PRECISION_LOCATION_NA_TRY_AGAIN_PREFERABLY_WITH_NETWORK_CONNECTIVITY)
+        {
+            startLocation()
+        }
+    }
+
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+
+
+    override fun onSuccess(locations: ArrayList<Location>) {
+
+        nearestStation = LocationCalculations().nearestStationPath(stationData, 300F, path, locations[0].latitude, locations[0].longitude)
+        Log.d("LocationService","${locations[0].latitude} , ${locations[0].longitude}")
+
+        if (nearestStation.isNotEmpty() && previousStation != nearestStation) {
+            if (previousStation == "") {
+                previousStation = nearestStation
+            }
+            if (path.indexOf(previousStation) <= path.indexOf(nearestStation)) {
+                runOnUiThread {
+                    setDataInRecycler(nearestStation)
+                }
+                previousStation = nearestStation
+
+                if (nearestStation == path[path.size - 1]) {
+                    cancelProcess()
+                }
+            }
+        }
+    }
 }

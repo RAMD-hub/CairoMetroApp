@@ -23,8 +23,11 @@ import android.content.res.Configuration
 import android.util.Log
 import com.ramd.cairoMetro.coreApp.Application
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ramd.cairoMetro.ui.customViews.CustomArrayAdapter
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class Home : AppCompatActivity(),AirLocation.Callback {
     lateinit var binding: ActivityHomeBinding
@@ -36,12 +39,13 @@ class Home : AppCompatActivity(),AirLocation.Callback {
     lateinit var home: SharedPreferences
     var currentLocation = mutableListOf<Double>()
     var path= emptyList<String>()
-    var currentStation ="" ; var indicator =false
+    var currentStation ="" ; var indicator = false
     var language="" ; var previousStation=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setupApplication()
+        val application = application as Application
+        setupApplication(application)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding= ActivityHomeBinding.inflate(layoutInflater)
@@ -56,30 +60,24 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
         startAndEndAdapter()
 
-        getPreviousStation()
-
+        getPreviousStation(application)
 
         startLocation()
+
 
     }
 
     private fun startLocation() {
-        airLocation = AirLocation(this, this, false, 3000)
+        airLocation = AirLocation(this, this, false, 5000)
         airLocation.start()
     }
 
 
-    private fun getPreviousStation() {
-        val getID = readAndWriteData.getID(this, "previousService")
+    private fun getPreviousStation(application: Application) {
+        val getID = application.previousStationID
         if (getID != 0 && indicator) {
             previousStation = stationData.firstOrNull { it.id == getID }?.name ?: ""
-        } else if (!indicator) {
-            readAndWriteData.saveID(this, 0, "previousService")
-
         }
-
-
-        Log.d("LocationServiceTRIP", "${indicator} , PREVIOUS STATION in home $previousStation")
     }
 
 
@@ -92,8 +90,7 @@ class Home : AppCompatActivity(),AirLocation.Callback {
     }
 
 
-    private fun setupApplication() {
-        val application = application as Application
+    private fun setupApplication(application: Application) {
         stationData = application.stationData
         readAndWriteData = application.readAndWriteData
 
@@ -112,20 +109,17 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
     fun changeLanguage(view: View) {
 
-        if ( ! readAndWriteData.getSimpleData(this,"indicator")) {
-            readAndWriteData.homeDataSave(this,stationData,
-                shortRoute = binding.lessTransfer.isChecked,
-                arrival = binding.arrival.text.toString(),
-                start = binding.start.text.toString(),
-            )
-            showLanguageDialog()
-        }
-        else
-        {
-            readAndWriteData.extractPathId(this,path,stationData)
-            showLanguageDialog()
-            readAndWriteData.saveSimpleData(this,true,"languageChange")
-        }
+        showLanguageDialog()
+
+    }
+
+    private fun saveStations() {
+        readAndWriteData.homeDataSave(
+            this, stationData,
+            shortRoute = binding.lessTransfer.isChecked,
+            arrival = binding.arrival.text.toString(),
+            start = binding.start.text.toString(),
+        )
     }
 
     private fun showLanguageDialog() {
@@ -137,7 +131,17 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
         builder.setItems(languages) { _, which ->
             val selectedLanguage = languageCodes[which]
-            switchLanguage(selectedLanguage)
+            if(selectedLanguage != language) {
+                saveStations()
+                switchLanguage(selectedLanguage)
+            }
+            if (selectedLanguage != language && indicator)
+            {
+                readAndWriteData.extractPathId(this,path,stationData)
+                readAndWriteData.saveSimpleData(this,true,"languageChange")
+
+            }
+
         }
 
         builder.show()
@@ -212,19 +216,20 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
         val shortRoute =binding.lessTransfer.isChecked
 
-        val station = location.nearestLocation(stationData,0.5F,currentLocation[0],currentLocation[1])
-
+        var station =""
+        if(currentLocation.isNotEmpty()) {
+            station =
+                location.nearestLocation(stationData, 0.2F, currentLocation[0], currentLocation[1])
+        }
         val a = Intent(this, AllRoutes::class.java)
         a.putExtra("startStation",start)
         a.putExtra("arrivalStation",arrival)
         a.putExtra("shortType",shortRoute)
-        a.putExtra("tripAvailability",station.isNotEmpty())
+        a.putExtra("tripAvailability",station.isNotEmpty() )
         startActivity(a)
     }
 
     fun showNearest(view: View) {
-        val airLocation2 = AirLocation(this, this, true)
-        airLocation2.start()
 
         if(currentLocation.isNotEmpty()) {
             val station =
@@ -232,8 +237,8 @@ class Home : AppCompatActivity(),AirLocation.Callback {
             if (station.isEmpty())
                 showToast(getString(R.string.no_near_station_from_your_location))
             else binding.start.setText(station, false)
-
         }
+
     }
 
     fun map(view: View) {
@@ -308,53 +313,59 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
     private fun stationDialog () {
 
-        if(  indicator && path.isNotEmpty()) {
-            currentStation = location.nearestStationPath(stationData,1000F,path,currentLocation[0],currentLocation[1])
+        if(  indicator && path.isNotEmpty() ) {
 
-            Log.d("LocationServiceTRIP", "${indicator} , current STATION in home $currentStation")
+            currentStation = location.nearestStationPath(stationData,300F,path,currentLocation[0],currentLocation[1])
 
             if (currentStation.isNotEmpty()) {
-
                 binding.status.isVisible = true
 
-                if(previousStation =="" || path.indexOf(previousStation) > path.indexOf(currentStation))
+                if(previousStation =="" )
                 { previousStation =currentStation}
 
-
                 if (path.indexOf(previousStation) <= path.indexOf(currentStation)) {
+                    previousStation = currentStation
+                    Log.d("LocationServiceTRIP", "${indicator} , PREVIOUS STATION in home inside$previousStation")
 
-                    binding.currentStation.text = currentStation
-                    val stationIndex = path.indexOf(currentStation)
-                    if (stationIndex < path.size - 1) {
-                        binding.nextStation.text = path[stationIndex + 1]
-                    } else {
-                        binding.nextStation.text = ""
-                    }
-                    if (stationIndex > 0) {
-                        binding.perviousStation.text = path[stationIndex - 1]
-                    } else {
-                        binding.perviousStation.text = ""
-                    }
+                    uiForLocationUpdate()
 
-                    if (currentStation == path.last()) {
+                    if (previousStation == path.last()) {
                         indicator = false
                         readAndWriteData.saveSimpleData(this, false, "indicator")
                         binding.status.visibility = View.GONE;
                         readAndWriteData.saveID(this, 0,"previousHome")
 
                     }
-
-                    previousStation = currentStation
                 }
-
+            }
+            else
+            {
+                if(previousStation == ""){
+                    previousStation = path[0]}
+                binding.status.isVisible = true
+                uiForLocationUpdate()
             }
         }
-
         val id = stationData.firstOrNull{it.name== previousStation }?.id
         if(id != null) {
             readAndWriteData.saveID(this, id,"previousHome")
         }
 
+    }
+
+    private fun uiForLocationUpdate() {
+        binding.currentStation.text = previousStation
+        val stationIndex = path.indexOf(previousStation)
+        if (stationIndex < path.size - 1) {
+            binding.nextStation.text = path[stationIndex + 1]
+        } else {
+            binding.nextStation.text = ""
+        }
+        if (stationIndex > 0) {
+            binding.perviousStation.text = path[stationIndex - 1]
+        } else {
+            binding.perviousStation.text = ""
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -376,10 +387,19 @@ class Home : AppCompatActivity(),AirLocation.Callback {
     }
 
     override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
-//        showToast("$locationFailedEnum")
-        startLocation()
-    }
+        if (locationFailedEnum == AirLocation.LocationFailedEnum.HIGH_PRECISION_LOCATION_NA_TRY_AGAIN_PREFERABLY_WITH_NETWORK_CONNECTIVITY)
+             {
+                lifecycleScope.launch {
+                    delay(10000)
+                    if (currentLocation.isEmpty() ) {
+                        showToast(getString(R.string.make_sure_you_are_connect_to_internet))
+                    }
+                    startLocation()
+                }
 
+            }
+
+    }
 
 
     private fun homeDataLoadLanguageChange(){

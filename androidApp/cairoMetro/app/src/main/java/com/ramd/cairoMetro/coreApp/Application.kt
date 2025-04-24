@@ -17,6 +17,7 @@ class Application : Application() , SharedPreferences.OnSharedPreferenceChangeLi
     var indicator = false
     var path = emptyArray<String>()
     var language = ""
+    var previousStationID =0
 
     override fun onCreate() {
         super.onCreate()
@@ -29,8 +30,10 @@ class Application : Application() , SharedPreferences.OnSharedPreferenceChangeLi
         indicator = file.getBoolean("indicator", false)
 
         getList()
+
         language = file.getString("My_Lang", "en") ?: "en"
 
+         previousStationID  =file.getInt("previousService",0)
 
         try {
             val inputStream = this.assets.open("metro_$language.json")
@@ -63,7 +66,6 @@ class Application : Application() , SharedPreferences.OnSharedPreferenceChangeLi
             "My_Lang" -> {
                 if (sharedPreferences != null) {
                     language = file.getString("My_Lang", "en") ?: "en"
-//                    Log.d("lan=>" , "$language")
                     try {
                         val inputStream = this.assets.open("metro_$language.json")
                         val inputStreamReader = InputStreamReader(inputStream)
@@ -75,9 +77,11 @@ class Application : Application() , SharedPreferences.OnSharedPreferenceChangeLi
 
                 }
             }
-
-
-
+            "previousService" ->{
+                if (sharedPreferences != null) {
+                    previousStationID = sharedPreferences.getInt(key, 0)
+                }
+            }
         }
 
     }

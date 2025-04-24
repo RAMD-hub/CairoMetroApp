@@ -46,7 +46,6 @@
                     android:id="@+id/notesText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:background="#81C883"
                     android:gravity="center"
@@ -57,103 +56,103 @@
                     android:textStyle="bold"
                     android:visibility="visible" />
 
-                <LinearLayout
-                    android:id="@+id/control"
-                    android:layout_width="match_parent"
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/control"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/backBtn"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="32dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:backgroundTint="#FEA613"
+                    android:enabled="false"
+                    android:onClick="back"
+                    android:text="@string/back"
+                    android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/backBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="32dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#FEA613"
-                        android:enabled="false"
-                        android:onClick="back"
-                        android:text="@string/back"
-                        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/numberText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_box"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="2/6" />
 
-                    <TextView
-                        android:id="@+id/numberText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_box"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:text="2/6" />
+                <Button
+                    android:id="@+id/nextBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#FEA613"
+                    android:onClick="next"
+                    android:text="@string/next"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-                    <Button
-                        android:id="@+id/nextBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#FEA613"
-                        android:onClick="next"
-                        android:text="@string/next"
-                        android:textStyle="bold" />
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/stationText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="left"
+                    android:layout_marginStart="32dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:background="@drawable/round_box"
+                    android:fontFamily="@font/alatsi"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    tools:text="15 station" />
 
-                    <TextView
-                        android:id="@+id/stationText"
-                        android:layout_width="match_parent"
-                        android:layout_height="75dp"
-                        android:layout_gravity="left"
-                        android:layout_marginStart="32dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_box"
-                        android:fontFamily="@font/alatsi"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        tools:text="15 station" />
+                <TextView
+                    android:id="@+id/timeText"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_box"
+                    android:fontFamily="@font/alatsi"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    tools:text="30 minute" />
 
-                    <TextView
-                        android:id="@+id/timeText"
-                        android:layout_width="match_parent"
-                        android:layout_height="75dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_box"
-                        android:fontFamily="@font/alatsi"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        tools:text="30 minute" />
-
-                    <TextView
-                        android:id="@+id/priceText"
-                        android:layout_width="match_parent"
-                        android:layout_height="75dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_box"
-                        android:fontFamily="@font/alatsi"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        tools:text="10 EG" />
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/priceText"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_box"
+                    android:fontFamily="@font/alatsi"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    tools:text="10 EG" />
 
             </LinearLayout>
 
