@@ -6,12 +6,7 @@ import com.ramd.cairoMetro.data.DataItem
 class PathsCalculations (private val data:Array<DataItem>){
 
 
-    fun sortingByStations(paths:List<List<String>>): List<List<String>>{
 
-           val sortedPath = paths.sortedBy { it.size }
-        return sortedPath
-
-    }
 
     fun findAllPaths(start: String, end: String): List<List<String>> {
 

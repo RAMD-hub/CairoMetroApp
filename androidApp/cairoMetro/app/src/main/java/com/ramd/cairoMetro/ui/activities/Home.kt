@@ -109,20 +109,17 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
     fun changeLanguage(view: View) {
 
-        if ( ! readAndWriteData.getSimpleData(this,"indicator")) {
-            readAndWriteData.homeDataSave(this,stationData,
-                shortRoute = binding.lessTransfer.isChecked,
-                arrival = binding.arrival.text.toString(),
-                start = binding.start.text.toString(),
-            )
-            showLanguageDialog()
-        }
-        else
-        {
-            readAndWriteData.extractPathId(this,path,stationData)
-            showLanguageDialog()
-            readAndWriteData.saveSimpleData(this,true,"languageChange")
-        }
+        showLanguageDialog()
+
+    }
+
+    private fun saveStations() {
+        readAndWriteData.homeDataSave(
+            this, stationData,
+            shortRoute = binding.lessTransfer.isChecked,
+            arrival = binding.arrival.text.toString(),
+            start = binding.start.text.toString(),
+        )
     }
 
     private fun showLanguageDialog() {
@@ -135,8 +132,16 @@ class Home : AppCompatActivity(),AirLocation.Callback {
         builder.setItems(languages) { _, which ->
             val selectedLanguage = languageCodes[which]
             if(selectedLanguage != language) {
+                saveStations()
                 switchLanguage(selectedLanguage)
             }
+            if (selectedLanguage != language && indicator)
+            {
+                readAndWriteData.extractPathId(this,path,stationData)
+                readAndWriteData.saveSimpleData(this,true,"languageChange")
+
+            }
+
         }
 
         builder.show()
@@ -389,8 +394,9 @@ class Home : AppCompatActivity(),AirLocation.Callback {
                     if (currentLocation.isEmpty() ) {
                         showToast(getString(R.string.make_sure_you_are_connect_to_internet))
                     }
+                    startLocation()
                 }
-                startLocation()
+
             }
 
     }

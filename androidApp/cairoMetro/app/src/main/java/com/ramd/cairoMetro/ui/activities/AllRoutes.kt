@@ -37,7 +37,7 @@ class AllRoutes : AppCompatActivity() {
     var adapter = GroupieAdapter()
     var index =0  ; var indexPlus = 1 ;var  indexMins = 0
     var language="" ;
-    val direction = Direction(stationData)
+    var direction = Direction(stationData)
 
     @SuppressLint("SetTextI18n", "StringFormatMatches")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,9 +96,12 @@ class AllRoutes : AppCompatActivity() {
                 binding.control.isVisible= false
             }
         }
+
+        direction = Direction(stationData)
+
         sorting = if (!shortType) {
 
-            pathsCalculations.sortingByStations(paths)
+            direction.sortingByStations(paths)
 
         } else {
             direction.sortingByIntersections(paths)

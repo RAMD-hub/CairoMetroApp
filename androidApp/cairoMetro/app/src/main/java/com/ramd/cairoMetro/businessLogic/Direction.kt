@@ -1,6 +1,7 @@
 package com.ramd.cairoMetro.businessLogic
 
 import android.content.Context
+import android.util.Log
 import com.ramd.cairoMetro.R
 import com.ramd.cairoMetro.data.DataItem
 
@@ -9,8 +10,15 @@ class Direction( val data:Array<DataItem> ) {
 
     fun sortingByIntersections(paths: List<List<String>>): List<List<String>> {
 
-        val sortedPaths = paths.sortedBy { findIntersections(it).size }
+        val sortedPaths = paths.sortedWith(compareBy<List<String>> { findIntersections(it).size}.thenBy{it.size})
         return sortedPaths
+    }
+
+    fun sortingByStations(paths:List<List<String>>): List<List<String>>{
+
+        val sortedPaths = paths.sortedWith(compareBy<List<String>> { it.size}.thenBy{findIntersections(it).size})
+        return sortedPaths
+
     }
 
     fun findLine(first: String, second: String): String {
@@ -45,6 +53,7 @@ class Direction( val data:Array<DataItem> ) {
                 }
             }
         }
+
         return intersections
 
     }
