@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../core/constants/constant.dart';
 
 class CustomIcon extends StatelessWidget {
   const CustomIcon({
     super.key,
-    this.color = kPrimaryColor,
+    this.color = const Color(0xFFFEA613),
     required this.icon,
     this.iconSize = 0,
+    this.onPressed,
   });
 
   final Color color;
   final IconData icon;
   final double iconSize;
+  final Function()? onPressed;
   @override
   Widget build(BuildContext context) {
-    return Icon(
-      icon,
-      color: color,
-      size: iconSize == 0 ? (Get.width * 0.07).clamp(14.0, 36.0) : iconSize,
-    );
+    return IconButton(
+        onPressed: onPressed,
+        icon: Icon(
+          icon,
+          color: color,
+          size: iconSize == 0
+              ? (MediaQuery.sizeOf(context).width * 0.07).clamp(14.0, 36.0)
+              : iconSize,
+        ));
   }
 }

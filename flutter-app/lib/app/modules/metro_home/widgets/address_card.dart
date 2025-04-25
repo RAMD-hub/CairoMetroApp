@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../controllers/metro_controller.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../shared/widgets/custom_button.dart';
 import '../../../shared/widgets/custom_text.dart';
 import '../../../shared/widgets/custom_text_field.dart';
 
 class AddressCard extends StatelessWidget {
-  const AddressCard({
+  AddressCard({
     super.key,
   });
-
+  final addressCont = TextEditingController();
+  final MetroController metroController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -35,9 +38,19 @@ class AddressCard extends StatelessWidget {
             CustomTextField(
               hint: 'Address',
               suffixIcon: Icons.location_city_outlined,
-              textController: TextEditingController(),
+              textController: addressCont,
             ),
-            CustomButton(onPressed: () {}, btnName: 'Search')
+            CustomButton(
+              onPressed: () {
+                if (addressCont.text.isEmpty) {
+                  Get.snackbar('Error', 'The address is Empty');
+                }
+                if (addressCont.text.isNotEmpty) {
+                  metroController.locationFromAddress(addressCont.text);
+                }
+              },
+              btnName: 'Search',
+            )
           ],
         ),
       ),

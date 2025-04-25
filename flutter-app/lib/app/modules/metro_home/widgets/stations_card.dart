@@ -17,6 +17,7 @@ class StationsCard extends StatelessWidget {
   final startCont = TextEditingController();
   final endCont = TextEditingController();
   final temp = ''.obs;
+  final isGetNearestStation = false.obs;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -35,9 +36,21 @@ class StationsCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
           children: [
-            CustomDropDownMenu(
-              isSwap: isSwap,
-              startCont: startCont,
+            Row(
+              children: [
+                Expanded(
+                  child: CustomDropDownMenu(
+                    isSwap: isSwap,
+                    startCont: startCont,
+                  ),
+                ),
+                CustomIcon(
+                  icon: Icons.location_on_outlined,
+                  onPressed: () {
+                    metroController.getNearestStation(true.obs);
+                  },
+                ),
+              ],
             ),
             IconButton(
               onPressed: () {

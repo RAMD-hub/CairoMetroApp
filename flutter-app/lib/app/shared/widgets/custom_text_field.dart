@@ -24,6 +24,7 @@ class CustomTextField extends StatelessWidget {
       controller: textController,
       onEditingComplete: onEditingComplete,
       focusNode: focusNode,
+      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         suffixIcon: CustomIcon(icon: suffixIcon),
         label: CustomText(

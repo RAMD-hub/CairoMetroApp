@@ -1,13 +1,16 @@
 import 'package:cairo_metro_flutter/core/algorithms/path_finder.dart';
 import 'package:cairo_metro_flutter/core/algorithms/sorted_paths.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../app/data/models/metro_path.dart';
 import '../app/data/repositories/metro_repository.dart';
 import '../core/algorithms/exchange_stations.dart';
 import '../core/algorithms/ticket_service.dart';
+import '../core/services/current_location.dart';
 
 class MetroController extends GetxController {
   MetroController({
+    required this.currentLocation,
     required this.pathFinder,
     required this.ticketService,
     required this.sortedPaths,
@@ -19,6 +22,7 @@ class MetroController extends GetxController {
   final TicketService ticketService;
   final PathFinder pathFinder;
   final SortedPaths sortedPaths;
+  final CurrentLocation currentLocation;
   final RxList<String> stationsNames = <String>[].obs;
   final startStation = ''.obs;
   final endStation = ''.obs;
@@ -26,6 +30,8 @@ class MetroController extends GetxController {
   final allPaths = <List<String>>[].obs;
   final allPathsByExchangedNum = <List<String>>[].obs;
   final metroPaths = <MetroPath>[].obs;
+  final nearestStation = ''.obs;
+  final distance = ''.obs;
   final getPaths =
       false.obs; // دا زي متغير كدا لما هعمله Listener لاستدعاء داله allPaths
   @override
@@ -78,6 +84,42 @@ class MetroController extends GetxController {
 
   void updateSelectedTransfer(String value) {
     selectedTransfers.value = value;
+  }
+
+  Future<void> getNearestStation(RxBool isNearStation) async {
+    final location = await currentLocation.getCurrentLocation();
+    if (isNearStation.value == true) {
+      nearestStation.value = currentLocation
+          .distanceBetweenStations(
+            metroRepository.stations,
+            location,
+          )
+          .station
+          .name;
+      // print('isNearStation${nearestStation.value}');
+      startStation.value = nearestStation.value;
+      return;
+    }
+
+    final stationLatLong = currentLocation
+        .distanceBetweenStations(metroRepository.stations, location)
+        .station
+        .coordinates;
+    final Uri url = Uri.parse(
+      'geo:0,0?q=${stationLatLong[0]} ${stationLatLong[1]}',
+    );
+    // print("##########${nearestStation.value}");
+    launchUrl(url);
+  }
+
+  Future<void> locationFromAddress(String address) async {
+    final addressListOfLocation =
+        await currentLocation.getAddressLatLong(address);
+
+    final nearestStationByAddress = currentLocation.distanceBetweenStations(
+        metroRepository.stations, addressListOfLocation);
+    endStation.value = nearestStationByAddress.station.name;
+    print("###########${endStation.value}");
   }
 
   @override
