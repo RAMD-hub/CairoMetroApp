@@ -42,10 +42,10 @@ class CustomRadioButton extends StatelessWidget {
                 color: isSelected ? kPrimaryColor : Colors.transparent,
               ),
               child: isSelected
-                  ? CustomIcon(
-                      icon: Icons.check,
+                  ? Icon(
+                      Icons.check,
                       color: Colors.white,
-                      iconSize: 16,
+                      size: 16,
                     )
                   : null,
             ),
