@@ -5,7 +5,7 @@ import '../core/algorithms/exchange_stations.dart';
 import '../core/algorithms/path_finder.dart';
 import '../core/algorithms/sorted_paths.dart';
 import '../core/algorithms/ticket_service.dart';
-import '../core/services/current_location.dart';
+import '../core/services/location_services.dart';
 
 class MetroBinding extends Bindings {
   @override
@@ -15,7 +15,7 @@ class MetroBinding extends Bindings {
     Get.lazyPut(() => SortedPaths());
     Get.lazyPut(() => ExchangeStation(metroRepository: Get.find()));
     Get.lazyPut(() => MetroRepository());
-    Get.lazyPut(() => CurrentLocation());
+    Get.lazyPut(() => LocationService());
     Get.find<MetroRepository>().loadJsonData();
     Get.lazyPut(
       () => MetroController(
@@ -24,7 +24,7 @@ class MetroBinding extends Bindings {
         sortedPaths: Get.find(),
         exchangeStation: Get.find(),
         metroRepository: Get.find(),
-        currentLocation: Get.find(),
+        locationService: Get.find(),
       ),
     );
   }

@@ -3,14 +3,15 @@ import 'package:cairo_metro_flutter/core/algorithms/sorted_paths.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../app/data/models/metro_path.dart';
+import '../app/data/models/station.dart';
 import '../app/data/repositories/metro_repository.dart';
 import '../core/algorithms/exchange_stations.dart';
 import '../core/algorithms/ticket_service.dart';
-import '../core/services/current_location.dart';
+import '../core/services/location_services.dart';
 
 class MetroController extends GetxController {
   MetroController({
-    required this.currentLocation,
+    required this.locationService,
     required this.pathFinder,
     required this.ticketService,
     required this.sortedPaths,
@@ -22,13 +23,15 @@ class MetroController extends GetxController {
   final TicketService ticketService;
   final PathFinder pathFinder;
   final SortedPaths sortedPaths;
-  final CurrentLocation currentLocation;
+  final LocationService locationService;
   final RxList<String> stationsNames = <String>[].obs;
   final startStation = ''.obs;
   final endStation = ''.obs;
   final selectedTransfers = 'Less Stations'.obs;
   final allPaths = <List<String>>[].obs;
   final allPathsByExchangedNum = <List<String>>[].obs;
+  final userSelectedPath = <String>[].obs;
+  final userSelectedPathToMetroStation = <MetroStation>[].obs;
   final metroPaths = <MetroPath>[].obs;
   final nearestStation = ''.obs;
   final distance = ''.obs;
@@ -87,9 +90,9 @@ class MetroController extends GetxController {
   }
 
   Future<void> getNearestStation(RxBool isNearStation) async {
-    final location = await currentLocation.getCurrentLocation();
+    final location = await locationService.getCurrentLocation();
     if (isNearStation.value == true) {
-      nearestStation.value = currentLocation
+      nearestStation.value = locationService
           .distanceBetweenStations(
             metroRepository.stations,
             location,
@@ -101,7 +104,7 @@ class MetroController extends GetxController {
       return;
     }
 
-    final stationLatLong = currentLocation
+    final stationLatLong = locationService
         .distanceBetweenStations(metroRepository.stations, location)
         .station
         .coordinates;
@@ -114,12 +117,26 @@ class MetroController extends GetxController {
 
   Future<void> locationFromAddress(String address) async {
     final addressListOfLocation =
-        await currentLocation.getAddressLatLong(address);
+        await locationService.getAddressLatLong(address);
 
-    final nearestStationByAddress = currentLocation.distanceBetweenStations(
+    final nearestStationByAddress = locationService.distanceBetweenStations(
         metroRepository.stations, addressListOfLocation);
     endStation.value = nearestStationByAddress.station.name;
     print("###########${endStation.value}");
+  }
+
+  void metroStationFromStationName() {
+    userSelectedPathToMetroStation.clear();
+    for (var stationName in userSelectedPath) {
+      userSelectedPathToMetroStation.add(
+        metroRepository.findStation(stationName),
+      );
+    }
+  }
+
+  startTracking() {
+    metroStationFromStationName();
+    locationService.startTracking(userSelectedPathToMetroStation);
   }
 
   @override

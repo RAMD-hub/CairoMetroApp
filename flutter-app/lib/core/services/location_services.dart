@@ -1,21 +1,19 @@
+import 'dart:async';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-
 import '../../app/data/models/address_latlong.dart';
 import '../../app/data/models/nearest_station_result.dart';
 import '../../app/data/models/station.dart';
 
-class CurrentLocation {
-  Future<AddressLatLong> getCurrentLocation() async {
+class LocationService {
+  Future<void> permissions() async {
     bool serviceEnabled;
     LocationPermission permission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       Get.snackbar('Metro Cairo ', 'Location services are disabled.');
-
-      // return null ;
     }
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -32,6 +30,10 @@ class CurrentLocation {
         // return null  ;
       }
     }
+  }
+
+  Future<AddressLatLong> getCurrentLocation() async {
+    await permissions();
     final location = await Geolocator.getCurrentPosition();
     return AddressLatLong(lat: location.latitude, long: location.longitude);
   }
@@ -52,6 +54,7 @@ class CurrentLocation {
   }
 
   Future<AddressLatLong> getAddressLatLong(String address) async {
+    await permissions();
     try {
       List<Location> locations = await locationFromAddress(address);
       if (locations.isEmpty) {
@@ -64,5 +67,35 @@ class CurrentLocation {
     } catch (e) {
       throw Exception("فشل في تحويل العنوان إلى إحداثيات: $e");
     }
+  }
+
+  StreamSubscription<Position>? positionStream;
+
+  void startTracking(RxList<MetroStation> routeStations) async {
+    await permissions();
+    const LocationSettings locationSettings = LocationSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 10,
+    );
+
+    positionStream =
+        Geolocator.getPositionStream(locationSettings: locationSettings)
+            .listen((Position position) {
+      double userLat = position.latitude;
+      double userLng = position.longitude;
+
+      for (var station in routeStations) {
+        double distance = Geolocator.distanceBetween(
+          userLat,
+          userLng,
+          station.coordinates[0],
+          station.coordinates[1],
+        );
+        if (distance <= 200) {
+          print("قربت توصل لمحطة ${station.name}$distance");
+          break;
+        }
+      }
+    });
   }
 }
