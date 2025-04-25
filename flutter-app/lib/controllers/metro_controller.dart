@@ -6,7 +6,6 @@ import '../app/data/models/metro_path.dart';
 import '../app/data/repositories/metro_repository.dart';
 import '../core/algorithms/exchange_stations.dart';
 import '../core/algorithms/ticket_service.dart';
-import '../core/services/current_location.dart';
 
 class MetroController extends GetxController {
   MetroController({
