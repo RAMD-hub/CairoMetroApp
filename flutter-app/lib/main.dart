@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'bindings/metro_binding.dart';
+import 'core/bindings/metro_binding.dart';
 import 'core/routes/app_routes.dart';
 
 void main() {

@@ -1,8 +1,9 @@
-import 'package:cairo_metro_flutter/app/shared/widgets/routes/route_details_landscape_screen.dart';
-import 'package:cairo_metro_flutter/app/shared/widgets/routes/route_details_portrait_screen.dart';
-import 'package:cairo_metro_flutter/controllers/metro_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../core/controllers/metro_controller.dart';
+import '../../../../core/shared/widgets/routes/route_details_landscape_screen.dart';
+import '../../../../core/shared/widgets/routes/route_details_portrait_screen.dart';
 
 class MetroTripProgress extends StatefulWidget {
   const MetroTripProgress({super.key});

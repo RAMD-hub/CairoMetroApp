@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
-import '../app/data/repositories/metro_repository.dart';
+
+import '../../app/data/repositories/metro_repository.dart';
+import '../algorithms/exchange_stations.dart';
+import '../algorithms/path_finder.dart';
+import '../algorithms/sorted_paths.dart';
+import '../algorithms/ticket_service.dart';
 import '../controllers/metro_controller.dart';
-import '../core/algorithms/exchange_stations.dart';
-import '../core/algorithms/path_finder.dart';
-import '../core/algorithms/sorted_paths.dart';
-import '../core/algorithms/ticket_service.dart';
-import '../core/services/location_services.dart';
+import '../services/location_services.dart';
 
 class MetroBinding extends Bindings {
   @override

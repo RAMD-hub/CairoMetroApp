@@ -1,8 +1,8 @@
-import 'package:cairo_metro_flutter/app/shared/widgets/line_shape.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/constants/constant.dart';
-import '../../../shared/widgets/circle_shape.dart';
-import '../../../shared/widgets/custom_text.dart';
+import '../../../../core/shared/widgets/circle_shape.dart';
+import '../../../../core/shared/widgets/custom_text.dart';
+import '../../../../core/shared/widgets/line_shape.dart';
 
 class DialogCard extends StatelessWidget {
   final bool isCurrent;

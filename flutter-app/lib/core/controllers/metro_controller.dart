@@ -2,12 +2,13 @@ import 'package:cairo_metro_flutter/core/algorithms/path_finder.dart';
 import 'package:cairo_metro_flutter/core/algorithms/sorted_paths.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../app/data/models/metro_path.dart';
-import '../app/data/models/station.dart';
-import '../app/data/repositories/metro_repository.dart';
-import '../core/algorithms/exchange_stations.dart';
-import '../core/algorithms/ticket_service.dart';
-import '../core/services/location_services.dart';
+
+import '../../app/data/models/metro_path.dart';
+import '../../app/data/models/station.dart';
+import '../../app/data/repositories/metro_repository.dart';
+import '../algorithms/exchange_stations.dart';
+import '../algorithms/ticket_service.dart';
+import '../services/location_services.dart';
 
 class MetroController extends GetxController {
   MetroController({
@@ -122,7 +123,6 @@ class MetroController extends GetxController {
     final nearestStationByAddress = locationService.distanceBetweenStations(
         metroRepository.stations, addressListOfLocation);
     endStation.value = nearestStationByAddress.station.name;
-    print("###########${endStation.value}");
   }
 
   void metroStationFromStationName() {

@@ -1,8 +1,8 @@
-import 'package:cairo_metro_flutter/app/shared/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constants/constant.dart';
+import 'custom_text.dart';
 
 class CustomRadioButton extends StatelessWidget {
   final String text;

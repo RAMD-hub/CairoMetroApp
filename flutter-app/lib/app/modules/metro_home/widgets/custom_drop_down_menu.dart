@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/constant.dart';
-import '../../../../controllers/metro_controller.dart';
-import '../../../shared/widgets/custom_text.dart';
+import '../../../../core/controllers/metro_controller.dart';
+import '../../../../core/shared/widgets/custom_text.dart';
 
 class CustomDropDownMenu extends StatelessWidget {
   CustomDropDownMenu({

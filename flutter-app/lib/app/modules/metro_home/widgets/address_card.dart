@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controllers/metro_controller.dart';
 import '../../../../core/constants/constant.dart';
-import '../../../shared/widgets/custom_button.dart';
-import '../../../shared/widgets/custom_text.dart';
-import '../../../shared/widgets/custom_text_field.dart';
+import '../../../../core/controllers/metro_controller.dart';
+import '../../../../core/shared/widgets/custom_button.dart';
+import '../../../../core/shared/widgets/custom_text.dart';
+import '../../../../core/shared/widgets/custom_text_field.dart';
 
 class AddressCard extends StatelessWidget {
   AddressCard({

@@ -1,11 +1,11 @@
-import 'package:cairo_metro_flutter/app/shared/widgets/appbar/custom_appbar.dart';
-import 'package:cairo_metro_flutter/app/shared/widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/constant.dart';
-import '../../../../controllers/metro_controller.dart';
+import '../../../../core/controllers/metro_controller.dart';
+import '../appbar/custom_appbar.dart';
 import '../custom_button.dart';
 import '../custom_details_card.dart';
+import '../custom_snack_bar.dart';
 import '../custom_text.dart';
 import 'station_tile_list_view.dart';
 
