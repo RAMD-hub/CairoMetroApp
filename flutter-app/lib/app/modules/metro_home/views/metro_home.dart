@@ -26,9 +26,9 @@ class MetroHome extends StatelessWidget {
             ),
             child: Image.asset(
               kBackgroundImage,
-              fit: BoxFit.fill,
-              width: Get.width,
-              height: Get.height,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
             ),
           ),
           CustomScrollView(
@@ -71,7 +71,7 @@ class MetroHome extends StatelessWidget {
                       SizedBox(
                         height: 12,
                       ),
-                      DialogCard(),
+                      if (!metroController.positionStream()) DialogCard(),
                       StationsCard(),
                       AddressCard(),
                     ],

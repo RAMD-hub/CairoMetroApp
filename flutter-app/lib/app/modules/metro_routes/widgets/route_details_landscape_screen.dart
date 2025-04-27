@@ -46,8 +46,8 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
           child: Image.asset(
             kBackgroundImage,
             fit: BoxFit.fill,
-            width: Get.width,
-            height: Get.height,
+            width: double.infinity,
+            height: double.infinity,
           ),
         ),
         Padding(

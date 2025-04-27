@@ -34,7 +34,7 @@ class StationsCard extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          spacing: 16,
+          spacing: 12,
           children: [
             Row(
               children: [
