@@ -1,53 +1,42 @@
 package com.ramd.cairoMetro.businessLogic
 
-import com.ramd.cairoMetro.data.DataItem
+import android.annotation.SuppressLint
+import android.content.Context
+import com.ramd.cairoMetro.R
 
+class PathsCalculations {
 
-class PathsCalculations (private val data:Array<DataItem>){
-
-
-
-
-    fun findAllPaths(start: String, end: String): List<List<String>> {
-
-        val visited = mutableSetOf<String>()
-        val path = mutableListOf<String>()
-        val result = mutableListOf<List<String>>()
-        dfs(start, end, visited, path, result)
-        return result
-    }
-
-    private fun dfs(
-        current: String,
-        end: String,
-        visited: MutableSet<String>,
-        path: MutableList<String>,
-        result: MutableList<List<String>>
-    ){
-
-        visited.add(current)
-        path.add(current)
-
-        if (current == end) {
-            if(path !in result) {
-                result.add(ArrayList(path))
-            }
-        } else {
-
-            val currentClasses = data.filter { it.name == current }
-            for (currentClass in currentClasses) {
-                currentClass.neighbourStations.forEach { neighbor ->
-                    if (!visited.contains(neighbor)) {
-                        dfs(neighbor, end, visited, path, result)
-                    }
-                }
-            }
-
+   fun calculatePrice(path:List<String>): Int {
+       val stationCount = path.size
+        return when {
+            stationCount <= 9 -> 8
+            stationCount <= 16 -> 10
+            stationCount <= 23 -> 15
+            else -> 20
         }
-        visited.remove(current)
-        path.removeAt(path.size - 1)
 
     }
+
+
+    @SuppressLint("StringFormatMatches")
+
+    fun time(context: Context, path: List<String>): String {
+        val pathCount = path.size
+         if (pathCount * 3 / 60 >= 1) {
+          return  context.getString(R.string.time_hrs_mins, (pathCount * 3) / 60, (pathCount * 3) % 60)
+        }
+        if (pathCount * 3 % 60 in 3..10) {
+          return  context.getString(R.string.time_mins, (pathCount * 3) % 60)
+        }
+        else {
+          return  context.getString(R.string.time_min, ((pathCount * 3) % 60).toString())
+        }
+    }
+
+
+    @SuppressLint("StringFormatMatches")
+
+    fun countStations(context: Context, path: List<String>):String = context.getString(R.string.station_no, path.size)
 
 
 }

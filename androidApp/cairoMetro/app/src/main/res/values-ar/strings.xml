@@ -138,6 +138,7 @@
     <string name="then_come_out_wait_the_next_metro_and">" بعد ما توصل الكيت كات انزل وخد المترو الجاي و "</string>
     <string name="there_is_a_path_has_a_kit_kat_station_if_you_choose_that_path">فيه طريق من الطرق موجود فيه محطة الكيت كات لو هتختار الطريق ده </string>
     <string name="make_sure_you_are_connect_to_internet">اتاكد انك مشغل الانترنت </string>
+    <string name="time_two_mins">الوقت \n%1$s دقيقتين</string> />
 
 
 </resources>

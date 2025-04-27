@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 
 import androidx.activity.enableEdgeToEdge
@@ -19,8 +18,8 @@ import com.ramd.cairoMetro.coreApp.Application
 import com.ramd.cairoMetro.data.DataItem
 import com.ramd.cairoMetro.businessLogic.Direction
 import com.ramd.cairoMetro.data.DataHandling
+import com.ramd.cairoMetro.businessLogic.PathsAlgorithms
 import com.ramd.cairoMetro.businessLogic.PathsCalculations
-import com.ramd.cairoMetro.businessLogic.Price
 import com.ramd.cairoMetro.ui.customViews.StationItem
 import com.xwray.groupie.GroupieAdapter
 import java.util.ArrayList
@@ -33,7 +32,7 @@ class AllRoutes : AppCompatActivity() {
     var paths  = listOf<List<String>>()
     var sorting = emptyList<List<String>>()
     val items = mutableListOf<StationItem>()
-    val price = Price()
+    val pathsCalculations = PathsCalculations()
     var adapter = GroupieAdapter()
     var index =0  ; var indexPlus = 1 ;var  indexMins = 0
     var language="" ;
@@ -83,10 +82,10 @@ class AllRoutes : AppCompatActivity() {
         val shortType = intent.getBooleanExtra("shortType",false)
         val tripAvailability =  intent.getBooleanExtra("tripAvailability",false)
 
-        val pathsCalculations = PathsCalculations(stationData)
+        val pathsAlgorithms = PathsAlgorithms(stationData)
 
         if(!startStation.isNullOrEmpty() && !arrivalStation.isNullOrEmpty()) {
-            paths = pathsCalculations.findAllPaths(startStation,arrivalStation)
+            paths = pathsAlgorithms.findAllPaths(startStation,arrivalStation)
             if (paths.size > 1) {
                 binding.control.isVisible= true
                 binding.nextBtn.isEnabled=true
@@ -111,8 +110,7 @@ class AllRoutes : AppCompatActivity() {
 
         setRecyclerList(sorting[0])
         binding.notesText.isVisible =true
-        binding.priceText.text =
-            getString(R.string.price, price.calculatePrice(sorting[0].size))
+        binding.priceText.text = getString(R.string.price, pathsCalculations.calculatePrice(sorting[0]))
 
         binding.startBtn.isEnabled = tripAvailability
     }
@@ -215,23 +213,11 @@ class AllRoutes : AppCompatActivity() {
         adapter = GroupieAdapter()
         adapter.addAll(items)
         binding.StationsLV.adapter= adapter
-        val pathCount = path.size
-        binding.stationText.text= getString(R.string.station_no, pathCount)
-        if(pathCount*3/60 >= 1) {
-            binding.timeText.text =
-                getString(R.string.time_hrs_mins, (pathCount * 3) / 60 , (pathCount * 3) % 60)
-        }
-        else
-        {
-            if(pathCount*3%60 in 3..10)
-            {
-                binding.timeText.text = getString(R.string.time_mins, (pathCount * 3) % 60)
-            }
-            else {
-                binding.timeText.text =
-                    getString(R.string.time_min, ((pathCount * 3) % 60).toString())
-            }
-        }
+        binding.stationText.text= pathsCalculations.countStations(this,path)
+        binding.timeText.text = pathsCalculations.time(this,path)
     }
+
+
+
 
 }

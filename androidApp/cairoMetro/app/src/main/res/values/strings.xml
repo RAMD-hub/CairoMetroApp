@@ -69,12 +69,13 @@
     <string name="tawfikia">tawfikia</string>
     <string name="kit_kat">kit kat</string>
     <string name="ok">OK</string>
-    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_rod_el_farag_corridor">make sure to take metro in direction from kit kat to rod el farag corridor</string>
-    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_cairo_university_el_monib">make sure to take metro in direction from kit kat to cairo university (el monib)</string>
-    <string name="make_sure_to_take_metro_in_direction_from_rod_el_farag_corridor_to_kit_kat">make sure to take metro in direction from rod el farag corridor to kit kat</string>
-    <string name="make_sure_to_take_metro_in_direction_from_cairo_university_el_monib_to_kit_kat">make sure to take metro in direction from cairo university (el monib) to kit kat</string>
-    <string name="then_come_out_wait_the_next_metro_and">" after arriving kit kat station come out take the next metro and  "</string>
+    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_rod_el_farag_corridor">make sure to take metro in direction of rod el farag corridor</string>
+    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_cairo_university_el_monib">make sure to take metro in direction of cairo university (el monib)</string>
+    <string name="make_sure_to_take_metro_in_direction_from_rod_el_farag_corridor_to_kit_kat">make sure to take metro in direction of rod el farag corridor </string>
+    <string name="make_sure_to_take_metro_in_direction_from_cairo_university_el_monib_to_kit_kat">make sure to take metro in direction of cairo university (el monib) </string>
+    <string name="then_come_out_wait_the_next_metro_and">" after arriving kit kat station come out ,take the next metro and  "</string>
     <string name="there_is_a_path_has_a_kit_kat_station_if_you_choose_that_path">there is a path from paths has kit kat station , if you choose that path</string>
     <string name="make_sure_you_are_connect_to_internet">make sure you are connect to internet</string>
+    <string name="time_two_mins">Time \n%1$s mins</string> />
 
 </resources>

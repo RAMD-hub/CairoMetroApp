@@ -219,7 +219,7 @@ class Home : AppCompatActivity(),AirLocation.Callback {
         var station =""
         if(currentLocation.isNotEmpty()) {
             station =
-                location.nearestLocation(stationData, 0.2F, currentLocation[0], currentLocation[1])
+                location.nearestLocation(stationData, 1F, currentLocation[0], currentLocation[1])
         }
         val a = Intent(this, AllRoutes::class.java)
         a.putExtra("startStation",start)
@@ -312,7 +312,6 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
 
     private fun stationDialog () {
-
         if(  indicator && path.isNotEmpty() ) {
 
             currentStation = location.nearestStationPath(stationData,300F,path,currentLocation[0],currentLocation[1])
@@ -325,16 +324,12 @@ class Home : AppCompatActivity(),AirLocation.Callback {
 
                 if (path.indexOf(previousStation) <= path.indexOf(currentStation)) {
                     previousStation = currentStation
-                    Log.d("LocationServiceTRIP", "${indicator} , PREVIOUS STATION in home inside$previousStation")
-
                     uiForLocationUpdate()
-
                     if (previousStation == path.last()) {
                         indicator = false
                         readAndWriteData.saveSimpleData(this, false, "indicator")
                         binding.status.visibility = View.GONE;
                         readAndWriteData.saveID(this, 0,"previousHome")
-
                     }
                 }
             }

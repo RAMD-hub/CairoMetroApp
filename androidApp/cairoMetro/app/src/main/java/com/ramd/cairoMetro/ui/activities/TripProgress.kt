@@ -1,15 +1,11 @@
 package com.ramd.cairoMetro.ui.activities
 
 import android.annotation.SuppressLint
-import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
 import android.content.res.Configuration
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
-import android.os.IBinder
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -18,7 +14,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramd.cairoMetro.R
 import com.ramd.cairoMetro.ui.customViews.StationItem
@@ -30,10 +25,8 @@ import com.ramd.cairoMetro.businessLogic.Direction
 import com.ramd.cairoMetro.businessLogic.LocationCalculations
 import com.ramd.cairoMetro.services.LocationService
 import com.ramd.cairoMetro.systemIntegration.Permissions
-import com.ramd.cairoMetro.businessLogic.Price
+import com.ramd.cairoMetro.businessLogic.PathsCalculations
 import com.xwray.groupie.GroupieAdapter
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import mumayank.com.airlocationlibrary.AirLocation
 import java.util.Locale
 
@@ -88,21 +81,12 @@ class TripProgress : AppCompatActivity() , AirLocation.Callback{
     @SuppressLint("StringFormatMatches")
     private fun setUpActivityData() {
         setDataInRecycler(previousStation)
-        val pathCount = path.size
-        val price = Price()
-        binding.stationNumbers.text = getString(R.string.station_no, pathCount)
-        if (pathCount * 3 / 60 >= 1) {
-            binding.timeTrip.text =
-                getString(R.string.time_hrs_mins, (pathCount * 3) / 60, (pathCount * 3) % 60)
-        } else {
-            if (pathCount * 3 % 60 in 3..10) {
-                binding.timeTrip.text = getString(R.string.time_mins, (pathCount * 3) % 60)
-            } else {
-                binding.timeTrip.text =
-                    getString(R.string.time_min, ((pathCount * 3) % 60).toString())
-            }
-        }
-        binding.priceStation.text = getString(R.string.price, price.calculatePrice(pathCount))
+        val pathsCalculations = PathsCalculations()
+        binding.stationNumbers.text = pathsCalculations.countStations(this,path)
+
+        binding.timeTrip.text = pathsCalculations.time(this,path)
+
+        binding.priceStation.text = getString(R.string.price, pathsCalculations.calculatePrice(path))
     }
 
     private fun getCurrentStationFromHome(application: Application) {
