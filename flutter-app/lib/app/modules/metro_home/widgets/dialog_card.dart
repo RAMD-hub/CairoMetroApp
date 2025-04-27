@@ -1,17 +1,18 @@
+import 'package:cairo_metro_flutter/core/controllers/metro_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/shared/widgets/circle_shape.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
 import '../../../../core/shared/widgets/line_shape.dart';
 
 class DialogCard extends StatelessWidget {
-  final bool isCurrent;
+  final MetroController metroController = Get.find();
 
   DialogCard({
     super.key,
-    this.isCurrent = false,
   });
-  final List<String> path = [];
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -37,14 +38,20 @@ class DialogCard extends StatelessWidget {
                   txtColor: kPrimaryColor,
                 ),
                 Spacer(),
-                TextButton(
-                    onPressed: () {
-                      // Get.to(MetroTripProgress());
-                    },
-                    child: CustomText(
-                      text: 'View All',
-                      txtColor: kPrimaryColor,
-                    ))
+                Obx(() {
+                  return TextButton(
+                      onPressed: metroController.userSelectedPath.isNotEmpty
+                          ? () {
+                              Get.toNamed(
+                                '/MetroTripProgress',
+                              );
+                            }
+                          : null,
+                      child: CustomText(
+                        text: 'View All',
+                        txtColor: kPrimaryColor,
+                      ));
+                })
               ],
             ),
             const Divider(
@@ -61,29 +68,45 @@ class DialogCard extends StatelessWidget {
                   children: [
                     LineShape(),
                     CircleShape(
-                      circleColor: isCurrent ? kPrimaryColor : Colors.grey,
+                      circleColor: kPrimaryColor,
                     ),
                     LineShape(),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 11,
-                  children: [
-                    CustomText(
-                      text: path.isNotEmpty ? path[0] : '',
-                      txtColor: Colors.black,
-                    ),
-                    CustomText(
-                      text: path.isNotEmpty ? path[path.length ~/ 2] : '',
-                      txtFontWeight: FontWeight.bold,
-                      txtColor: kPrimaryColor,
-                    ),
-                    CustomText(
-                      text: path.isNotEmpty ? path[path.length] : '',
-                      txtColor: Colors.black,
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 11,
+                    children: [
+                      Obx(() {
+                        return CustomText(
+                          text: metroController.startStation.value.isNotEmpty
+                              ? '${metroController.startStation.value} => start station'
+                              : '',
+                          txtColor: Colors.white70,
+                          txtFontWeight: FontWeight.bold,
+                        );
+                      }),
+                      Obx(() {
+                        return CustomText(
+                          text: metroController.currentStation.value.isNotEmpty
+                              ? '${metroController.currentStation.value} => You are here now'
+                              : '',
+                          txtFontWeight: FontWeight.bold,
+                          txtColor: kPrimaryColor,
+                        );
+                      }),
+                      Obx(() {
+                        return CustomText(
+                          text: metroController.endStation.value.isNotEmpty
+                              ? '${metroController.endStation.value} => arrival station'
+                              : '',
+                          txtColor: Colors.white70,
+                          txtFontWeight: FontWeight.bold,
+                        );
+                      }),
+                    ],
+                  ),
                 ),
               ],
             ),

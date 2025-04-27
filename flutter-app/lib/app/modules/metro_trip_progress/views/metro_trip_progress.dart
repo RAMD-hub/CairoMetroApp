@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/controllers/metro_controller.dart';
-import '../../../../core/shared/widgets/routes/route_details_landscape_screen.dart';
-import '../../../../core/shared/widgets/routes/route_details_portrait_screen.dart';
+import '../widgets/tracking_landscape_screen.dart';
+import '../widgets/tracking_portrait_screen.dart';
 
 class MetroTripProgress extends StatefulWidget {
   const MetroTripProgress({super.key});
@@ -13,36 +13,39 @@ class MetroTripProgress extends StatefulWidget {
 }
 
 class _MetroTripProgressState extends State<MetroTripProgress> {
-  final List<List<String>> path = Get.arguments;
   final MetroController metroController = Get.find();
   @override
   void initState() {
     super.initState();
-    metroController.userSelectedPath.assignAll(path[0]);
-    metroController.startTracking();
+    if (metroController.positionStream()) {
+      Future.delayed(Duration.zero, () {
+        metroController.startTracking();
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<String> path = metroController.userSelectedPath;
     return Scaffold(
       body: OrientationBuilder(builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
-          return RouteDetailsPortraitScreen(
+          return TrackingPortraitScreen(
             paths: path,
-            isMetroRouteScreen: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
-              Get.offNamed('/MetroHome');
+              metroController.stopTracking();
+              Get.back();
             },
             bigButtonName: 'Cancel',
           );
         } else {
-          return RouteDetailsLandScapeScreen(
+          return TrackingLandScapeScreen(
             paths: path,
-            isMetroRouteScreen: false,
             btnBackgroundColor: Colors.red,
             onPressedBigNext: () {
-              Get.offNamed('/MetroHome');
+              metroController.stopTracking();
+              Get.back();
             },
             bigButtonName: 'Cancel',
           );

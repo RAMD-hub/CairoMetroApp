@@ -1,18 +1,17 @@
+import 'package:cairo_metro_flutter/app/modules/metro_routes/widgets/station_tile_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/controllers/metro_controller.dart';
-import '../custom_button.dart';
-import '../custom_details_card.dart';
-import '../custom_snack_bar.dart';
-import '../custom_text.dart';
-import 'station_tile_list_view.dart';
+import '../../../../core/shared/widgets/custom_button.dart';
+import '../../../../core/shared/widgets/custom_details_card.dart';
+import '../../../../core/shared/widgets/custom_snack_bar.dart';
+import '../../../../core/shared/widgets/custom_text.dart';
 
 class RouteDetailsLandScapeScreen extends StatelessWidget {
   RouteDetailsLandScapeScreen({
     super.key,
     required this.paths,
-    this.isMetroRouteScreen = true,
     this.btnBackgroundColor = kPrimaryColor,
     required this.onPressedBigNext,
     required this.bigButtonName,
@@ -22,7 +21,6 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
   }) : pathIndex = pathIndex ?? 0.obs;
 
   final List<List<String>> paths;
-  final bool isMetroRouteScreen;
   final Color btnBackgroundColor;
   final Function() onPressedBigNext;
   final String bigButtonName;
@@ -33,7 +31,7 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isMetroRouteScreen && pathIndex.value == 0) {
+    if (pathIndex.value == 0) {
       customSnackBar(pathIndex.value);
     }
     final double screenWidth = Get.width;
@@ -62,41 +60,36 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    isMetroRouteScreen
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                flex: 2,
-                                child: CustomButton(
-                                  onPressed: onPressedCounterBack ?? () {},
-                                  btnName: 'Back',
-                                ),
-                              ),
-                              Flexible(
-                                child: Obx(() {
-                                  return CustomText(
-                                    text:
-                                        '${pathIndex.value + 1}/${paths.length}',
-                                    txtFontWeight: FontWeight.bold,
-                                    txtFontSize: screenWidth * 0.018,
-                                    txtColor: kSecondaryTextColor,
-                                  );
-                                }),
-                              ),
-                              Flexible(
-                                flex: 2,
-                                child: CustomButton(
-                                  onPressed: onPressedCounterNext ?? () {},
-                                  btnName: 'Next',
-                                ),
-                              ),
-                            ],
-                          )
-                        : SizedBox(),
-                    isMetroRouteScreen
-                        ? SizedBox(height: screenHeight * 0.02)
-                        : SizedBox(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          child: CustomButton(
+                            onPressed: onPressedCounterBack ?? () {},
+                            btnName: 'Back',
+                          ),
+                        ),
+                        Flexible(
+                          child: Obx(() {
+                            return CustomText(
+                              text: '${pathIndex.value + 1}/${paths.length}',
+                              txtFontWeight: FontWeight.bold,
+                              txtFontSize: screenWidth * 0.018,
+                              txtColor: kSecondaryTextColor,
+                            );
+                          }),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child: CustomButton(
+                            onPressed: onPressedCounterNext ?? () {},
+                            btnName: 'Next',
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: screenHeight * 0.02),
                     CustomDetailsCard(text: Obx(() {
                       final stationsNumbers = paths[pathIndex.value].length.obs;
                       return CustomText(

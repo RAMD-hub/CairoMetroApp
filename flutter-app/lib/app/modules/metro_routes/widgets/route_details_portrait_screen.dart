@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/controllers/metro_controller.dart';
-import '../appbar/custom_appbar.dart';
-import '../custom_button.dart';
-import '../custom_details_card.dart';
-import '../custom_snack_bar.dart';
-import '../custom_text.dart';
+import '../../../../core/shared/widgets/appbar/custom_appbar.dart';
+import '../../../../core/shared/widgets/custom_button.dart';
+import '../../../../core/shared/widgets/custom_details_card.dart';
+import '../../../../core/shared/widgets/custom_snack_bar.dart';
+import '../../../../core/shared/widgets/custom_text.dart';
 import 'station_tile_list_view.dart';
 
 class RouteDetailsPortraitScreen extends StatelessWidget {
   RouteDetailsPortraitScreen({
     super.key,
     required this.paths,
-    this.isMetroRouteScreen = true,
     this.btnBackgroundColor = kPrimaryColor,
     required this.onPressedBigNext,
     required this.bigButtonName,
@@ -23,7 +22,6 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
   }) : pathIndex = pathIndex ?? 0.obs;
 
   final List<List<String>> paths;
-  final bool isMetroRouteScreen;
   final Color btnBackgroundColor;
   final Function() onPressedBigNext;
   final String bigButtonName;
@@ -34,7 +32,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isMetroRouteScreen && pathIndex.value == 0) {
+    if (pathIndex.value == 0) {
       customSnackBar(pathIndex.value);
     }
     // final RxInt stationsNumbers = paths[pathIndex.value].length.obs;
@@ -61,44 +59,40 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
             children: [
               CustomAppBar(
                 title: CustomText(
-                  text: isMetroRouteScreen ? 'All Paths' : 'Trip Progress',
+                  text: 'All Paths',
                   txtColor: kPrimaryColor,
                   txtFontWeight: FontWeight.bold,
                 ),
               ),
-              isMetroRouteScreen
-                  ? Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: CustomButton(
-                              onPressed: onPressedCounterBack ?? () {},
-                              btnName: 'Back',
-                            ),
-                          ),
-                          Flexible(
-                            child: Obx(() {
-                              return CustomText(
-                                text: '${pathIndex.value + 1}/${paths.length}',
-                                txtFontWeight: FontWeight.bold,
-                                txtColor: kSecondaryTextColor,
-                              );
-                            }),
-                          ),
-                          Flexible(
-                              flex: 2,
-                              child: CustomButton(
-                                onPressed: onPressedCounterNext ?? () {},
-                                btnName: 'Next',
-                              )),
-                        ],
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      flex: 2,
+                      child: CustomButton(
+                        onPressed: onPressedCounterBack ?? () {},
+                        btnName: 'Back',
                       ),
-                    )
-                  : SizedBox(
-                      height: 0,
                     ),
+                    Flexible(
+                      child: Obx(() {
+                        return CustomText(
+                          text: '${pathIndex.value + 1}/${paths.length}',
+                          txtFontWeight: FontWeight.bold,
+                          txtColor: kSecondaryTextColor,
+                        );
+                      }),
+                    ),
+                    Flexible(
+                        flex: 2,
+                        child: CustomButton(
+                          onPressed: onPressedCounterNext ?? () {},
+                          btnName: 'Next',
+                        )),
+                  ],
+                ),
+              ),
               Expanded(
                 flex: 2,
                 child: SizedBox(

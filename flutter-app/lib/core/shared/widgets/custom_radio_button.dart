@@ -52,7 +52,7 @@ class CustomRadioButton extends StatelessWidget {
             CustomText(
               text: text,
               txtColor: isSelected ? kPrimaryColor : kSecondaryTextColor,
-            )
+            ),
           ],
         ),
       );

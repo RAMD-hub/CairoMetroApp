@@ -1,25 +1,25 @@
+import 'package:cairo_metro_flutter/core/controllers/metro_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/constant.dart';
-import '../circle_shape.dart';
-import '../custom_text.dart';
-import '../line_shape.dart';
+import '../../../../core/shared/widgets/circle_shape.dart';
+import '../../../../core/shared/widgets/custom_text.dart';
+import '../../../../core/shared/widgets/line_shape.dart';
 
 class StationTile extends StatelessWidget {
   final String stationName;
   final bool isFirst;
   final bool isLast;
   final bool isInterSection;
-
-  const StationTile({
+  StationTile({
     super.key,
     required this.stationName,
     required this.isFirst,
     required this.isLast,
     required this.isInterSection,
   });
-
+  final MetroController metroController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Card(

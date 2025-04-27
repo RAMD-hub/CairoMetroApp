@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/controllers/metro_controller.dart';
-import '../../../../core/shared/widgets/routes/route_details_landscape_screen.dart';
-import '../../../../core/shared/widgets/routes/route_details_portrait_screen.dart';
+import '../widgets/route_details_landscape_screen.dart';
+import '../widgets/route_details_portrait_screen.dart';
 
 class MetroRouteScreen extends StatefulWidget {
   const MetroRouteScreen({super.key});
@@ -36,9 +36,10 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
             pathIndex: pathIndex,
             paths: paths,
             onPressedBigNext: () {
-              Get.toNamed(
+              metroController.userSelectedPath
+                  .assignAll(paths[pathIndex.value]);
+              Get.offNamed(
                 '/MetroTripProgress',
-                arguments: [paths[pathIndex.value]],
               );
             },
             bigButtonName: 'Next',
@@ -52,9 +53,10 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
             pathIndex: pathIndex,
             paths: paths,
             onPressedBigNext: () {
-              Get.toNamed(
+              metroController.userSelectedPath
+                  .assignAll(paths[pathIndex.value]);
+              Get.offNamed(
                 '/MetroTripProgress',
-                arguments: [paths[pathIndex.value]],
               );
             },
             bigButtonName: 'Next',

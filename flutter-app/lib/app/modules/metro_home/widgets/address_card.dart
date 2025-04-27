@@ -43,7 +43,12 @@ class AddressCard extends StatelessWidget {
             CustomButton(
               onPressed: () {
                 if (addressCont.text.isEmpty) {
-                  Get.snackbar('Error', 'The address is Empty');
+                  Get.snackbar(
+                    'Error',
+                    'The address is Empty',
+                    backgroundColor: Colors.red,
+                    colorText: Colors.white,
+                  );
                 }
                 if (addressCont.text.isNotEmpty) {
                   metroController.locationFromAddress(addressCont.text);

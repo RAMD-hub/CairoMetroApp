@@ -11,7 +11,9 @@ import '../widgets/stations_card.dart';
 
 class MetroHome extends StatelessWidget {
   MetroHome({super.key});
+
   final MetroController metroController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +67,9 @@ class MetroHome extends StatelessWidget {
                           text: 'Where are you going Today?',
                           txtColor: kSecondaryTextColor,
                         ),
+                      ),
+                      SizedBox(
+                        height: 12,
                       ),
                       DialogCard(),
                       StationsCard(),
