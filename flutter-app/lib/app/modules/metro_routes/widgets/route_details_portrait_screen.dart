@@ -8,6 +8,7 @@ import '../../../../core/shared/widgets/custom_details_card.dart';
 import '../../../../core/shared/widgets/custom_snack_bar.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
 import 'station_tile_list_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RouteDetailsPortraitScreen extends StatelessWidget {
   RouteDetailsPortraitScreen({
@@ -33,7 +34,8 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (pathIndex.value == 0) {
-      customSnackBar(pathIndex.value);
+      customSnackBar(pathIndex.value, AppLocalizations.of(context)!.shortPath,
+          AppLocalizations.of(context)!.shortPathMessage);
     }
     // final RxInt stationsNumbers = paths[pathIndex.value].length.obs;
     final double screenWidth = Get.width;
@@ -59,7 +61,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
             children: [
               CustomAppBar(
                 title: CustomText(
-                  text: 'All Paths',
+                  text: AppLocalizations.of(context)!.allPaths,
                   txtColor: kPrimaryColor,
                   txtFontWeight: FontWeight.bold,
                 ),
@@ -72,7 +74,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                       flex: 2,
                       child: CustomButton(
                         onPressed: onPressedCounterBack ?? () {},
-                        btnName: 'Back',
+                        btnName: AppLocalizations.of(context)!.back,
                       ),
                     ),
                     Flexible(
@@ -88,7 +90,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                         flex: 2,
                         child: CustomButton(
                           onPressed: onPressedCounterNext ?? () {},
-                          btnName: 'Next',
+                          btnName: AppLocalizations.of(context)!.next,
                         )),
                   ],
                 ),
@@ -104,7 +106,8 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                         final stationsNumbers =
                             paths[pathIndex.value].length.obs;
                         return CustomText(
-                          text: 'Stations no : ${stationsNumbers.value}',
+                          text:AppLocalizations.of(context)!
+                              .stationNumber(stationsNumbers.value),
                           txtColor: kSecondaryTextColor,
                         );
                       }))),
@@ -112,9 +115,11 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                         final stationsNumbers =
                             paths[pathIndex.value].length.obs;
                         return CustomText(
+                          //time..............................//
                           text:
-                              'Time : ${(stationsNumbers.value * 3) ~/ 60} hrs ${(stationsNumbers.value * 3) % 60} min',
-                          txtColor: kSecondaryTextColor,
+                          AppLocalizations.of(context)!.time(
+                              (stationsNumbers.value * 3) ~/ 60,
+                              (stationsNumbers.value * 3) % 60),                          txtColor: kSecondaryTextColor,
                         );
                       }))),
                       Flexible(child: CustomDetailsCard(text: Obx(() {
@@ -122,7 +127,9 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                             paths[pathIndex.value].length.obs;
                         return CustomText(
                           text:
-                              'Price : ${metroController.getTicketPrice(stationsNumbers.value)}',
+                          AppLocalizations.of(context)!.price(
+                              metroController
+                                  .getTicketPrice(stationsNumbers.value)),
                           txtColor: kSecondaryTextColor,
                         );
                       }))),

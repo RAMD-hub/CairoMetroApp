@@ -1,3 +1,4 @@
+import 'package:cairo_metro_flutter/core/algorithms/exchange_stations.dart';
 import 'package:cairo_metro_flutter/core/controllers/metro_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import '../../../../core/constants/constant.dart';
 import '../../../../core/shared/widgets/circle_shape.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
 import '../../../../core/shared/widgets/line_shape.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TrackStationTile extends StatelessWidget {
   final String stationName;
@@ -72,7 +74,7 @@ class TrackStationTile extends StatelessWidget {
               final isCurrent = metroController.currentStation;
               return CustomText(
                 text: isInterSection.value
-                    ? '$stationName => Exchanged Station.'
+                    ? AppLocalizations.of(context)!.exchange(stationName)
                     : stationName,
                 txtFontWeight: isFirst.value ||
                         isLast.value ||

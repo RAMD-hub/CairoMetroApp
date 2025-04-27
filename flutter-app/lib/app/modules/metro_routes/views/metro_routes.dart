@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../../../../core/controllers/metro_controller.dart';
 import '../widgets/route_details_landscape_screen.dart';
 import '../widgets/route_details_portrait_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MetroRouteScreen extends StatefulWidget {
   const MetroRouteScreen({super.key});
@@ -42,7 +43,7 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
                 '/MetroTripProgress',
               );
             },
-            bigButtonName: 'Next',
+            bigButtonName: AppLocalizations.of(context)!.startTrip,
             onPressedCounterNext: () =>
                 pathIndex.value < paths.length - 1 ? pathIndex.value++ : null,
             onPressedCounterBack: () =>
@@ -59,7 +60,7 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
                 '/MetroTripProgress',
               );
             },
-            bigButtonName: 'Next',
+            bigButtonName: AppLocalizations.of(context)!.startTrip,
             onPressedCounterNext: () =>
                 pathIndex.value < paths.length - 1 ? pathIndex.value++ : null,
             onPressedCounterBack: () =>

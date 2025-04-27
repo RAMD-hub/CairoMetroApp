@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:cairo_metro_flutter/core/algorithms/path_finder.dart';
 import 'package:cairo_metro_flutter/core/algorithms/sorted_paths.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../app/data/models/metro_path.dart';
@@ -19,6 +22,9 @@ class MetroController extends GetxController {
     required this.exchangeStation,
     required this.metroRepository,
   });
+
+  final Rx<Locale> locale = Locale('en', '').obs;
+
   final ExchangeStation exchangeStation;
   final MetroRepository metroRepository;
   final TicketService ticketService;
@@ -41,6 +47,13 @@ class MetroController extends GetxController {
       false.obs; // دا زي متغير كدا لما هعمله Listener لاستدعاء داله allPaths
   @override
   void onInit() {
+    startStation.value = '';
+    endStation.value = '';
+    stationsNames.clear();
+    allPaths.clear();
+    allPathsByExchangedNum.clear();
+    metroPaths.clear();
+
     super.onInit();
     ever(metroRepository.stationsNames, (_) {
       stationsNames.assignAll(metroRepository.stationsNames);
@@ -52,6 +65,17 @@ class MetroController extends GetxController {
         findPaths();
       }
     });
+    final savedLang = GetStorage().read('language');
+    if (savedLang != null) {
+      locale.value = Locale(savedLang, '');
+    }
+  }
+
+  Future<void> changeLanguage(String languageCode) async {
+    locale.value = Locale(languageCode, '');
+    Get.updateLocale(locale.value);
+    GetStorage().write('language', languageCode);
+    await metroRepository.updateLanguage(languageCode);
   }
 
   void findPaths() {

@@ -6,6 +6,7 @@ import '../../../../core/shared/widgets/custom_button.dart';
 import '../../../../core/shared/widgets/custom_icon.dart';
 import '../../../../core/shared/widgets/custom_radio_button.dart';
 import 'custom_drop_down_menu.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StationsCard extends StatelessWidget {
   StationsCard({
@@ -40,9 +41,9 @@ class StationsCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomDropDownMenu(
-                    isSwap: isSwap,
-                    startCont: startCont,
-                  ),
+                      isSwap: isSwap,
+                      startCont: startCont,
+                      hint: AppLocalizations.of(context)!.startStation),
                 ),
                 CustomIcon(
                   icon: Icons.location_on_outlined,
@@ -61,23 +62,23 @@ class StationsCard extends StatelessWidget {
               icon: CustomIcon(icon: Icons.swap_vert_circle_outlined),
             ),
             CustomDropDownMenu(
-              isStart: false,
-              isSwap: isSwap,
-              endCont: endCont,
-            ),
+                isStart: false,
+                isSwap: isSwap,
+                endCont: endCont,
+                hint: AppLocalizations.of(context)!.arriveStation),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomRadioButton(
-                  text: 'Less Stations',
-                  value: 'Less Stations',
+                  text: AppLocalizations.of(context)!.lessStation,
+                  value: AppLocalizations.of(context)!.lessStation,
                   groupValue: metroController.selectedTransfers,
                   onChanged: (newValue) =>
                       metroController.updateSelectedTransfer(newValue),
                 ),
                 CustomRadioButton(
-                  text: 'Less Transfer',
-                  value: 'Less Transfer',
+                  text: AppLocalizations.of(context)!.lessTransfer,
+                  value: AppLocalizations.of(context)!.lessTransfer,
                   groupValue: metroController.selectedTransfers,
                   onChanged: (newValue) =>
                       metroController.updateSelectedTransfer(newValue),
@@ -97,8 +98,8 @@ class StationsCard extends StatelessWidget {
                 // Validation logic
                 if (startText.isEmpty || endText.isEmpty) {
                   Get.snackbar(
-                    'Missing Input',
-                    'Please enter both the start and end stations.',
+                    AppLocalizations.of(context)!.missingInput,
+                    AppLocalizations.of(context)!.missingInputMessage,
                     snackPosition: SnackPosition.TOP,
                     backgroundColor: Colors.red,
                     colorText: Colors.white,
@@ -108,8 +109,8 @@ class StationsCard extends StatelessWidget {
 
                 if (!startInStations || !endInStations) {
                   Get.snackbar(
-                    'Invalid Station',
-                    'One or both stations do not exist. Please check the station names.',
+                    AppLocalizations.of(context)!.invalidStation,
+                    AppLocalizations.of(context)!.invalidStationMessage,
                     snackPosition: SnackPosition.TOP,
                     backgroundColor: Colors.red,
                     colorText: Colors.white,
@@ -119,8 +120,8 @@ class StationsCard extends StatelessWidget {
 
                 if (startText == endText) {
                   Get.snackbar(
-                    'Same Station',
-                    'Start and End stations cannot be the same.',
+                    AppLocalizations.of(context)!.sameStation,
+                    AppLocalizations.of(context)!.sameStationMessage,
                     snackPosition: SnackPosition.TOP,
                     backgroundColor: Colors.red,
                     colorText: Colors.white,
@@ -135,7 +136,7 @@ class StationsCard extends StatelessWidget {
                 // Navigate to the next screen
                 Get.toNamed('/MetroRouteScreen');
               },
-              btnName: 'Start',
+              btnName: AppLocalizations.of(context)!.start,
             ),
           ],
         ),

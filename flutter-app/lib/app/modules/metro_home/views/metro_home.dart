@@ -7,7 +7,9 @@ import '../../../../core/shared/widgets/appbar/custom_appbar.dart';
 import '../../../../core/shared/widgets/custom_icon.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
 import '../widgets/address_card.dart';
+import '../widgets/languageDialog.dart';
 import '../widgets/stations_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MetroHome extends StatelessWidget {
   MetroHome({super.key});
@@ -42,11 +44,15 @@ class MetroHome extends StatelessWidget {
                     metroController.getNearestStation(false.obs);
                   },
                 ),
-                actions: const [
+                actions: [
                   Padding(
-                    padding: EdgeInsets.only(right: 16.0),
+                    padding: const EdgeInsets.only(right: 16.0),
                     child:
-                        CustomIcon(icon: Icons.language, color: Colors.black),
+                        CustomIcon(icon: Icons.language,
+                            onPressed: () {
+                              LanguageDialog().show(context);
+                            }
+                            ,color: Colors.black),
                   ),
                 ],
               )),
@@ -56,15 +62,15 @@ class MetroHome extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(left: 8.0),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
                         child: CustomText(
-                            text: 'Welcome', txtColor: kPrimaryColor),
+                            text: (AppLocalizations.of(context)!.welcome), txtColor: kPrimaryColor),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: CustomText(
-                          text: 'Where are you going Today?',
+                          text: AppLocalizations.of(context)!.welcomeMessage,
                           txtColor: kSecondaryTextColor,
                         ),
                       ),

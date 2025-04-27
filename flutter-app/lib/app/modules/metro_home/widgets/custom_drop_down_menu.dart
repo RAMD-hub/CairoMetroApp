@@ -11,8 +11,10 @@ class CustomDropDownMenu extends StatelessWidget {
     required this.isSwap,
     this.startCont,
     this.endCont,
+    required this.hint
   });
 
+  final String hint;
   final bool isStart;
   final TextEditingController? startCont;
   final TextEditingController? endCont;
@@ -26,7 +28,7 @@ class CustomDropDownMenu extends StatelessWidget {
       return DropdownMenu<String>(
         width: Get.width,
         controller: isStart ? startCont : endCont,
-        hintText: 'Please Selected Station',
+        hintText: hint,
         onSelected: (station) {
           station != null && isStart
               ? metroController.startStation.value = station

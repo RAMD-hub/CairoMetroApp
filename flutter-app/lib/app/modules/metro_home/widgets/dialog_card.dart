@@ -5,6 +5,7 @@ import '../../../../core/constants/constant.dart';
 import '../../../../core/shared/widgets/circle_shape.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
 import '../../../../core/shared/widgets/line_shape.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DialogCard extends StatelessWidget {
   final MetroController metroController = Get.find();
@@ -34,7 +35,7 @@ class DialogCard extends StatelessWidget {
                   width: 22,
                 ),
                 CustomText(
-                  text: 'Stations',
+                  text: AppLocalizations.of(context)!.stations,
                   txtColor: kPrimaryColor,
                 ),
                 Spacer(),
@@ -48,7 +49,7 @@ class DialogCard extends StatelessWidget {
                             }
                           : null,
                       child: CustomText(
-                        text: 'View All',
+                        text: AppLocalizations.of(context)!.viewAll,
                         txtColor: kPrimaryColor,
                       ));
                 })

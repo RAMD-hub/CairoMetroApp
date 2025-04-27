@@ -19,6 +19,7 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: txtFontSize == 0
             ? (Get.width * 0.045).clamp(12.0, 18.0)

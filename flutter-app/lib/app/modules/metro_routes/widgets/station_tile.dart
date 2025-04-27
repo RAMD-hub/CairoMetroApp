@@ -1,6 +1,7 @@
 import 'package:cairo_metro_flutter/core/controllers/metro_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/constants/constant.dart';
 import '../../../../core/shared/widgets/circle_shape.dart';
@@ -57,7 +58,7 @@ class StationTile extends StatelessWidget {
           Expanded(
             child: CustomText(
               text: isInterSection
-                  ? '$stationName => Exchanged Station.'
+                  ? AppLocalizations.of(context)!.exchange(stationName)
                   : stationName,
               txtFontWeight: isFirst || isLast || isInterSection
                   ? FontWeight.w700

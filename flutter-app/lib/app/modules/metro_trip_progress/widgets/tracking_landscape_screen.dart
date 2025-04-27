@@ -6,6 +6,7 @@ import '../../../../core/controllers/metro_controller.dart';
 import '../../../../core/shared/widgets/custom_button.dart';
 import '../../../../core/shared/widgets/custom_details_card.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TrackingLandScapeScreen extends StatelessWidget {
   TrackingLandScapeScreen({
@@ -55,20 +56,23 @@ class TrackingLandScapeScreen extends StatelessWidget {
                   children: [
                     CustomDetailsCard(
                       text: CustomText(
-                        text: 'Stations no : $stationsNumbers',
+                        text: AppLocalizations.of(context)!
+                            .stationNumber(stationsNumbers),
                         txtColor: kSecondaryTextColor,
                       ),
                     ),
                     CustomDetailsCard(
                         text: CustomText(
-                      text:
-                          'Time : ${(stationsNumbers * 3) ~/ 60} hrs ${(stationsNumbers * 3) % 60} min',
+                      //time..............//
+                      text: AppLocalizations.of(context)!.time(
+                          (stationsNumbers * 3) ~/ 60,
+                          (stationsNumbers * 3) % 60),
                       txtColor: kSecondaryTextColor,
                     )),
                     CustomDetailsCard(
                         text: CustomText(
-                      text:
-                          'Price : ${metroController.getTicketPrice(stationsNumbers)}',
+                      text: AppLocalizations.of(context)!.price(
+                          metroController.getTicketPrice(stationsNumbers)),
                       txtColor: kSecondaryTextColor,
                     )),
                     SizedBox(height: screenHeight * 0.02),

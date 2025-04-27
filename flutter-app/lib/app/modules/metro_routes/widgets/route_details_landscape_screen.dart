@@ -7,6 +7,7 @@ import '../../../../core/shared/widgets/custom_button.dart';
 import '../../../../core/shared/widgets/custom_details_card.dart';
 import '../../../../core/shared/widgets/custom_snack_bar.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RouteDetailsLandScapeScreen extends StatelessWidget {
   RouteDetailsLandScapeScreen({
@@ -32,7 +33,8 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (pathIndex.value == 0) {
-      customSnackBar(pathIndex.value);
+      customSnackBar(pathIndex.value, AppLocalizations.of(context)!.shortPath,
+          AppLocalizations.of(context)!.shortPathMessage);
     }
     final double screenWidth = Get.width;
     final double screenHeight = Get.height;
@@ -67,7 +69,7 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
                           flex: 2,
                           child: CustomButton(
                             onPressed: onPressedCounterBack ?? () {},
-                            btnName: 'Back',
+                            btnName: AppLocalizations.of(context)!.back,
                           ),
                         ),
                         Flexible(
@@ -84,7 +86,7 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
                           flex: 2,
                           child: CustomButton(
                             onPressed: onPressedCounterNext ?? () {},
-                            btnName: 'Next',
+                            btnName: AppLocalizations.of(context)!.next,
                           ),
                         ),
                       ],
@@ -93,23 +95,27 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
                     CustomDetailsCard(text: Obx(() {
                       final stationsNumbers = paths[pathIndex.value].length.obs;
                       return CustomText(
-                        text: 'Stations no : ${stationsNumbers.value}',
+                        text: AppLocalizations.of(context)!
+                            .stationNumber(stationsNumbers.value),
                         txtColor: kSecondaryTextColor,
                       );
                     })),
                     CustomDetailsCard(text: Obx(() {
                       final stationsNumbers = paths[pathIndex.value].length.obs;
                       return CustomText(
-                        text:
-                            'Time : ${(stationsNumbers.value * 3) ~/ 60} hrs ${(stationsNumbers.value * 3) % 60} min',
+                        //time................................
+                        text: AppLocalizations.of(context)!.time(
+                            (stationsNumbers.value * 3) ~/ 60,
+                            (stationsNumbers.value * 3) % 60),
                         txtColor: kSecondaryTextColor,
                       );
                     })),
                     CustomDetailsCard(text: Obx(() {
                       final stationsNumbers = paths[pathIndex.value].length.obs;
                       return CustomText(
-                        text:
-                            'Price : ${metroController.getTicketPrice(stationsNumbers.value)}',
+                        text: AppLocalizations.of(context)!.price(
+                            metroController
+                                .getTicketPrice(stationsNumbers.value)),
                         txtColor: kSecondaryTextColor,
                       );
                     })),

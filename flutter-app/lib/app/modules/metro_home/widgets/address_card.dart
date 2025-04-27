@@ -6,6 +6,8 @@ import '../../../../core/controllers/metro_controller.dart';
 import '../../../../core/shared/widgets/custom_button.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
 import '../../../../core/shared/widgets/custom_text_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddressCard extends StatelessWidget {
   AddressCard({
@@ -32,11 +34,11 @@ class AddressCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomText(
-              text: 'Please enter your destination (optional)',
+              text: AppLocalizations.of(context)!.addressMessage,
               txtColor: kSecondaryTextColor,
             ),
             CustomTextField(
-              hint: 'Address',
+              hint: AppLocalizations.of(context)!.address,
               suffixIcon: Icons.location_city_outlined,
               textController: addressCont,
             ),
@@ -54,7 +56,7 @@ class AddressCard extends StatelessWidget {
                   metroController.locationFromAddress(addressCont.text);
                 }
               },
-              btnName: 'Search',
+              btnName:( AppLocalizations.of(context)!.search)
             )
           ],
         ),
