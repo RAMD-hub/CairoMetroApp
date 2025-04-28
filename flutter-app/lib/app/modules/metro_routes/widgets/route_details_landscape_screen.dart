@@ -120,10 +120,12 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
                       );
                     })),
                     SizedBox(height: screenHeight * 0.02),
-                    CustomButton(
-                      onPressed: onPressedBigNext,
-                      btnName: bigButtonName,
-                      btnBackgroundColor: btnBackgroundColor,
+                    Expanded(
+                      child: CustomButton(
+                        onPressed: onPressedBigNext,
+                        btnName: bigButtonName,
+                        btnBackgroundColor: btnBackgroundColor,
+                      ),
                     ),
                   ],
                 ),

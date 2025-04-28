@@ -106,7 +106,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                         final stationsNumbers =
                             paths[pathIndex.value].length.obs;
                         return CustomText(
-                          text:AppLocalizations.of(context)!
+                          text: AppLocalizations.of(context)!
                               .stationNumber(stationsNumbers.value),
                           txtColor: kSecondaryTextColor,
                         );
@@ -116,18 +116,17 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                             paths[pathIndex.value].length.obs;
                         return CustomText(
                           //time..............................//
-                          text:
-                          AppLocalizations.of(context)!.time(
+                          text: AppLocalizations.of(context)!.time(
                               (stationsNumbers.value * 3) ~/ 60,
-                              (stationsNumbers.value * 3) % 60),                          txtColor: kSecondaryTextColor,
+                              (stationsNumbers.value * 3) % 60),
+                          txtColor: kSecondaryTextColor,
                         );
                       }))),
                       Flexible(child: CustomDetailsCard(text: Obx(() {
                         final stationsNumbers =
                             paths[pathIndex.value].length.obs;
                         return CustomText(
-                          text:
-                          AppLocalizations.of(context)!.price(
+                          text: AppLocalizations.of(context)!.price(
                               metroController
                                   .getTicketPrice(stationsNumbers.value)),
                           txtColor: kSecondaryTextColor,

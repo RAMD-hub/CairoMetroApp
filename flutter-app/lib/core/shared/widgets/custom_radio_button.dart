@@ -33,8 +33,8 @@ class CustomRadioButton extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: (Get.width * 0.05),
-              height: (Get.height * 0.05),
+              width: 18,
+              height: 18,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: kPrimaryColor, width: 2),
@@ -48,7 +48,7 @@ class CustomRadioButton extends StatelessWidget {
                     )
                   : null,
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             CustomText(
               text: text,
               txtColor: isSelected ? kPrimaryColor : kSecondaryTextColor,

@@ -66,24 +66,27 @@ class StationsCard extends StatelessWidget {
                 isSwap: isSwap,
                 endCont: endCont,
                 hint: AppLocalizations.of(context)!.arriveStation),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomRadioButton(
-                  text: AppLocalizations.of(context)!.lessStation,
-                  value: AppLocalizations.of(context)!.lessStation,
-                  groupValue: metroController.selectedTransfers,
-                  onChanged: (newValue) =>
-                      metroController.updateSelectedTransfer(newValue),
-                ),
-                CustomRadioButton(
-                  text: AppLocalizations.of(context)!.lessTransfer,
-                  value: AppLocalizations.of(context)!.lessTransfer,
-                  groupValue: metroController.selectedTransfers,
-                  onChanged: (newValue) =>
-                      metroController.updateSelectedTransfer(newValue),
-                ),
-              ],
+            SizedBox(
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomRadioButton(
+                    text: AppLocalizations.of(context)!.lessStation,
+                    value: AppLocalizations.of(context)!.lessStation,
+                    groupValue: metroController.selectedTransfers,
+                    onChanged: (newValue) =>
+                        metroController.updateSelectedTransfer(newValue),
+                  ),
+                  CustomRadioButton(
+                    text: AppLocalizations.of(context)!.lessTransfer,
+                    value: AppLocalizations.of(context)!.lessTransfer,
+                    groupValue: metroController.selectedTransfers,
+                    onChanged: (newValue) =>
+                        metroController.updateSelectedTransfer(newValue),
+                  ),
+                ],
+              ),
             ),
             CustomButton(
               onPressed: () {

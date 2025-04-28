@@ -5,14 +5,13 @@ import '../../../../core/controllers/metro_controller.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
 
 class CustomDropDownMenu extends StatelessWidget {
-  CustomDropDownMenu({
-    super.key,
-    this.isStart = true,
-    required this.isSwap,
-    this.startCont,
-    this.endCont,
-    required this.hint
-  });
+  CustomDropDownMenu(
+      {super.key,
+      this.isStart = true,
+      required this.isSwap,
+      this.startCont,
+      this.endCont,
+      required this.hint});
 
   final String hint;
   final bool isStart;
@@ -26,7 +25,7 @@ class CustomDropDownMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return DropdownMenu<String>(
-        width: Get.width,
+        width: double.infinity,
         controller: isStart ? startCont : endCont,
         hintText: hint,
         onSelected: (station) {

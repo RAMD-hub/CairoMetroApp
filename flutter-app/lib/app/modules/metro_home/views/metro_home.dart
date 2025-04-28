@@ -19,6 +19,7 @@ class MetroHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
           ColorFiltered(
@@ -47,12 +48,12 @@ class MetroHome extends StatelessWidget {
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(right: 16.0),
-                    child:
-                        CustomIcon(icon: Icons.language,
-                            onPressed: () {
-                              LanguageDialog().show(context);
-                            }
-                            ,color: Colors.black),
+                    child: CustomIcon(
+                        icon: Icons.language,
+                        onPressed: () {
+                          LanguageDialog().show(context);
+                        },
+                        color: Colors.black),
                   ),
                 ],
               )),
@@ -65,7 +66,8 @@ class MetroHome extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: CustomText(
-                            text: (AppLocalizations.of(context)!.welcome), txtColor: kPrimaryColor),
+                            text: (AppLocalizations.of(context)!.welcome),
+                            txtColor: kPrimaryColor),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
