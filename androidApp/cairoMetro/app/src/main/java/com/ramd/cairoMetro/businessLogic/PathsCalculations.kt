@@ -22,14 +22,14 @@ class PathsCalculations {
 
     fun time(context: Context, path: List<String>): String {
         val pathCount = path.size
-         if (pathCount * 3 / 60 >= 1) {
-          return  context.getString(R.string.time_hrs_mins, (pathCount * 3) / 60, (pathCount * 3) % 60)
-        }
-        if (pathCount * 3 % 60 in 3..10) {
-          return  context.getString(R.string.time_mins, (pathCount * 3) % 60)
-        }
-        else {
-          return  context.getString(R.string.time_min, ((pathCount * 3) % 60).toString())
+        return if (pathCount * 3 / 60 >= 1) {
+            context.getString(R.string.time_hrs_mins, (pathCount * 3) / 60, (pathCount * 3) % 60)
+        }else {
+            if (pathCount * 3 % 60 in 3..10) {
+                context.getString(R.string.time_mins, (pathCount * 3) % 60)
+            } else {
+                context.getString(R.string.time_min, ((pathCount * 3) % 60).toString())
+            }
         }
     }
 
