@@ -19,7 +19,7 @@ class MetroHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: true, //to not open keyboard up dropdown
       body: Stack(
         children: [
           ColorFiltered(
@@ -53,7 +53,7 @@ class MetroHome extends StatelessWidget {
                         onPressed: () {
                           LanguageDialog().show(context);
                         },
-                        color: Colors.black),
+                        color: Colors.orange),
                   ),
                 ],
               )),
