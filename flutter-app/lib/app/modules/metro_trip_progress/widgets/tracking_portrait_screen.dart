@@ -31,83 +31,86 @@ class TrackingPortraitScreen extends StatelessWidget {
     final double screenWidth = Get.width;
     final double screenHeight = Get.height;
     final stationsNumbers = paths.length;
-    return Stack(
-      children: [
-        ColorFiltered(
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.4),
-            BlendMode.darken,
-          ),
-          child: Image.asset(
-            kBackgroundImage,
-            fit: BoxFit.fill,
-            width: Get.width,
-            height: Get.height,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            spacing: 20,
+    return paths.isNotEmpty
+        ? Stack(
             children: [
-              CustomAppBar(
-                title: CustomText(
-                  text: AppLocalizations.of(context)!.tripProgress,
-                  txtColor: kPrimaryColor,
-                  txtFontWeight: FontWeight.bold,
+              ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.4),
+                  BlendMode.darken,
+                ),
+                child: Image.asset(
+                  kBackgroundImage,
+                  fit: BoxFit.fill,
+                  width: Get.width,
+                  height: Get.height,
                 ),
               ),
-              Expanded(
-                flex: 2,
-                child: SizedBox(
-                  height: (screenHeight + screenWidth) * 0.07,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                          child: CustomDetailsCard(
-                        text: CustomText(
-                          text: AppLocalizations.of(context)!
-                              .stationNumber(stationsNumbers),
-                          txtColor: kSecondaryTextColor,
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  spacing: 20,
+                  children: [
+                    CustomAppBar(
+                      title: CustomText(
+                        text: AppLocalizations.of(context)!.tripProgress,
+                        txtColor: kPrimaryColor,
+                        txtFontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                        height: (screenHeight + screenWidth) * 0.07,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                                child: CustomDetailsCard(
+                              text: CustomText(
+                                text: AppLocalizations.of(context)!
+                                    .stationNumber(stationsNumbers),
+                                txtColor: kSecondaryTextColor,
+                              ),
+                            )),
+                            Flexible(
+                                child: CustomDetailsCard(
+                                    text: CustomText(
+                              text: AppLocalizations.of(context)!.time(
+                                  (stationsNumbers * 3) ~/ 60,
+                                  (stationsNumbers * 3) % 60),
+                              txtColor: kSecondaryTextColor,
+                            ))),
+                            Flexible(
+                                child: CustomDetailsCard(
+                                    text: CustomText(
+                              text: AppLocalizations.of(context)!.price(
+                                  metroController
+                                      .getTicketPrice(stationsNumbers)),
+                              txtColor: kSecondaryTextColor,
+                            ))),
+                          ],
                         ),
-                      )),
-                      Flexible(
-                          child: CustomDetailsCard(
-                              text: CustomText(
-                        text: AppLocalizations.of(context)!.time(
-                            (stationsNumbers * 3) ~/ 60,
-                            (stationsNumbers * 3) % 60),
-                        txtColor: kSecondaryTextColor,
-                      ))),
-                      Flexible(
-                          child: CustomDetailsCard(
-                              text: CustomText(
-                        text: AppLocalizations.of(context)!.price(
-                            metroController.getTicketPrice(stationsNumbers)),
-                        txtColor: kSecondaryTextColor,
-                      ))),
-                    ],
-                  ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 11,
+                      child: TackingTileListView(
+                        pathIndex: pathIndex,
+                        path: paths.obs,
+                      ),
+                    ),
+                    Expanded(
+                        child: CustomButton(
+                      onPressed: onPressedBigNext,
+                      btnName: bigButtonName,
+                      btnBackgroundColor: btnBackgroundColor,
+                    )),
+                  ],
                 ),
               ),
-              Expanded(
-                flex: 11,
-                child: TackingTileListView(
-                  pathIndex: pathIndex,
-                  path: paths.obs,
-                ),
-              ),
-              Expanded(
-                  child: CustomButton(
-                onPressed: onPressedBigNext,
-                btnName: bigButtonName,
-                btnBackgroundColor: btnBackgroundColor,
-              )),
             ],
-          ),
-        ),
-      ],
-    );
+          )
+        : Center(child: CustomText(text: 'No paths found.'));
   }
 }

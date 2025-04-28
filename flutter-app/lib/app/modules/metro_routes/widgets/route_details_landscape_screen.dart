@@ -38,112 +38,119 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
     }
     final double screenWidth = Get.width;
     final double screenHeight = Get.height;
-    return Stack(
-      children: [
-        ColorFiltered(
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.4),
-            BlendMode.darken,
-          ),
-          child: Image.asset(
-            kBackgroundImage,
-            fit: BoxFit.fill,
-            width: double.infinity,
-            height: double.infinity,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: screenWidth * 0.02, vertical: screenHeight * 0.02),
-          child: Row(
+    return paths.isNotEmpty
+        ? Stack(
             children: [
-              Expanded(
-                flex: 3,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.4),
+                  BlendMode.darken,
+                ),
+                child: Image.asset(
+                  kBackgroundImage,
+                  fit: BoxFit.fill,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth * 0.02,
+                    vertical: screenHeight * 0.02),
+                child: Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          flex: 2,
-                          child: CustomButton(
-                            onPressed: onPressedCounterBack ?? () {},
-                            btnName: AppLocalizations.of(context)!.back,
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                flex: 2,
+                                child: CustomButton(
+                                  onPressed: onPressedCounterBack ?? () {},
+                                  btnName: AppLocalizations.of(context)!.back,
+                                ),
+                              ),
+                              Flexible(
+                                child: Obx(() {
+                                  return CustomText(
+                                    text:
+                                        '${pathIndex.value + 1}/${paths.length}',
+                                    txtFontWeight: FontWeight.bold,
+                                    txtFontSize: screenWidth * 0.018,
+                                    txtColor: kSecondaryTextColor,
+                                  );
+                                }),
+                              ),
+                              Flexible(
+                                flex: 2,
+                                child: CustomButton(
+                                  onPressed: onPressedCounterNext ?? () {},
+                                  btnName: AppLocalizations.of(context)!.next,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Flexible(
-                          child: Obx(() {
+                          SizedBox(height: screenHeight * 0.02),
+                          CustomDetailsCard(text: Obx(() {
+                            final stationsNumbers =
+                                paths[pathIndex.value].length.obs;
                             return CustomText(
-                              text: '${pathIndex.value + 1}/${paths.length}',
-                              txtFontWeight: FontWeight.bold,
-                              txtFontSize: screenWidth * 0.018,
+                              text: AppLocalizations.of(context)!
+                                  .stationNumber(stationsNumbers.value),
                               txtColor: kSecondaryTextColor,
                             );
-                          }),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: CustomButton(
-                            onPressed: onPressedCounterNext ?? () {},
-                            btnName: AppLocalizations.of(context)!.next,
+                          })),
+                          CustomDetailsCard(text: Obx(() {
+                            final stationsNumbers =
+                                paths[pathIndex.value].length.obs;
+                            return CustomText(
+                              //time................................
+                              text: AppLocalizations.of(context)!.time(
+                                  (stationsNumbers.value * 3) ~/ 60,
+                                  (stationsNumbers.value * 3) % 60),
+                              txtColor: kSecondaryTextColor,
+                            );
+                          })),
+                          CustomDetailsCard(text: Obx(() {
+                            final stationsNumbers =
+                                paths[pathIndex.value].length.obs;
+                            return CustomText(
+                              text: AppLocalizations.of(context)!.price(
+                                  metroController
+                                      .getTicketPrice(stationsNumbers.value)),
+                              txtColor: kSecondaryTextColor,
+                            );
+                          })),
+                          SizedBox(height: screenHeight * 0.02),
+                          Expanded(
+                            child: CustomButton(
+                              onPressed: onPressedBigNext,
+                              btnName: bigButtonName,
+                              btnBackgroundColor: btnBackgroundColor,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: screenHeight * 0.02),
-                    CustomDetailsCard(text: Obx(() {
-                      final stationsNumbers = paths[pathIndex.value].length.obs;
-                      return CustomText(
-                        text: AppLocalizations.of(context)!
-                            .stationNumber(stationsNumbers.value),
-                        txtColor: kSecondaryTextColor,
-                      );
-                    })),
-                    CustomDetailsCard(text: Obx(() {
-                      final stationsNumbers = paths[pathIndex.value].length.obs;
-                      return CustomText(
-                        //time................................
-                        text: AppLocalizations.of(context)!.time(
-                            (stationsNumbers.value * 3) ~/ 60,
-                            (stationsNumbers.value * 3) % 60),
-                        txtColor: kSecondaryTextColor,
-                      );
-                    })),
-                    CustomDetailsCard(text: Obx(() {
-                      final stationsNumbers = paths[pathIndex.value].length.obs;
-                      return CustomText(
-                        text: AppLocalizations.of(context)!.price(
-                            metroController
-                                .getTicketPrice(stationsNumbers.value)),
-                        txtColor: kSecondaryTextColor,
-                      );
-                    })),
-                    SizedBox(height: screenHeight * 0.02),
-                    Expanded(
-                      child: CustomButton(
-                        onPressed: onPressedBigNext,
-                        btnName: bigButtonName,
-                        btnBackgroundColor: btnBackgroundColor,
+                        ],
                       ),
+                    ),
+                    SizedBox(width: screenWidth * 0.02),
+                    Expanded(
+                      flex: 5,
+                      child: Obx(() {
+                        return StationTileListView(
+                          path: paths[pathIndex.value].obs,
+                          pathIndex: pathIndex,
+                        );
+                      }),
                     ),
                   ],
                 ),
               ),
-              SizedBox(width: screenWidth * 0.02),
-              Expanded(
-                flex: 5,
-                child: Obx(() {
-                  return StationTileListView(
-                    path: paths[pathIndex.value].obs,
-                    pathIndex: pathIndex,
-                  );
-                }),
-              ),
             ],
-          ),
-        ),
-      ],
-    );
+          )
+        : Center(child: CustomText(text: 'No paths found.'));
   }
 }

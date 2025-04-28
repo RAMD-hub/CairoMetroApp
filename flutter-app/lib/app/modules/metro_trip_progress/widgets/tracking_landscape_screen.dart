@@ -30,72 +30,76 @@ class TrackingLandScapeScreen extends StatelessWidget {
     final double screenWidth = Get.width;
     final double screenHeight = Get.height;
     final stationsNumbers = paths.length;
-    return Stack(
-      children: [
-        ColorFiltered(
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.4),
-            BlendMode.darken,
-          ),
-          child: Image.asset(
-            kBackgroundImage,
-            fit: BoxFit.fill,
-            width: Get.width,
-            height: Get.height,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: screenWidth * 0.02, vertical: screenHeight * 0.02),
-          child: Row(
+    return paths.isNotEmpty
+        ? Stack(
             children: [
-              Expanded(
-                flex: 3,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.4),
+                  BlendMode.darken,
+                ),
+                child: Image.asset(
+                  kBackgroundImage,
+                  fit: BoxFit.fill,
+                  width: Get.width,
+                  height: Get.height,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth * 0.02,
+                    vertical: screenHeight * 0.02),
+                child: Row(
                   children: [
-                    CustomDetailsCard(
-                      text: CustomText(
-                        text: AppLocalizations.of(context)!
-                            .stationNumber(stationsNumbers),
-                        txtColor: kSecondaryTextColor,
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          CustomDetailsCard(
+                            text: CustomText(
+                              text: AppLocalizations.of(context)!
+                                  .stationNumber(stationsNumbers),
+                              txtColor: kSecondaryTextColor,
+                            ),
+                          ),
+                          CustomDetailsCard(
+                              text: CustomText(
+                            //time..............//
+                            text: AppLocalizations.of(context)!.time(
+                                (stationsNumbers * 3) ~/ 60,
+                                (stationsNumbers * 3) % 60),
+                            txtColor: kSecondaryTextColor,
+                          )),
+                          CustomDetailsCard(
+                              text: CustomText(
+                            text: AppLocalizations.of(context)!.price(
+                                metroController
+                                    .getTicketPrice(stationsNumbers)),
+                            txtColor: kSecondaryTextColor,
+                          )),
+                          SizedBox(height: screenHeight * 0.02),
+                          CustomButton(
+                            onPressed: onPressedBigNext,
+                            btnName: bigButtonName,
+                            btnBackgroundColor: btnBackgroundColor,
+                          ),
+                        ],
                       ),
                     ),
-                    CustomDetailsCard(
-                        text: CustomText(
-                      //time..............//
-                      text: AppLocalizations.of(context)!.time(
-                          (stationsNumbers * 3) ~/ 60,
-                          (stationsNumbers * 3) % 60),
-                      txtColor: kSecondaryTextColor,
-                    )),
-                    CustomDetailsCard(
-                        text: CustomText(
-                      text: AppLocalizations.of(context)!.price(
-                          metroController.getTicketPrice(stationsNumbers)),
-                      txtColor: kSecondaryTextColor,
-                    )),
-                    SizedBox(height: screenHeight * 0.02),
-                    CustomButton(
-                      onPressed: onPressedBigNext,
-                      btnName: bigButtonName,
-                      btnBackgroundColor: btnBackgroundColor,
+                    SizedBox(width: screenWidth * 0.02),
+                    Expanded(
+                      flex: 5,
+                      child: TackingTileListView(
+                        path: paths.obs,
+                        pathIndex: pathIndex,
+                      ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(width: screenWidth * 0.02),
-              Expanded(
-                flex: 5,
-                child: TackingTileListView(
-                  path: paths.obs,
-                  pathIndex: pathIndex,
-                ),
-              ),
             ],
-          ),
-        ),
-      ],
-    );
+          )
+        : Center(child: CustomText(text: 'No paths found.'));
   }
 }

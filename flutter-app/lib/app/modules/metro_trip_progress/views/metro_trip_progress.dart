@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/controllers/metro_controller.dart';
 import '../widgets/tracking_landscape_screen.dart';
 import '../widgets/tracking_portrait_screen.dart';
