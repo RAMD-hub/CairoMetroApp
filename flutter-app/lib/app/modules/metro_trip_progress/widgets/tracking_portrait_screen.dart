@@ -29,8 +29,6 @@ class TrackingPortraitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = Get.width;
-    final double screenHeight = Get.height;
     final stationsNumbers = paths.length;
     return paths.isNotEmpty
         ? Stack(
@@ -42,9 +40,9 @@ class TrackingPortraitScreen extends StatelessWidget {
                 ),
                 child: Image.asset(
                   kBackgroundImage,
-                  fit: BoxFit.fill,
-                  width: Get.width,
-                  height: Get.height,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
                 ),
               ),
               Padding(
@@ -60,45 +58,42 @@ class TrackingPortraitScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      flex: 2,
-                      child: SizedBox(
-                        height: (screenHeight + screenWidth) * 0.07,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Flexible(
-                                flex: 1,
-                                child: CustomDetailsCard(
+                      flex: 3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child: CustomDetailsCard(
+                                text: CustomText(
+                                  text: AppLocalizations.of(context)!
+                                      .stationNumber(stationsNumbers),
+                                  txtColor: kSecondaryTextColor,
+                                ),
+                              )),
+                          Expanded(
+                              flex: 1,
+                              child: CustomDetailsCard(
                                   text: CustomText(
-                                    text: AppLocalizations.of(context)!
-                                        .stationNumber(stationsNumbers),
-                                    txtColor: kSecondaryTextColor,
-                                  ),
-                                )),
-                            Flexible(
-                                flex: 1,
-                                child: CustomDetailsCard(
-                                    text: CustomText(
-                                  text: TimeCalculate()
-                                      .time(context, stationsNumbers),
-                                  txtColor: kSecondaryTextColor,
-                                ))),
-                            Flexible(
-                                flex: 1,
-                                child: CustomDetailsCard(
-                                    text: CustomText(
-                                  text: AppLocalizations.of(context)!.price(
-                                      metroController
-                                          .getTicketPrice(stationsNumbers)),
-                                  txtColor: kSecondaryTextColor,
-                                ))),
-                          ],
-                        ),
+                                text: TimeCalculate()
+                                    .time(context, stationsNumbers),
+                                txtColor: kSecondaryTextColor,
+                              ))),
+                          Expanded(
+                              flex: 1,
+                              child: CustomDetailsCard(
+                                  text: CustomText(
+                                text: AppLocalizations.of(context)!.price(
+                                    metroController
+                                        .getTicketPrice(stationsNumbers)),
+                                txtColor: kSecondaryTextColor,
+                              ))),
+                        ],
                       ),
                     ),
                     Expanded(
-                      flex: 11,
+                      flex: 13,
                       child: TackingTileListView(
                         pathIndex: pathIndex,
                         path: paths.obs,

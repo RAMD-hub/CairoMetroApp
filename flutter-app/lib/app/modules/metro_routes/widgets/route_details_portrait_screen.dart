@@ -51,9 +51,9 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                 ),
                 child: Image.asset(
                   kBackgroundImage,
-                  fit: BoxFit.fill,
-                  width: Get.width,
-                  height: Get.height,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
                 ),
               ),
               Padding(
@@ -98,47 +98,44 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      flex: 2,
-                      child: SizedBox(
-                        height: (screenHeight + screenWidth) * 0.07,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(child: CustomDetailsCard(text: Obx(() {
-                              final stationsNumbers =
-                                  paths[pathIndex.value].length.obs;
-                              return CustomText(
-                                text: AppLocalizations.of(context)!
-                                    .stationNumber(stationsNumbers.value),
-                                txtColor: kSecondaryTextColor,
-                              );
-                            }))),
-                            Flexible(child: CustomDetailsCard(text: Obx(() {
-                              final stationsNumbers =
-                                  paths[pathIndex.value].length.obs;
-                              return CustomText(
-                                //time..............................//
-                                text: TimeCalculate()
-                                    .time(context, stationsNumbers.value),
-                                txtColor: kSecondaryTextColor,
-                              );
-                            }))),
-                            Flexible(child: CustomDetailsCard(text: Obx(() {
-                              final stationsNumbers =
-                                  paths[pathIndex.value].length.obs;
-                              return CustomText(
-                                text: AppLocalizations.of(context)!.price(
-                                    metroController
-                                        .getTicketPrice(stationsNumbers.value)),
-                                txtColor: kSecondaryTextColor,
-                              );
-                            }))),
-                          ],
-                        ),
+                      flex: 3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(child: CustomDetailsCard(text: Obx(() {
+                            final stationsNumbers =
+                                paths[pathIndex.value].length.obs;
+                            return CustomText(
+                              text: AppLocalizations.of(context)!
+                                  .stationNumber(stationsNumbers.value),
+                              txtColor: kSecondaryTextColor,
+                            );
+                          }))),
+                          Expanded(child: CustomDetailsCard(text: Obx(() {
+                            final stationsNumbers =
+                                paths[pathIndex.value].length.obs;
+                            return CustomText(
+                              //time..............................//
+                              text: TimeCalculate()
+                                  .time(context, stationsNumbers.value),
+                              txtColor: kSecondaryTextColor,
+                            );
+                          }))),
+                          Expanded(child: CustomDetailsCard(text: Obx(() {
+                            final stationsNumbers =
+                                paths[pathIndex.value].length.obs;
+                            return CustomText(
+                              text: AppLocalizations.of(context)!.price(
+                                  metroController
+                                      .getTicketPrice(stationsNumbers.value)),
+                              txtColor: kSecondaryTextColor,
+                            );
+                          }))),
+                        ],
                       ),
                     ),
                     Expanded(
-                      flex: 11,
+                      flex: 12,
                       child: Obx(() {
                         return StationTileListView(
                           pathIndex: pathIndex,

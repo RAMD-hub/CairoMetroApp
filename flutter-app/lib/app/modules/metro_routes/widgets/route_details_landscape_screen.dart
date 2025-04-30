@@ -49,7 +49,7 @@ class RouteDetailsLandScapeScreen extends StatelessWidget {
                 ),
                 child: Image.asset(
                   kBackgroundImage,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
                 ),

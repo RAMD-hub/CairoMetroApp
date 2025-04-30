@@ -41,9 +41,9 @@ class TrackingLandScapeScreen extends StatelessWidget {
                 ),
                 child: Image.asset(
                   kBackgroundImage,
-                  fit: BoxFit.fill,
-                  width: Get.width,
-                  height: Get.height,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
                 ),
               ),
               Padding(
