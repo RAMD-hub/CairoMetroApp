@@ -45,6 +45,8 @@ class MetroController extends GetxController {
   final metroPaths = <MetroPath>[].obs;
   final nearestStation = ''.obs;
   final currentStation = ''.obs;
+  final previousStation = ''.obs;
+  final nextStation = ''.obs;
   final distance = ''.obs;
   final getPaths =
       false.obs; // دا زي متغير كدا لما هعمله Listener لاستدعاء داله allPaths
@@ -169,10 +171,18 @@ class MetroController extends GetxController {
     GetStorage().write('tracking', true);
     metroStationFromStationName();
     locationService.startTracking(userSelectedPathToMetroStation);
-    ever(locationService.currentStation, (String stationName) {
-      currentStation.value = stationName;
-      print("MetroController currentStation updated to: $stationName");
-    });
+    everAll(
+      [
+        locationService.currentStation,
+        locationService.nextStation,
+        locationService.previousStation,
+      ],
+      (_) {
+        currentStation.value = locationService.currentStation.value;
+        nextStation.value = locationService.nextStation.value;
+        previousStation.value = locationService.previousStation.value;
+      },
+    );
     tracking.value = true;
     if (locationService.currentStation.value.isNotEmpty) {
       currentStation.value = locationService.currentStation.value;

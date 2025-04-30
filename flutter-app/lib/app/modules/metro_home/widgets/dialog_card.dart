@@ -13,7 +13,14 @@ class DialogCard extends StatelessWidget {
 
   DialogCard({
     super.key,
+    required this.currentStation,
+    required this.nextStation,
+    required this.previousStation,
   });
+
+  final RxString currentStation;
+  final RxString nextStation;
+  final RxString previousStation;
 
   @override
   Widget build(BuildContext context) {
@@ -76,30 +83,37 @@ class DialogCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 11,
                     children: [
-                      CustomText(
-                        text: metroController.startStation.value.isNotEmpty
-                            ? AppLocalizations.of(context)!.startStationLabel(
-                                metroController.startStation.value)
-                            : '',
-                        txtColor: Colors.white70,
-                        txtFontWeight: FontWeight.bold,
-                      ),
-                      CustomText(
-                        text: metroController.currentStation.value.isNotEmpty
-                            ? AppLocalizations.of(context)!.currentStationLabel(
-                                metroController.currentStation.value)
-                            : '',
-                        txtFontWeight: FontWeight.bold,
-                        txtColor: kPrimaryColor,
-                      ),
-                      CustomText(
-                        text: metroController.endStation.value.isNotEmpty
-                            ? AppLocalizations.of(context)!.arrivalStationLabel(
-                                metroController.endStation.value)
-                            : '',
-                        txtColor: Colors.white70,
-                        txtFontWeight: FontWeight.bold,
-                      ),
+                      Obx(() {
+                        return CustomText(
+                          text: previousStation.value.isNotEmpty
+                              ? AppLocalizations.of(context)!.startStationLabel(
+                                  metroController.previousStation.value)
+                              : '',
+                          txtColor: Colors.white70,
+                          txtFontWeight: FontWeight.bold,
+                        );
+                      }),
+                      Obx(() {
+                        return CustomText(
+                          text: currentStation.value.isNotEmpty
+                              ? AppLocalizations.of(context)!
+                                  .currentStationLabel(currentStation.value)
+                              : '',
+                          txtFontWeight: FontWeight.bold,
+                          txtColor: kPrimaryColor,
+                        );
+                      }),
+                      Obx(() {
+                        return CustomText(
+                          text: nextStation.value.isNotEmpty
+                              ? AppLocalizations.of(context)!
+                                  .arrivalStationLabel(
+                                      metroController.nextStation.value)
+                              : '',
+                          txtColor: Colors.white70,
+                          txtFontWeight: FontWeight.bold,
+                        );
+                      }),
                     ],
                   ),
                 ),

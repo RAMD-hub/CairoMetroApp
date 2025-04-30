@@ -47,9 +47,9 @@
   "locationPermissionsPermanentlyDenied": "تم رفض أذونات الموقع بشكل دائم، لا يمكننا طلب الأذونات",
   "invalidAddress": "عنوان غير صالح أو غير موجود",
   "addressConversionError": "فشل في تحويل العنوان إلى إحداثيات: {error}",
-  "startStationLabel": "{station} => محطة البداية",
+  "startStationLabel": "{station} => المحطه اللي فاتت",
   "currentStationLabel": "{station} => انت هنا دلوقتي",
-  "arrivalStationLabel": "{station} => محطة الوصول",
+  "arrivalStationLabel": "{station} => المحطة اللي جاية",
   "language": "اللغة",
   "languageMessage": "مينفعش تتغير اللغة وفيه رحلة شغالة"
 }

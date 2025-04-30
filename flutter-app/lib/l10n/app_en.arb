@@ -47,9 +47,9 @@
   "locationPermissionsPermanentlyDenied": "Location permissions are permanently denied, we cannot request permissions.",
   "invalidAddress": "Invalid or non-existent address",
   "addressConversionError": "Failed to convert address to coordinates: {error}",
-  "startStationLabel": "{station} => start station",
+  "startStationLabel": "{station} => pervious station",
   "currentStationLabel": "{station} => You are here now",
-  "arrivalStationLabel": "{station} => arrival station",
+  "arrivalStationLabel": "{station} => next station",
   "language": "language",
   "languageMessage": "cant change language while trip"
 }

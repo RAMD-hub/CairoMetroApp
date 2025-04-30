@@ -17,6 +17,7 @@ class MetroHome extends StatelessWidget {
   MetroHome({super.key});
 
   final MetroController metroController = Get.find();
+  final LocationService locationService = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +100,11 @@ class MetroHome extends StatelessWidget {
                         height: 12,
                       ),
                       Obx(() => metroController.tracking.value
-                          ? DialogCard()
+                          ? DialogCard(
+                              currentStation: metroController.currentStation,
+                              nextStation: metroController.nextStation,
+                              previousStation: metroController.previousStation,
+                            )
                           : SizedBox()),
                       StationsCard(),
                       AddressCard(),

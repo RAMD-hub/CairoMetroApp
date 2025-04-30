@@ -99,6 +99,8 @@ class LocationService {
   }
 
   final currentStation = ''.obs;
+  final previousStation = ''.obs;
+  final nextStation = ''.obs;
   bool isTracking = true; // used to enable tracking service
 
   StreamSubscription<Position>? positionStream;
@@ -132,6 +134,17 @@ class LocationService {
           //   print('قربت توصل لمحطة ${station.name}$distance');
           if (currentStation.value != station.name) {
             currentStation.value = station.name;
+            final currentIndex =
+                routeStations.indexWhere((s) => s.name == station.name);
+
+            if (currentIndex != -1) {
+              previousStation.value =
+                  currentIndex > 0 ? routeStations[currentIndex - 1].name : '';
+
+              nextStation.value = currentIndex < routeStations.length - 1
+                  ? routeStations[currentIndex + 1].name
+                  : '';
+            }
           }
           if (station.name == lastStation.name) {
             // print("وصلت للمحطة الأخيرة: ${station.name}");
