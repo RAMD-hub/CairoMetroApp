@@ -6,9 +6,9 @@ import 'custom_text.dart';
 
 class CustomRadioButton extends StatelessWidget {
   final String text;
-  final String value;
-  final RxString groupValue;
-  final Function(String)? onChanged;
+  final int value;
+  final RxInt groupValue;
+  final Function(int)? onChanged;
 
   const CustomRadioButton({
     super.key,

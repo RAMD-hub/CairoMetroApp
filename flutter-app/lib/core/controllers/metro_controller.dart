@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cairo_metro_flutter/core/algorithms/path_finder.dart';
 import 'package:cairo_metro_flutter/core/algorithms/sorted_paths.dart';
+import 'package:cairo_metro_flutter/core/services/location_service_background.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,6 +26,8 @@ class MetroController extends GetxController {
 
   final Rx<Locale> locale = Locale('en', '').obs;
 
+  final RxBool tracking = false.obs;
+
   final ExchangeStation exchangeStation;
   final MetroRepository metroRepository;
   final TicketService ticketService;
@@ -34,7 +37,7 @@ class MetroController extends GetxController {
   final RxList<String> stationsNames = <String>[].obs;
   final startStation = ''.obs;
   final endStation = ''.obs;
-  final selectedTransfers = 'Less Stations'.obs;
+  final selectedTransfers = 0.obs;
   final allPaths = <List<String>>[].obs;
   final allPathsByExchangedNum = <List<String>>[].obs;
   final userSelectedPath = <String>[].obs;
@@ -69,6 +72,9 @@ class MetroController extends GetxController {
     if (savedLang != null) {
       locale.value = Locale(savedLang, '');
     }
+
+    dynamic storedTrackingValue = GetStorage().read('tracking');
+    tracking.value = storedTrackingValue is bool ? storedTrackingValue : false;
   }
 
   Future<void> changeLanguage(String languageCode) async {
@@ -111,7 +117,7 @@ class MetroController extends GetxController {
     return ticketService.calculateTicketPrice(stationCount);
   }
 
-  void updateSelectedTransfer(String value) {
+  void updateSelectedTransfer(int value) {
     selectedTransfers.value = value;
   }
 
@@ -160,16 +166,24 @@ class MetroController extends GetxController {
   }
 
   void startTracking() {
+    GetStorage().write('tracking', true);
     metroStationFromStationName();
     locationService.startTracking(userSelectedPathToMetroStation);
     ever(locationService.currentStation, (String stationName) {
       currentStation.value = stationName;
       print("MetroController currentStation updated to: $stationName");
     });
+    tracking.value = true;
+    if (locationService.currentStation.value.isNotEmpty) {
+      currentStation.value = locationService.currentStation.value;
+    }
   }
 
   void stopTracking() {
+    tracking.value = false;
+    GetStorage().write('tracking', false);
     locationService.stopTracking();
+    LocationServiceBackground().stopLocationTracking();
   }
 
   bool positionStream() {

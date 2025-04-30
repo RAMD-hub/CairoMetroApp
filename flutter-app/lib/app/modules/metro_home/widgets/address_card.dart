@@ -46,8 +46,8 @@ class AddressCard extends StatelessWidget {
               onPressed: () {
                 if (addressCont.text.isEmpty) {
                   Get.snackbar(
-                    'Error',
-                    'The address is Empty',
+                    AppLocalizations.of(context)!.error,
+                    AppLocalizations.of(context)!.errorMessage,
                     backgroundColor: Colors.red,
                     colorText: Colors.white,
                   );

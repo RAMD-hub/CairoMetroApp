@@ -1,3 +1,4 @@
+import 'package:cairo_metro_flutter/core/algorithms/timeCalculate.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/constant.dart';
@@ -117,9 +118,8 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                                   paths[pathIndex.value].length.obs;
                               return CustomText(
                                 //time..............................//
-                                text: AppLocalizations.of(context)!.time(
-                                    (stationsNumbers.value * 3) ~/ 60,
-                                    (stationsNumbers.value * 3) % 60),
+                                text: TimeCalculate()
+                                    .time(context, stationsNumbers.value),
                                 txtColor: kSecondaryTextColor,
                               );
                             }))),

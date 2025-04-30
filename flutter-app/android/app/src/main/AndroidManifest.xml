@@ -1,11 +1,44 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Location permissions -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+
     <application
-        android:label="cairo_metro_flutter"
+        android:label="Cairo Metro"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- Background Service -->
+        <service
+            android:name="de.julianassmann.flutter_background.IsolateHolderService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync|location" />
+        
+        <!-- Remove WorkManager Initialization -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.impl.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -15,30 +48,34 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
-            <!-- Specifies an Android theme to apply to this Activity as soon as
-                 the Android process has started. This theme is visible to the user
-                 while the Flutter UI initializes. After that, this theme continues
-                 to determine the Window background behind the Flutter UI. -->
+
             <meta-data
-              android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
-              />
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!-- Don't delete the meta-data below.
-             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+
+        <!-- Add receiver for awesome_notifications -->
+        <receiver android:name="com.awesomenotifications.notifications.broadcastReceivers.DismissedNotificationReceiver"
+            android:exported="false"/>
+        <receiver android:name="com.awesomenotifications.notifications.broadcastReceivers.ScheduledNotificationReceiver"
+            android:exported="false"/>
+        <receiver android:name="com.awesomenotifications.notifications.broadcastReceivers.KeepOnTopActionReceiver"
+            android:exported="false"/>
+        <receiver android:name="com.awesomenotifications.notifications.broadcastReceivers.ActionButtonsReceiver"
+            android:exported="false"/>
+
+        <!-- Flutter embedding metadata -->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
-    <!-- Required to query activities that can process text, see:
-         https://developer.android.com/training/package-visibility and
-         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
 
-         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <!-- Required for text processing (Flutter default) -->
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>

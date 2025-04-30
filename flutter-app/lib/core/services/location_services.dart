@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../app/data/models/address_latlong.dart';
 import '../../app/data/models/nearest_station_result.dart';
 import '../../app/data/models/station.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LocationService {
   Future<void> permissions() async {
@@ -15,8 +17,8 @@ class LocationService {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       Get.snackbar(
-        'Metro Cairo ',
-        'Location services are disabled.',
+        AppLocalizations.of(Get.context!)!.notificationServiceTitle,
+        AppLocalizations.of(Get.context!)!.locationServicesDisabled,
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
@@ -27,8 +29,8 @@ class LocationService {
 
       if (permission == LocationPermission.denied) {
         Get.snackbar(
-          'Metro Cairo',
-          'Location permissions are denied',
+          AppLocalizations.of(Get.context!)!.notificationServiceTitle,
+          AppLocalizations.of(Get.context!)!.locationPermissionsDenied,
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
@@ -37,8 +39,9 @@ class LocationService {
       if (permission == LocationPermission.deniedForever) {
         // Permissions are denied forever, handle appropriately.
         Get.snackbar(
-          'Metro Cairo',
-          'Location permissions are permanently denied, we cannot request permissions.',
+          AppLocalizations.of(Get.context!)!.notificationServiceTitle,
+          AppLocalizations.of(Get.context!)!
+              .locationPermissionsPermanentlyDenied,
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
@@ -74,8 +77,8 @@ class LocationService {
       List<Location> locations = await locationFromAddress(address);
       if (locations.isEmpty) {
         Get.snackbar(
-          'Error',
-          'Invalid or non-existent address',
+          AppLocalizations.of(Get.context!)!.error,
+          AppLocalizations.of(Get.context!)!.invalidAddress,
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
@@ -86,8 +89,8 @@ class LocationService {
       );
     } catch (e) {
       Get.snackbar(
-        'Error',
-        'Failed to convert address to coordinates: $e',
+        AppLocalizations.of(Get.context!)!.error,
+        AppLocalizations.of(Get.context!)!.addressConversionError(e),
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
@@ -97,14 +100,19 @@ class LocationService {
 
   final currentStation = ''.obs;
   bool isTracking = true; // used to enable tracking service
+
   StreamSubscription<Position>? positionStream;
   void startTracking(RxList<MetroStation> routeStations) async {
     if (!isTracking) return;
+    GetStorage().write('tracking', true);
     await permissions();
     const LocationSettings locationSettings = LocationSettings(
       accuracy: LocationAccuracy.high,
       distanceFilter: 10,
     );
+    if (currentStation.value.isNotEmpty) {
+      currentStation.value = '';
+    }
     final lastStation = routeStations.last;
     positionStream =
         Geolocator.getPositionStream(locationSettings: locationSettings)
@@ -119,14 +127,15 @@ class LocationService {
           station.coordinates[0],
           station.coordinates[1],
         );
-        print('Tracking On');
+        // print('Tracking On');
         if (distance <= 200) {
-          print('قربت توصل لمحطة ${station.name}$distance');
+          //   print('قربت توصل لمحطة ${station.name}$distance');
           if (currentStation.value != station.name) {
             currentStation.value = station.name;
           }
           if (station.name == lastStation.name) {
-            print("وصلت للمحطة الأخيرة: ${station.name}");
+            // print("وصلت للمحطة الأخيرة: ${station.name}");
+            GetStorage().write('tracking', false);
             stopTracking();
           }
           break;
@@ -141,6 +150,7 @@ class LocationService {
       positionStream = null;
     }
     isTracking = false;
-    print("✅ تم إيقاف التتبع");
+    GetStorage().write('tracking', false);
+    // print("✅ تم إيقاف التتبع");
   }
 }

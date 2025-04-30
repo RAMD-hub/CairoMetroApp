@@ -131,10 +131,10 @@
     <string name="tawfikia">التوفيقية</string>
     <string name="kit_kat">الكيت كات</string>
     <string name="ok">تمام</string>
-    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_rod_el_farag_corridor">اتاكد انك واخد المترو اللي اتجاهه من الكيت كات متجه لمحور روض الفرج</string>
-    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_cairo_university_el_monib">اتاكد انك واخد المترو اللي اتجاهه من الكيت كات متجه لجامعه القاهرة</string>
-    <string name="make_sure_to_take_metro_in_direction_from_rod_el_farag_corridor_to_kit_kat">اتاكد انك واخد المترو اللي اتجاهه من محور روض الفرج متجه الي الكيت كات</string>
-    <string name="make_sure_to_take_metro_in_direction_from_cairo_university_el_monib_to_kit_kat">اتاكد انك واخد المترو  اللي اتجاهه من جامعه القاهرة متجه الي الكيت كات</string>
+    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_rod_el_farag_corridor">اتاكد انك واخد المترو اللي اتجاهه لمحور روض الفرج</string>
+    <string name="make_sure_to_take_metro_in_direction_from_kit_kat_to_cairo_university_el_monib">اتاكد انك واخد المترو اللي اتجاهه  لجامعه القاهرة</string>
+    <string name="make_sure_to_take_metro_in_direction_from_rod_el_farag_corridor_to_kit_kat">اتاكد انك واخد المترو اللي اتجاهه لمحور روض الفرج متجه ت</string>
+    <string name="make_sure_to_take_metro_in_direction_from_cairo_university_el_monib_to_kit_kat">اتاكد انك واخد المترو  اللي اتجاهه لجامعه القاهرة متجه </string>
     <string name="then_come_out_wait_the_next_metro_and">" بعد ما توصل الكيت كات انزل وخد المترو الجاي و "</string>
     <string name="there_is_a_path_has_a_kit_kat_station_if_you_choose_that_path">فيه طريق من الطرق موجود فيه محطة الكيت كات لو هتختار الطريق ده </string>
     <string name="make_sure_you_are_connect_to_internet">اتاكد انك مشغل الانترنت </string>

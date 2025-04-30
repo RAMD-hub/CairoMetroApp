@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../../core/controllers/metro_controller.dart';
 import '../widgets/route_details_landscape_screen.dart';
 import '../widgets/route_details_portrait_screen.dart';
@@ -36,9 +37,10 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
           return RouteDetailsPortraitScreen(
             pathIndex: pathIndex,
             paths: paths,
-            onPressedBigNext: () {
+            onPressedBigNext: () async {
               metroController.userSelectedPath
                   .assignAll(paths[pathIndex.value]);
+              GetStorage().write('path', paths[pathIndex.value]);
               Get.offNamed(
                 '/MetroTripProgress',
               );

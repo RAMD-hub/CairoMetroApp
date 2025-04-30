@@ -1,3 +1,4 @@
+import 'package:cairo_metro_flutter/core/services/location_service_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,14 @@ import 'core/routes/app_routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+
+  final binding = MetroBinding();
+  binding.dependencies();
+
+  await LocationServiceBackground().initialize();
+
   runApp(
     const MyApp(),
   );

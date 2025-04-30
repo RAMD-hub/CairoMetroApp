@@ -1,6 +1,7 @@
 import 'package:cairo_metro_flutter/app/modules/metro_trip_progress/widgets/tracking_tile_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../core/algorithms/timeCalculate.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/controllers/metro_controller.dart';
 import '../../../../core/shared/widgets/custom_button.dart';
@@ -66,9 +67,8 @@ class TrackingLandScapeScreen extends StatelessWidget {
                           CustomDetailsCard(
                               text: CustomText(
                             //time..............//
-                            text: AppLocalizations.of(context)!.time(
-                                (stationsNumbers * 3) ~/ 60,
-                                (stationsNumbers * 3) % 60),
+                            text:
+                                TimeCalculate().time(context, stationsNumbers),
                             txtColor: kSecondaryTextColor,
                           )),
                           CustomDetailsCard(

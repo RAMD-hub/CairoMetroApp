@@ -73,14 +73,14 @@ class StationsCard extends StatelessWidget {
                 children: [
                   CustomRadioButton(
                     text: AppLocalizations.of(context)!.lessStation,
-                    value: AppLocalizations.of(context)!.lessStation,
+                    value: 0,
                     groupValue: metroController.selectedTransfers,
                     onChanged: (newValue) =>
                         metroController.updateSelectedTransfer(newValue),
                   ),
                   CustomRadioButton(
                     text: AppLocalizations.of(context)!.lessTransfer,
-                    value: AppLocalizations.of(context)!.lessTransfer,
+                    value: 1,
                     groupValue: metroController.selectedTransfers,
                     onChanged: (newValue) =>
                         metroController.updateSelectedTransfer(newValue),

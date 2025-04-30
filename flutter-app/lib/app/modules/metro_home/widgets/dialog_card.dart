@@ -1,6 +1,7 @@
 import 'package:cairo_metro_flutter/core/controllers/metro_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/shared/widgets/circle_shape.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
@@ -39,20 +40,16 @@ class DialogCard extends StatelessWidget {
                   txtColor: kPrimaryColor,
                 ),
                 Spacer(),
-                Obx(() {
-                  return TextButton(
-                      onPressed: metroController.userSelectedPath.isNotEmpty
-                          ? () {
-                              Get.toNamed(
-                                '/MetroTripProgress',
-                              );
-                            }
-                          : null,
-                      child: CustomText(
-                        text: AppLocalizations.of(context)!.viewAll,
-                        txtColor: kPrimaryColor,
-                      ));
-                })
+                TextButton(
+                    onPressed: () {
+                      Get.toNamed(
+                        '/MetroTripProgress',
+                      );
+                    },
+                    child: CustomText(
+                      text: AppLocalizations.of(context)!.viewAll,
+                      txtColor: kPrimaryColor,
+                    )),
               ],
             ),
             const Divider(
@@ -79,33 +76,30 @@ class DialogCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 11,
                     children: [
-                      Obx(() {
-                        return CustomText(
-                          text: metroController.startStation.value.isNotEmpty
-                              ? '${metroController.startStation.value} => start station'
-                              : '',
-                          txtColor: Colors.white70,
-                          txtFontWeight: FontWeight.bold,
-                        );
-                      }),
-                      Obx(() {
-                        return CustomText(
-                          text: metroController.currentStation.value.isNotEmpty
-                              ? '${metroController.currentStation.value} => You are here now'
-                              : '',
-                          txtFontWeight: FontWeight.bold,
-                          txtColor: kPrimaryColor,
-                        );
-                      }),
-                      Obx(() {
-                        return CustomText(
-                          text: metroController.endStation.value.isNotEmpty
-                              ? '${metroController.endStation.value} => arrival station'
-                              : '',
-                          txtColor: Colors.white70,
-                          txtFontWeight: FontWeight.bold,
-                        );
-                      }),
+                      CustomText(
+                        text: metroController.startStation.value.isNotEmpty
+                            ? AppLocalizations.of(context)!.startStationLabel(
+                                metroController.startStation.value)
+                            : '',
+                        txtColor: Colors.white70,
+                        txtFontWeight: FontWeight.bold,
+                      ),
+                      CustomText(
+                        text: metroController.currentStation.value.isNotEmpty
+                            ? AppLocalizations.of(context)!.currentStationLabel(
+                                metroController.currentStation.value)
+                            : '',
+                        txtFontWeight: FontWeight.bold,
+                        txtColor: kPrimaryColor,
+                      ),
+                      CustomText(
+                        text: metroController.endStation.value.isNotEmpty
+                            ? AppLocalizations.of(context)!.arrivalStationLabel(
+                                metroController.endStation.value)
+                            : '',
+                        txtColor: Colors.white70,
+                        txtFontWeight: FontWeight.bold,
+                      ),
                     ],
                   ),
                 ),

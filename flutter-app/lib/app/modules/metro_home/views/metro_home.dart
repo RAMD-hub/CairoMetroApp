@@ -1,8 +1,10 @@
 import 'package:cairo_metro_flutter/app/modules/metro_home/widgets/dialog_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/controllers/metro_controller.dart';
+import '../../../../core/services/location_services.dart';
 import '../../../../core/shared/widgets/appbar/custom_appbar.dart';
 import '../../../../core/shared/widgets/custom_icon.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
@@ -18,6 +20,17 @@ class MetroHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (metroController.tracking.value && !LocationService().isTracking) {
+      dynamic storedPath = GetStorage().read('path');
+      if (storedPath != null && storedPath is List) {
+        // Convert List<dynamic> to List<String>
+        storedPath =
+            List<String>.from(storedPath.map((item) => item.toString()));
+      }
+      LocationService().startTracking(storedPath);
+    } else {
+      LocationService().stopTracking();
+    }
     return Scaffold(
       resizeToAvoidBottomInset: true, //to not open keyboard up dropdown
       body: Stack(
@@ -47,14 +60,20 @@ class MetroHome extends StatelessWidget {
                 ),
                 actions: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
-                    child: CustomIcon(
-                        icon: Icons.language,
-                        onPressed: () {
-                          LanguageDialog().show(context);
-                        },
-                        color: Colors.orange),
-                  ),
+                      padding: const EdgeInsets.only(right: 16.0),
+                      child: CustomIcon(
+                          icon: Icons.language,
+                          onPressed: () {
+                            if (!metroController.tracking.value) {
+                              LanguageDialog().show(context);
+                            } else {
+                              Get.snackbar(
+                                  AppLocalizations.of(context)!.language,
+                                  AppLocalizations.of(context)!
+                                      .languageMessage);
+                            }
+                          },
+                          color: Colors.orange)),
                 ],
               )),
               SliverToBoxAdapter(
@@ -79,7 +98,9 @@ class MetroHome extends StatelessWidget {
                       SizedBox(
                         height: 12,
                       ),
-                      if (!metroController.positionStream()) DialogCard(),
+                      Obx(() => metroController.tracking.value
+                          ? DialogCard()
+                          : SizedBox()),
                       StationsCard(),
                       AddressCard(),
                     ],

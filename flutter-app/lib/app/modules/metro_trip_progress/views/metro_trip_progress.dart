@@ -1,5 +1,8 @@
+import 'package:cairo_metro_flutter/core/services/location_premissions.dart';
+import 'package:cairo_metro_flutter/core/services/location_service_background.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../../core/controllers/metro_controller.dart';
 import '../widgets/tracking_landscape_screen.dart';
 import '../widgets/tracking_portrait_screen.dart';
@@ -18,15 +21,23 @@ class _MetroTripProgressState extends State<MetroTripProgress> {
   void initState() {
     super.initState();
     if (metroController.positionStream()) {
-      Future.delayed(Duration.zero, () {
+      Future.delayed(Duration.zero, () async {
         metroController.startTracking();
+        await Permissions().checkLocationPermission();
+        await LocationServiceBackground().startLocationTracking();
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<String> path = metroController.userSelectedPath;
+    List<String> path = metroController.userSelectedPath;
+    if (path.isEmpty && GetStorage().read('path') != null) {
+      final dynamic storedPath = GetStorage().read('path');
+      if (storedPath is List) {
+        path = storedPath.map((item) => item.toString()).toList();
+      }
+    }
     return Scaffold(
       body: OrientationBuilder(builder: (context, orientation) {
         if (orientation == Orientation.portrait) {

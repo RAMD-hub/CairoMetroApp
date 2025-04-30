@@ -7,9 +7,9 @@
 
     <style name="Theme.CairoMetro" parent="Base.Theme.CairoMetro" >
         <item name="radioButtonStyle">@style/Widget.App.RadioButton</item>
-        <!-- الخط الافتراضي -->
-        <item name="android:fontFamily">@font/zain_bold</item>
-        <item name="android:textSize">19sp</item> <!-- الحجم -->
+<!--        &lt;!&ndash; الخط الافتراضي &ndash;&gt;-->
+<!--        <item name="android:fontFamily">@font/zain_bold</item>-->
+<!--        <item name="android:textSize">19sp</item> &lt;!&ndash; الحجم &ndash;&gt;-->
     </style>
     <style name="Widget.App.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
         <item name="buttonTint">@color/radio_button</item>
