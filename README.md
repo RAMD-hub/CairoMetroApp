@@ -65,29 +65,18 @@ Used to compute shortest and optimal routes through the metro network.
 
 ### 📱 Kotlin App (Android)
 
-| Screen 1 | Screen 2 |
-|----------|----------|
-| ![Kotlin 1](https://your-image-link.com/kotlin1.png) | ![Kotlin 2](https://your-image-link.com/kotlin2.png) |
-
-| Screen 3 | Screen 4 |
-|----------|----------|
-| ![Kotlin 3](https://your-image-link.com/kotlin3.png) | ![Kotlin 4](https://your-image-link.com/kotlin4.png) |
-
-| Screen 3 | Screen 4 |
-|----------|----------|
-| ![Kotlin 3](https://your-image-link.com/kotlin3.png) | ![Kotlin 4](https://your-image-link.com/kotlin4.png) |
+| HomePage | All Routes | | Live Tracking
+|----------|----------|----------|
+| ![Home](https://i.postimg.cc/NfB9Jtkz/image.png) | ![All Route](https://i.postimg.cc/LXF6Jkyb/image.png) | ![Live Tracking](https://i.postimg.cc/L6Q9tFCf/image.png) |
 
 ---
 
 ### 🌐 Flutter App (Android & iOS)
 
-| Screen 1 | Screen 2 |
-|----------|----------|
-| ![Flutter 1](https://i.postimg.cc/NfB9Jtkz/image.png) | ![Flutter 2](https://your-image-link.com/flutter2.png) |
+| HomePage | All Routes | | Live Tracking
+|----------|----------|----------|
+| ![Home](https://i.postimg.cc/NfB9Jtkz/image.png) | ![All Route](https://i.postimg.cc/LXF6Jkyb/image.png) | ![Live Tracking](https://i.postimg.cc/L6Q9tFCf/image.png) |
 
-| Screen 3 | Screen 4 |
-|----------|----------|
-| ![Flutter 3](https://your-image-link.com/flutter3.png) | ![Flutter 4](https://your-image-link.com/flutter4.png) |
 
 ---
 
