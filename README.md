@@ -65,17 +65,17 @@ Used to compute shortest and optimal routes through the metro network.
 
 ### 📱 Kotlin App (Android)
 
-| HomePage | All Routes | | Live Tracking
-|----------|----------|----------|
-| ![Home](https://i.postimg.cc/NfB9Jtkz/image.png) | ![All Route](https://i.postimg.cc/LXF6Jkyb/image.png) | ![Live Tracking](https://i.postimg.cc/L6Q9tFCf/image.png) |
+| Home Page | All Routes | Live Tracking |
+|-----------|------------|---------------|
+| ![Home](https://i.postimg.cc/0Q91gVXP/image.png) | ![All Routes](https://i.postimg.cc/pTkbPK38/image.png) | ![Live Tracking](https://i.postimg.cc/7hQF2wHZ/image.png) |
 
 ---
 
 ### 🌐 Flutter App (Android & iOS)
 
-| HomePage | All Routes | | Live Tracking
-|----------|----------|----------|
-| ![Home](https://i.postimg.cc/NfB9Jtkz/image.png) | ![All Route](https://i.postimg.cc/LXF6Jkyb/image.png) | ![Live Tracking](https://i.postimg.cc/L6Q9tFCf/image.png) |
+| Home Page | All Routes | Live Tracking |
+|-----------|------------|---------------|
+| ![Home](https://i.postimg.cc/NfB9Jtkz/image.png) | ![All Routes](https://i.postimg.cc/LXF6Jkyb/image.png) | ![Live Tracking](https://i.postimg.cc/L6Q9tFCf/image.png) |
 
 
 ---
@@ -100,14 +100,14 @@ Used to compute shortest and optimal routes through the metro network.
 
 ---
 
-## 👨‍💻 Meet the Team
+## 👨‍💻 Team Members
 
-| Member            | Role                 | LinkedIn                          |
-|------------------|----------------------|-----------------------------------|
-| Ahmed Saleh      | Mobile Developer     | [LinkedIn](https://www.linkedin.com/in/ahmed-saleh-054651219/) |
-| Doaa Abdelhafez  | Mobile Developer     | [LinkedIn](https://www.linkedin.com/in/doaa-abd-el-hafez/) |
-| Radwa Mohamed    | Mobile Developer     | [LinkedIn](https://www.linkedin.com/in/radwa-mohamed-029bab25a/) |
-| Mohamed Nasir    | Mobile Developer     | [LinkedIn](https://www.linkedin.com/in/mohamed-nosair-11b814192/) |
+| 👤 Name            | 🛠️ Role             | 🔗 LinkedIn |
+|--------------------|----------------------|-------------|
+| **Ahmed Saleh**      | Mobile Developer     | [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ahmed-saleh-054651219/) |
+| **Doaa Abdelhafez**  | Mobile Developer     | [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/doaa-abd-el-hafez/) |
+| **Radwa Mohamed**    | Mobile Developer     | [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/radwa-mohamed-029bab25a/) |
+| **Mohamed Nasir**    | Mobile Developer     | [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohamed-nosair-11b814192/) |
 
 ---
 
