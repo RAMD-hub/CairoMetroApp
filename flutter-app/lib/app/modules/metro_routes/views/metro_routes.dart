@@ -22,7 +22,7 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
   void initState() {
     super.initState();
     metroController.getPaths.value = true;
-    paths.assignAll(metroController.selectedTransfers.value == 'Less Stations'
+    paths.assignAll(metroController.selectedTransfers.value == 0
         ? metroController.allPaths
         : metroController.allPathsByExchangedNum);
     metroController.getPaths.value = false; // reset boolean
