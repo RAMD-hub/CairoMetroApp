@@ -1,6 +1,7 @@
 import 'package:cairo_metro_flutter/core/algorithms/timeCalculate.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/controllers/metro_controller.dart';
 import '../../../../core/shared/widgets/appbar/custom_appbar.dart';
@@ -21,6 +22,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
     this.onPressedCounterNext,
     this.onPressedCounterBack,
     RxInt? pathIndex,
+    required this.startTripKey,
   }) : pathIndex = pathIndex ?? 0.obs;
 
   final List<List<String>> paths;
@@ -31,6 +33,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
   final Function()? onPressedCounterBack;
   final RxInt pathIndex;
   final MetroController metroController = Get.find();
+  final GlobalKey startTripKey;
 
   @override
   Widget build(BuildContext context) {
@@ -105,30 +108,36 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                           Expanded(child: CustomDetailsCard(text: Obx(() {
                             final stationsNumbers =
                                 paths[pathIndex.value].length.obs;
-                            return CustomText(
-                              text: AppLocalizations.of(context)!
-                                  .stationNumber(stationsNumbers.value),
-                              txtColor: kSecondaryTextColor,
+                            return FittedBox(
+                              child: CustomText(
+                                text: AppLocalizations.of(context)!
+                                    .stationNumber(stationsNumbers.value),
+                                txtColor: kSecondaryTextColor,
+                              ),
                             );
                           }))),
                           Expanded(child: CustomDetailsCard(text: Obx(() {
                             final stationsNumbers =
                                 paths[pathIndex.value].length.obs;
-                            return CustomText(
-                              //time..............................//
-                              text: TimeCalculate()
-                                  .time(context, stationsNumbers.value),
-                              txtColor: kSecondaryTextColor,
+                            return FittedBox(
+                              child: CustomText(
+                                //time..............................//
+                                text: TimeCalculate()
+                                    .time(context, stationsNumbers.value),
+                                txtColor: kSecondaryTextColor,
+                              ),
                             );
                           }))),
                           Expanded(child: CustomDetailsCard(text: Obx(() {
                             final stationsNumbers =
                                 paths[pathIndex.value].length.obs;
-                            return CustomText(
-                              text: AppLocalizations.of(context)!.price(
-                                  metroController
-                                      .getTicketPrice(stationsNumbers.value)),
-                              txtColor: kSecondaryTextColor,
+                            return FittedBox(
+                              child: CustomText(
+                                text: AppLocalizations.of(context)!.price(
+                                    metroController
+                                        .getTicketPrice(stationsNumbers.value)),
+                                txtColor: kSecondaryTextColor,
+                              ),
                             );
                           }))),
                         ],
@@ -144,11 +153,17 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                       }),
                     ),
                     Expanded(
+                      child: Showcase(
+                        key: startTripKey,
+                        description: AppLocalizations.of(context)!
+                            .liveTrackingDescription,
                         child: CustomButton(
-                      onPressed: onPressedBigNext,
-                      btnName: bigButtonName,
-                      btnBackgroundColor: btnBackgroundColor,
-                    )),
+                          onPressed: onPressedBigNext,
+                          btnName: bigButtonName,
+                          btnBackgroundColor: btnBackgroundColor,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

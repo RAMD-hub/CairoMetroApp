@@ -1,6 +1,7 @@
 import 'package:cairo_metro_flutter/core/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 import '../../../../core/controllers/metro_controller.dart';
 import '../../../../core/shared/widgets/custom_button.dart';
 import '../../../../core/shared/widgets/custom_icon.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class StationsCard extends StatelessWidget {
   StationsCard({
     super.key,
+    required this.nearestStationDropDownKey,
   });
 
   final MetroController metroController = Get.find();
@@ -19,6 +21,7 @@ class StationsCard extends StatelessWidget {
   final endCont = TextEditingController();
   final temp = ''.obs;
   final isGetNearestStation = false.obs;
+  final GlobalKey nearestStationDropDownKey;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -45,11 +48,16 @@ class StationsCard extends StatelessWidget {
                       startCont: startCont,
                       hint: AppLocalizations.of(context)!.startStation),
                 ),
-                CustomIcon(
-                  icon: Icons.location_on_outlined,
-                  onPressed: () {
-                    metroController.getNearestStation(true.obs);
-                  },
+                Showcase(
+                  key: nearestStationDropDownKey,
+                  description:
+                      AppLocalizations.of(context)!.nearestStationDescription,
+                  child: CustomIcon(
+                    icon: Icons.location_on_outlined,
+                    onPressed: () {
+                      metroController.getNearestStation(true.obs);
+                    },
+                  ),
                 ),
               ],
             ),

@@ -1,6 +1,7 @@
 import 'package:cairo_metro_flutter/app/modules/metro_trip_progress/widgets/tracking_tile_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 import '../../../../core/algorithms/timeCalculate.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/controllers/metro_controller.dart';
@@ -18,6 +19,7 @@ class TrackingPortraitScreen extends StatelessWidget {
     required this.onPressedBigNext,
     required this.bigButtonName,
     RxInt? pathIndex,
+    required this.cancelTripKey,
   }) : pathIndex = pathIndex ?? 0.obs;
 
   final List<String> paths;
@@ -26,6 +28,7 @@ class TrackingPortraitScreen extends StatelessWidget {
   final String bigButtonName;
   final RxInt pathIndex;
   final MetroController metroController = Get.find();
+  final GlobalKey cancelTripKey;
 
   @override
   Widget build(BuildContext context) {
@@ -100,11 +103,16 @@ class TrackingPortraitScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
+                      child: Showcase(
+                        key: cancelTripKey,
+                        description: AppLocalizations.of(context)!.cancelTrip,
                         child: CustomButton(
-                      onPressed: onPressedBigNext,
-                      btnName: bigButtonName,
-                      btnBackgroundColor: btnBackgroundColor,
-                    )),
+                          onPressed: onPressedBigNext,
+                          btnName: bigButtonName,
+                          btnBackgroundColor: btnBackgroundColor,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../core/constants/constant.dart';
 import '../../../../core/controllers/metro_controller.dart';
@@ -12,9 +13,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AddressCard extends StatelessWidget {
   AddressCard({
     super.key,
+    required this.addressSearchKey,
   });
   final addressCont = TextEditingController();
   final MetroController metroController = Get.find();
+  final GlobalKey addressSearchKey;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -42,21 +45,25 @@ class AddressCard extends StatelessWidget {
               suffixIcon: Icons.location_city_outlined,
               textController: addressCont,
             ),
-            CustomButton(
-              onPressed: () {
-                if (addressCont.text.isEmpty) {
-                  Get.snackbar(
-                    AppLocalizations.of(context)!.error,
-                    AppLocalizations.of(context)!.errorMessage,
-                    backgroundColor: Colors.red,
-                    colorText: Colors.white,
-                  );
-                }
-                if (addressCont.text.isNotEmpty) {
-                  metroController.locationFromAddress(addressCont.text);
-                }
-              },
-              btnName:( AppLocalizations.of(context)!.search)
+            Showcase(
+              key: addressSearchKey,
+              description:
+                  AppLocalizations.of(context)!.searchButtonDescription,
+              child: CustomButton(
+                  onPressed: () {
+                    if (addressCont.text.isEmpty) {
+                      Get.snackbar(
+                        AppLocalizations.of(context)!.error,
+                        AppLocalizations.of(context)!.errorMessage,
+                        backgroundColor: Colors.red,
+                        colorText: Colors.white,
+                      );
+                    }
+                    if (addressCont.text.isNotEmpty) {
+                      metroController.locationFromAddress(addressCont.text);
+                    }
+                  },
+                  btnName: (AppLocalizations.of(context)!.search)),
             )
           ],
         ),

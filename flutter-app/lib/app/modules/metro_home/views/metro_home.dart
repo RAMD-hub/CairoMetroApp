@@ -2,8 +2,10 @@ import 'package:cairo_metro_flutter/app/modules/metro_home/widgets/dialog_card.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:showcaseview/showcaseview.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/controllers/metro_controller.dart';
+import '../../../../core/helper/showCaseIsFirstTime.dart';
 import '../../../../core/services/location_services.dart';
 import '../../../../core/shared/widgets/appbar/custom_appbar.dart';
 import '../../../../core/shared/widgets/custom_icon.dart';
@@ -13,11 +15,39 @@ import '../widgets/languageDialog.dart';
 import '../widgets/stations_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class MetroHome extends StatelessWidget {
-  MetroHome({super.key});
+class MetroHome extends StatefulWidget {
+  const MetroHome({super.key});
 
+  @override
+  State<MetroHome> createState() => _MetroHomeState();
+}
+
+class _MetroHomeState extends State<MetroHome> {
   final MetroController metroController = Get.find();
+
   final LocationService locationService = Get.find();
+
+  final GlobalKey _locationIconKey = GlobalKey();
+
+  final GlobalKey _languageIconKey = GlobalKey();
+
+  final GlobalKey _nearestStationDropDownKey = GlobalKey();
+
+  final GlobalKey _addressSearchKey = GlobalKey();
+  @override
+  void initState() {
+    super.initState();
+    showShowcaseIfFirstTime(
+      context: context,
+      keys: [
+        _locationIconKey,
+        _languageIconKey,
+        _nearestStationDropDownKey,
+        _addressSearchKey,
+      ],
+      storageKey: 'hasShownShowcase_home',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +63,7 @@ class MetroHome extends StatelessWidget {
       LocationService().stopTracking();
     }
     return Scaffold(
-      resizeToAvoidBottomInset: true, //to not open keyboard up dropdown
+      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
           ColorFiltered(
@@ -52,29 +82,39 @@ class MetroHome extends StatelessWidget {
             slivers: [
               SliverToBoxAdapter(
                   child: CustomAppBar(
-                leading: CustomIcon(
-                  icon: Icons.location_on_outlined,
-                  onPressed: () {
-                    // metroController.isNearStation.value = false;
-                    metroController.getNearestStation(false.obs);
-                  },
+                leading: Showcase(
+                  key: _locationIconKey,
+                  description:
+                      AppLocalizations.of(context)!.locationIconDescription,
+                  child: CustomIcon(
+                    icon: Icons.location_on_outlined,
+                    onPressed: () {
+                      // metroController.isNearStation.value = false;
+                      metroController.getNearestStation(false.obs);
+                    },
+                  ),
                 ),
                 actions: [
                   Padding(
                       padding: const EdgeInsets.only(right: 16.0),
-                      child: CustomIcon(
-                          icon: Icons.language,
-                          onPressed: () {
-                            if (!metroController.tracking.value) {
-                              LanguageDialog().show(context);
-                            } else {
-                              Get.snackbar(
-                                  AppLocalizations.of(context)!.language,
-                                  AppLocalizations.of(context)!
-                                      .languageMessage);
-                            }
-                          },
-                          color: Colors.orange)),
+                      child: Showcase(
+                        key: _languageIconKey,
+                        description: AppLocalizations.of(context)!
+                            .languageIconDescription,
+                        child: CustomIcon(
+                            icon: Icons.language,
+                            onPressed: () {
+                              if (!metroController.tracking.value) {
+                                LanguageDialog().show(context);
+                              } else {
+                                Get.snackbar(
+                                    AppLocalizations.of(context)!.language,
+                                    AppLocalizations.of(context)!
+                                        .languageMessage);
+                              }
+                            },
+                            color: Colors.orange),
+                      )),
                 ],
               )),
               SliverToBoxAdapter(
@@ -106,8 +146,12 @@ class MetroHome extends StatelessWidget {
                               previousStation: metroController.previousStation,
                             )
                           : SizedBox()),
-                      StationsCard(),
-                      AddressCard(),
+                      StationsCard(
+                        nearestStationDropDownKey: _nearestStationDropDownKey,
+                      ),
+                      AddressCard(
+                        addressSearchKey: _addressSearchKey,
+                      ),
                     ],
                   ),
                 ),

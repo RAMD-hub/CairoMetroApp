@@ -51,5 +51,11 @@
   "currentStationLabel": "{station} => انت هنا دلوقتي",
   "arrivalStationLabel": "{station} => المحطة اللي جاية",
   "language": "اللغة",
-  "languageMessage": "مينفعش تتغير اللغة وفيه رحلة شغالة"
+  "languageMessage": "مينفعش تتغير اللغة وفيه رحلة شغالة",
+  "locationIconDescription": " اضغط للحصول على موقعك الحالي واكتشاف أقرب محطة علي الخريطة.",
+  "languageIconDescription": "اضغط لتغيير لغة التطبيق.",
+  "nearestStationDescription": "اضغط لاختيار أقرب محطة تلقائياً من القائمة.",
+  "searchButtonDescription": "اضغط للبحث عن أقرب محطة إلى عنوانك التي تريد الوصول اليه.",
+  "liveTrackingDescription": "اضغط لبدء تتبع رحلتك. ستصلك إشعارات عند محطات التبديل والوصول.",
+  "cancelTrip": "اضغط لإلغاء الرحلة الحالية وإيقاف الإشعارات."
 }

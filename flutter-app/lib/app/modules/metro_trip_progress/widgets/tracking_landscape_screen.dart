@@ -1,6 +1,7 @@
 import 'package:cairo_metro_flutter/app/modules/metro_trip_progress/widgets/tracking_tile_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 import '../../../../core/algorithms/timeCalculate.dart';
 import '../../../../core/constants/constant.dart';
 import '../../../../core/controllers/metro_controller.dart';
@@ -17,6 +18,7 @@ class TrackingLandScapeScreen extends StatelessWidget {
     required this.onPressedBigNext,
     required this.bigButtonName,
     RxInt? pathIndex,
+    required this.cancelTripKey,
   }) : pathIndex = pathIndex ?? 0.obs;
 
   final List<String> paths;
@@ -25,6 +27,7 @@ class TrackingLandScapeScreen extends StatelessWidget {
   final String bigButtonName;
   final RxInt pathIndex;
   final MetroController metroController = Get.find();
+  final GlobalKey cancelTripKey;
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +82,18 @@ class TrackingLandScapeScreen extends StatelessWidget {
                             txtColor: kSecondaryTextColor,
                           )),
                           SizedBox(height: screenHeight * 0.02),
-                          CustomButton(
-                            onPressed: onPressedBigNext,
-                            btnName: bigButtonName,
-                            btnBackgroundColor: btnBackgroundColor,
+                          SizedBox(
+                            height: screenHeight * 0.07,
+                            child: Showcase(
+                              key: cancelTripKey,
+                              description:
+                                  AppLocalizations.of(context)!.cancelTrip,
+                              child: CustomButton(
+                                onPressed: onPressedBigNext,
+                                btnName: bigButtonName,
+                                btnBackgroundColor: btnBackgroundColor,
+                              ),
+                            ),
                           ),
                         ],
                       ),

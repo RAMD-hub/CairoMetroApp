@@ -51,5 +51,11 @@
   "currentStationLabel": "{station} => You are here now",
   "arrivalStationLabel": "{station} => next station",
   "language": "language",
-  "languageMessage": "cant change language while trip"
+  "languageMessage": "cant change language while trip",
+  "locationIconDescription": "Click to get your current location and find the nearest station in map.",
+  "languageIconDescription": "Click to change the app language.",
+  "nearestStationDescription": "Click to automatically pick the nearest station from the dropdown.",
+  "searchButtonDescription": "Click to search for the nearest station to your destination.",
+  "liveTrackingDescription": "Press to start tracking your trip. Notifications will alert you at interchange and arrival stations.",
+  "cancelTrip": "Press to cancel the current trip and stop notifications."
 }
