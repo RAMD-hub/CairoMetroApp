@@ -3,7 +3,6 @@ import 'package:cairo_metro_flutter/core/services/location_service_background.da
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:showcaseview/showcaseview.dart';
 import '../../../../core/controllers/metro_controller.dart';
 import '../../../../core/helper/showCaseIsFirstTime.dart';
 import '../widgets/tracking_landscape_screen.dart';

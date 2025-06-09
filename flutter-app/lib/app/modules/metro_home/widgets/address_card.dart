@@ -8,7 +8,6 @@ import '../../../../core/shared/widgets/custom_button.dart';
 import '../../../../core/shared/widgets/custom_text.dart';
 import '../../../../core/shared/widgets/custom_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddressCard extends StatelessWidget {
   AddressCard({

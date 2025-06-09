@@ -42,8 +42,6 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
           AppLocalizations.of(context)!.shortPathMessage);
     }
     // final RxInt stationsNumbers = paths[pathIndex.value].length.obs;
-    final double screenWidth = Get.width;
-    final double screenHeight = Get.height;
     return paths.isNotEmpty
         ? Stack(
             children: [

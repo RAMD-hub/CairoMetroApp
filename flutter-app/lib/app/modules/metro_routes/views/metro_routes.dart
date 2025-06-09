@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:showcaseview/showcaseview.dart';
 import '../../../../core/controllers/metro_controller.dart';
 import '../../../../core/helper/showCaseIsFirstTime.dart';
 import '../widgets/route_details_landscape_screen.dart';
