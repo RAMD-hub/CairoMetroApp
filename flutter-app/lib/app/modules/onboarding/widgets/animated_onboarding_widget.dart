@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-
 import 'animated_onboarding_type.dart';
 
-class AnimatedOnboardingImage extends StatefulWidget {
-  final String imagePath;
+class AnimatedOnboardingWidget extends StatefulWidget {
+  final Widget child;
   final AnimationType animationType;
-  final double height;
+  final Duration duration;
 
-  const AnimatedOnboardingImage({
+  const AnimatedOnboardingWidget({
     super.key,
-    required this.imagePath,
+    required this.child,
     required this.animationType,
-    this.height = 200,
+    this.duration = const Duration(milliseconds: 1500),
   });
 
   @override
-  State<AnimatedOnboardingImage> createState() =>
-      _AnimatedOnboardingImageState();
+  State<AnimatedOnboardingWidget> createState() =>
+      _AnimatedOnboardingWidgetState();
 }
 
-class _AnimatedOnboardingImageState extends State<AnimatedOnboardingImage>
+class _AnimatedOnboardingWidgetState extends State<AnimatedOnboardingWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
@@ -32,7 +31,7 @@ class _AnimatedOnboardingImageState extends State<AnimatedOnboardingImage>
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 1500),
+      duration: widget.duration,
       vsync: this,
     );
 
@@ -82,31 +81,21 @@ class _AnimatedOnboardingImageState extends State<AnimatedOnboardingImage>
 
   @override
   Widget build(BuildContext context) {
-    final image = ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(40),
-        bottomRight: Radius.circular(40),
-      ),
-      child: Image.asset(
-        widget.imagePath,
-        height: widget.height,
-        fit: BoxFit.cover,
-      ),
-    );
+    final child = widget.child;
 
     switch (widget.animationType) {
       case AnimationType.fade:
-        return FadeTransition(opacity: _fadeAnimation, child: image);
+        return FadeTransition(opacity: _fadeAnimation, child: child);
 
       case AnimationType.scale:
-        return ScaleTransition(scale: _scaleAnimation, child: image);
+        return ScaleTransition(scale: _scaleAnimation, child: child);
 
       case AnimationType.slideFromBottom:
       case AnimationType.slideFromLeft:
-        return SlideTransition(position: _slideAnimation, child: image);
+        return SlideTransition(position: _slideAnimation, child: child);
 
       case AnimationType.rotation:
-        return RotationTransition(turns: _rotationAnimation, child: image);
+        return RotationTransition(turns: _rotationAnimation, child: child);
     }
   }
 }

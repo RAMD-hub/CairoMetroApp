@@ -14,7 +14,6 @@ Future<void> main() async {
 
   final binding = MetroBinding();
   binding.dependencies();
-
   await LocationServiceBackground().initialize();
 
   runApp(
@@ -31,7 +30,9 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialBinding: MetroBinding(),
-        locale: Locale('ar'),
+        locale: Locale(GetStorage().read('language') ??
+            Get.deviceLocale?.languageCode ??
+            'ar'),
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -42,7 +43,9 @@ class MyApp extends StatelessWidget {
           Locale('en', ''), // English
           Locale('ar', ''), // Arabic
         ],
-        initialRoute: '/MetroHome',
+        initialRoute: GetStorage().read('onboarding_shown') == true
+            ? '/MetroHome'
+            : '/Onboarding',
         getPages: AppRoutes.routes,
       ),
     );

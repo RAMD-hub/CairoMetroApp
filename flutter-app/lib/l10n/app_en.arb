@@ -57,5 +57,15 @@
   "nearestStationDescription": "Click to automatically pick the nearest station from the dropdown.",
   "searchButtonDescription": "Click to search for the nearest station to your destination.",
   "liveTrackingDescription": "Press to start tracking your trip. Notifications will alert you at interchange and arrival stations.",
-  "cancelTrip": "Press to cancel the current trip and stop notifications."
+  "cancelTrip": "Press to cancel the current trip and stop notifications.",
+  "onboardingPage1Title": "Welcome to CairoMetro App 🚆",
+  "onboardingPage1Subtitle": "The easiest way to navigate Cairo Metro.",
+  "onboardingPage2Title": "Choose the Shortest Route 🧭",
+  "onboardingPage2Subtitle": "We calculate the shortest route based on the least stations or interchanges — and show you all possible options.",
+  "onboardingPage3Title": "Smart Trip Tracking 📍",
+  "onboardingPage3Subtitle": "We track your location during the trip in the background and send you alerts at interchange and arrival stations.",
+  "onboardingPage4Title": "Ready to Start? 🚀",
+  "onboardingPage4Subtitle": "Tap to begin your journey with Cairo Metro.",
+  "onboardingSkip": "Skip",
+  "onboardingStart": "Start Now"
 }

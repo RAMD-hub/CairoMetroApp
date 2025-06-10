@@ -14,10 +14,13 @@ class MetroRepository {
     final savedLang = GetStorage().read('language');
     if (savedLang != null) {
       lang.value = savedLang;
+    } else {
+      lang.value = Get.deviceLocale?.languageCode ?? 'ar';
     }
     stations.clear();
     stationsNames.clear();
-    String jsonString = await rootBundle.loadString('assets/data_$lang.json');
+    String jsonString =
+        await rootBundle.loadString('assets/data_${lang.value}.json');
     List<dynamic> jsonData = jsonDecode(jsonString);
     for (var item in jsonData) {
       stations.add(
