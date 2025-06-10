@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShowCaseWidget(
+      autoPlayDelay: const Duration(seconds: 3),
       builder: (BuildContext context) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialBinding: MetroBinding(),

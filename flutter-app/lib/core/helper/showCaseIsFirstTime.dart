@@ -1,20 +1,28 @@
-import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:showcaseview/showcaseview.dart';
-
-final box = GetStorage();
 
 void showShowcaseIfFirstTime({
   required BuildContext context,
   required List<GlobalKey> keys,
   required String storageKey,
-}) {
-  final hasShown = box.read(storageKey) ?? false;
+  ScrollController? scrollController,
+}) async {
+  final storage = GetStorage();
+  final hasShown = storage.read(storageKey) ?? false;
 
   if (!hasShown) {
-    box.write(storageKey, true);
+    if (scrollController != null && scrollController.hasClients) {
+      await scrollController.animateTo(
+        scrollController.position.minScrollExtent,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ShowCaseWidget.of(context).startShowCase(keys);
+      storage.write(storageKey, true);
     });
   }
 }

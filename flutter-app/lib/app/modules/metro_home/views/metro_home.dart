@@ -39,16 +39,25 @@ class _MetroHomeState extends State<MetroHome> {
   @override
   void initState() {
     super.initState();
-    showShowcaseIfFirstTime(
-      context: context,
-      keys: [
-        _locationIconKey,
-        _languageIconKey,
-        _nearestStationDropDownKey,
-        _addressSearchKey,
-      ],
-      storageKey: 'hasShownShowcase_home',
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showShowcaseIfFirstTime(
+        context: context,
+        keys: [
+          _locationIconKey,
+          _languageIconKey,
+          _nearestStationDropDownKey,
+          _addressSearchKey,
+        ],
+        storageKey: 'hasShownShowcase_home',
+        scrollController: _scrollController,
+      );
+    });
+  }
+
+  @override
+  dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
