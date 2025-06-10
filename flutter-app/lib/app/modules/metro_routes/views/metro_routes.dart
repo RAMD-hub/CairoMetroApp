@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../../core/controllers/metro_controller.dart';
+import '../../../../core/helper/scroll_helper.dart';
 import '../../../../core/helper/showCaseIsFirstTime.dart';
 import '../widgets/route_details_landscape_screen.dart';
 import '../widgets/route_details_portrait_screen.dart';
@@ -19,7 +20,7 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
   final RxList<List<String>> paths = <List<String>>[].obs;
   final MetroController metroController = Get.find();
   final GlobalKey _startTripKey = GlobalKey();
-
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -53,11 +54,20 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
               );
             },
             bigButtonName: AppLocalizations.of(context)!.startTrip,
-            onPressedCounterNext: () =>
-                pathIndex.value < paths.length - 1 ? pathIndex.value++ : null,
-            onPressedCounterBack: () =>
-                pathIndex.value > 0 ? pathIndex.value-- : null,
+            onPressedCounterNext: () {
+              if (pathIndex.value < paths.length - 1) {
+                pathIndex.value++;
+                customScrollToTop(_scrollController);
+              }
+            },
+            onPressedCounterBack: () {
+              if (pathIndex.value > 0) {
+                pathIndex.value--;
+                customScrollToTop(_scrollController);
+              }
+            },
             startTripKey: _startTripKey,
+            scrollController: _scrollController,
           );
         } else {
           return RouteDetailsLandScapeScreen(
@@ -71,11 +81,20 @@ class _MetroRouteScreenState extends State<MetroRouteScreen> {
               );
             },
             bigButtonName: AppLocalizations.of(context)!.startTrip,
-            onPressedCounterNext: () =>
-                pathIndex.value < paths.length - 1 ? pathIndex.value++ : null,
-            onPressedCounterBack: () =>
-                pathIndex.value > 0 ? pathIndex.value-- : null,
+            onPressedCounterNext: () {
+              if (pathIndex.value < paths.length - 1) {
+                pathIndex.value++;
+                customScrollToTop(_scrollController);
+              }
+            },
+            onPressedCounterBack: () {
+              if (pathIndex.value > 0) {
+                pathIndex.value--;
+                customScrollToTop(_scrollController);
+              }
+            },
             startTripKey: _startTripKey,
+            scrollController: _scrollController,
           );
         }
       }),

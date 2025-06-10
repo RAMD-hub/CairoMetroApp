@@ -38,6 +38,7 @@ class OnboardingScreen extends StatelessWidget {
                   type: CustomTextType.body)),
           image: AnimatedOnboardingWidget(
             animationType: AnimationType.slideFromLeft,
+            padding: const EdgeInsets.only(top: 42.0),
             child: CustomOnboardingImage(
               imagePath: 'assets/images/onboarding1.png',
             ),
@@ -55,6 +56,7 @@ class OnboardingScreen extends StatelessWidget {
                   type: CustomTextType.body)),
           image: AnimatedOnboardingWidget(
             animationType: AnimationType.rotation,
+            padding: const EdgeInsets.only(top: 42.0),
             child: CustomOnboardingImage(
               imagePath: 'assets/images/onboarding2.png',
             ),
@@ -72,6 +74,7 @@ class OnboardingScreen extends StatelessWidget {
                   type: CustomTextType.body)),
           image: AnimatedOnboardingWidget(
             animationType: AnimationType.slideFromLeft,
+            padding: const EdgeInsets.only(top: 42.0),
             child: CustomOnboardingImage(
               imagePath: 'assets/images/onboarding3.png',
             ),
@@ -89,6 +92,7 @@ class OnboardingScreen extends StatelessWidget {
                   type: CustomTextType.body)),
           image: AnimatedOnboardingWidget(
             animationType: AnimationType.rotation,
+            padding: const EdgeInsets.only(top: 42.0),
             child: CustomOnboardingImage(
               imagePath: 'assets/images/onboarding4.png',
             ),

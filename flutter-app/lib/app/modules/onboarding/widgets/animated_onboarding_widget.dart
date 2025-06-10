@@ -5,12 +5,14 @@ class AnimatedOnboardingWidget extends StatefulWidget {
   final Widget child;
   final AnimationType animationType;
   final Duration duration;
+  final EdgeInsetsGeometry? padding;
 
   const AnimatedOnboardingWidget({
     super.key,
     required this.child,
     required this.animationType,
     this.duration = const Duration(milliseconds: 1500),
+    this.padding,
   });
 
   @override
@@ -81,7 +83,10 @@ class _AnimatedOnboardingWidgetState extends State<AnimatedOnboardingWidget>
 
   @override
   Widget build(BuildContext context) {
-    final child = widget.child;
+    final child = Padding(
+      padding: widget.padding ?? EdgeInsets.zero,
+      child: widget.child,
+    );
 
     switch (widget.animationType) {
       case AnimationType.fade:

@@ -34,6 +34,8 @@ class _MetroHomeState extends State<MetroHome> {
   final GlobalKey _nearestStationDropDownKey = GlobalKey();
 
   final GlobalKey _addressSearchKey = GlobalKey();
+
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -79,6 +81,7 @@ class _MetroHomeState extends State<MetroHome> {
             ),
           ),
           CustomScrollView(
+            controller: _scrollController,
             slivers: [
               SliverToBoxAdapter(
                   child: CustomAppBar(

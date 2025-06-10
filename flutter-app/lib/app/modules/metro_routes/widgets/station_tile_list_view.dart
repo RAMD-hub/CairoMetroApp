@@ -8,16 +8,18 @@ class StationTileListView extends StatelessWidget {
     super.key,
     required this.path,
     required this.pathIndex,
+    this.scrollController,
   });
   final RxInt pathIndex;
   final RxList<String> path;
   final MetroController metroController = Get.find();
   final List<String> _exchangeStations = [];
-
+  final ScrollController? scrollController;
   @override
   Widget build(BuildContext context) {
     _exchangeStations.assignAll(exchangeStationInPath());
     return ListView.builder(
+      controller: scrollController,
       itemCount: path.length,
       itemBuilder: (context, index) {
         return StationTile(

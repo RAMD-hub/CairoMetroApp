@@ -23,6 +23,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
     this.onPressedCounterBack,
     RxInt? pathIndex,
     required this.startTripKey,
+    this.scrollController,
   }) : pathIndex = pathIndex ?? 0.obs;
 
   final List<List<String>> paths;
@@ -34,7 +35,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
   final RxInt pathIndex;
   final MetroController metroController = Get.find();
   final GlobalKey startTripKey;
-
+  final ScrollController? scrollController;
   @override
   Widget build(BuildContext context) {
     if (pathIndex.value == 0 && paths.isNotEmpty) {
@@ -147,6 +148,7 @@ class RouteDetailsPortraitScreen extends StatelessWidget {
                         return StationTileListView(
                           pathIndex: pathIndex,
                           path: paths[pathIndex.value].obs,
+                          scrollController: scrollController,
                         );
                       }),
                     ),
